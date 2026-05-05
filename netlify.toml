@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/api/providers"
+  to = "/.netlify/functions/providers"
+  status = 200
+
+[[redirects]]
+  from = "/api/service-requests"
+  to = "/.netlify/functions/service-requests"
+  status = 200
