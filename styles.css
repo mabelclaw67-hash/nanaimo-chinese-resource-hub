@@ -1632,16 +1632,132 @@ body.home-page {
 }
 
 @media (max-width: 768px) {
-  .home-page .site-nav a {
-    border-radius: 14px;
-    font-size: 0.88rem;
-    padding: 0.82rem 0.9rem;
+  /* ═══════════════════════════════════════════════════
+     MOBILE SIDEBAR → LIGHT WARM TOP SECTION
+     Replaces the inherited dark-navy desktop sidebar.
+     All desktop sidebar rules (background, colors, text)
+     are explicitly overridden here.
+  ═══════════════════════════════════════════════════ */
+
+  /* 1. Sidebar shell: warm light background, compact height */
+  .home-page .site-header.dashboard-sidebar {
+    background: #fff8e8;
+    border-bottom: 1px solid #e8dcc2;
+    box-shadow: 0 4px 14px rgba(140, 106, 42, 0.09);
+    color: #2f2a24;
   }
 
+  /* 2. Sidebar inner: tighter padding and gaps */
+  .home-page .dashboard-sidebar-inner {
+    gap: 0.5rem;
+    padding: 0.65rem 0.85rem;
+  }
+
+  /* 3. Brand mark — keep the blue logo, shrink it */
+  .home-page .brand-mark {
+    border-radius: 10px;
+    font-size: 0.88rem;
+    height: 2.1rem;
+    width: 2.1rem;
+  }
+
+  /* 4. Brand text — dark, not white */
+  .home-page .brand-copy strong {
+    color: #2f2a24;
+    font-size: 0.84rem;
+  }
+
+  .home-page .brand-copy small {
+    color: #5c534a;
+    font-size: 0.68rem;
+  }
+
+  /* 5. Nav container: 2-column compact grid, no extra chrome */
+  .home-page .site-nav {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    gap: 0.3rem;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0;
+  }
+
+  /* 6. Nav items: warm light cards with DARK readable text */
+  .home-page .site-nav a {
+    background: #fffdf8;
+    border: 1px solid #e8dcc2;
+    border-radius: 10px;
+    color: #2f2a24;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.35;
+    padding: 0.48rem 0.6rem;
+    text-align: center;
+    transition: background 160ms ease, border-color 160ms ease;
+  }
+
+  /* 7. Active / hover nav: warm amber highlight */
+  .home-page .site-nav a:hover,
+  .home-page .site-nav a.is-active {
+    background: #f3e6c8;
+    border-color: #d8bf86;
+    color: #2f2a24;
+    transform: none;
+  }
+
+  /* 8. Platform Note: light warm card, dark text, compact */
+  .home-page .dashboard-sidebar-note {
+    background: #fffdf8;
+    border: 1px solid #e8dcc2;
+    border-radius: 10px;
+    box-shadow: none;
+    margin-top: 0;
+    padding: 0.5rem 0.65rem;
+  }
+
+  .home-page .dashboard-sidebar-note-title {
+    color: #8c6a2a;
+    font-size: 0.67rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.22rem;
+  }
+
+  .home-page .dashboard-sidebar-note .secondary-copy {
+    color: #5c534a;
+    font-size: 0.69rem;
+    line-height: 1.45;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     MAIN CONTENT — START EARLIER
+  ═══════════════════════════════════════════════════ */
+
+  .home-page .dashboard-main {
+    padding: 0.7rem 0.8rem 0;
+  }
+
+  .home-page .site-footer {
+    padding: 0 0.8rem 0.8rem;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     HEADINGS
+  ═══════════════════════════════════════════════════ */
+
   .home-page h1 {
-    font-size: clamp(2rem, 8vw, 2.6rem);
+    font-size: clamp(1.75rem, 7.5vw, 2.4rem);
     max-width: 100%;
   }
+
+  .home-page .headline-secondary {
+    font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+    margin-top: 0.4rem;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     CARDS — RADIUS + PADDING
+  ═══════════════════════════════════════════════════ */
 
   .home-page .dashboard-title-block,
   .home-page .dashboard-live-card,
@@ -1651,13 +1767,66 @@ body.home-page {
   .home-page .template-card,
   .home-page .contact-card,
   .home-page .contact-panel {
-    border-radius: 18px;
-    padding: 1.1rem;
+    border-radius: 14px;
+    padding: 0.85rem;
   }
 
+  /* ═══════════════════════════════════════════════════
+     STAT CARDS — 2-COLUMN GRID
+  ═══════════════════════════════════════════════════ */
+
   .home-page .dashboard-stats-grid {
-    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 0.75rem;
   }
+
+  .home-page .dashboard-stat-card {
+    min-height: auto;
+  }
+
+  .home-page .dashboard-stat-label {
+    font-size: 0.67rem;
+  }
+
+  .home-page .dashboard-stat-value {
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
+    margin: 0.3rem 0 0;
+  }
+
+  .home-page .dashboard-stat-note {
+    font-size: 0.74rem;
+    line-height: 1.4;
+    margin-top: 0.28rem;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     TOPBAR + SECTION SPACING
+  ═══════════════════════════════════════════════════ */
+
+  .home-page .dashboard-topbar {
+    margin-bottom: 0.75rem;
+  }
+
+  .home-page .section {
+    padding: 0 0 1rem;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     PANEL HEADERS
+  ═══════════════════════════════════════════════════ */
+
+  .home-page .dashboard-panel-header h2 {
+    font-size: 1.15rem;
+  }
+
+  .home-page .dashboard-panel-kicker {
+    font-size: 0.67rem;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     LISTS + ACTION BUTTONS
+  ═══════════════════════════════════════════════════ */
 
   .home-page .dashboard-list-row {
     flex-direction: column;
