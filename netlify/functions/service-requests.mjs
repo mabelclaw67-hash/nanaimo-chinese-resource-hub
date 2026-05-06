@@ -1,3 +1,6 @@
+const SERVICE_REQUESTS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyYOi0LVLDXZUGVQG94vl0K0zGYKhMaefM16n5NKAKn25-QkQI-1rqdtToBH1AFsc7ZYw/exec";
+
 const KEY_ALIASES = {
   serviceType: [
     "typeofserviceneeded",
@@ -146,20 +149,8 @@ const toPublicRequest = (record) => {
 };
 
 export default async (_req, _context) => {
-  const endpoint = Netlify.env.get("GOOGLE_SERVICE_REQUESTS_SCRIPT_URL");
-
-  if (!endpoint) {
-    return Response.json(
-      {
-        error: "Missing GOOGLE_SERVICE_REQUESTS_SCRIPT_URL environment variable.",
-        requests: [],
-      },
-      { status: 500 },
-    );
-  }
-
   try {
-    const upstream = await fetch(endpoint, {
+    const upstream = await fetch(SERVICE_REQUESTS_SCRIPT_URL, {
       headers: { Accept: "application/json" },
     });
 
