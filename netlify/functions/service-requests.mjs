@@ -6,8 +6,9 @@ const KEY_ALIASES = {
     "requesttype",
     "category",
     "您需要的服务类型typeofserviceneeded",
+    "type of service needed",
   ],
-  area: ["arealocation", "area", "location", "cityarea", "servicearea", "您所在区域yourarea"],
+  area: ["arealocation", "area", "location", "cityarea", "servicearea", "您所在区域yourarea", "yourarea"],
   description: [
     "shortdescription",
     "description",
@@ -15,6 +16,8 @@ const KEY_ALIASES = {
     "details",
     "publicdescription",
     "您的具体需求说明describewhatyouneed",
+    "describewhatyouneed",
+    "additionalnotes",
   ],
   contactMethod: ["preferredcontactmethod", "contactmethod", "contactpreference"],
   phone: ["contactphone", "phone", "联系电话contactphone"],
@@ -174,7 +177,7 @@ export default async (_req, _context) => {
     const requests = extractRows(payload)
       .map(toPublicRequest)
       .filter(Boolean)
-      .filter((request) => request.serviceType && request.description)
+      .filter((request) => request.serviceType)
       .sort((a, b) => String(b.dateSubmitted).localeCompare(String(a.dateSubmitted)));
 
     return Response.json({ requests });
