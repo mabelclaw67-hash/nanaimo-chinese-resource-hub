@@ -1,7 +1,7 @@
 const sectionNodes = document.querySelectorAll(".section");
 const navLinks = document.querySelectorAll(".site-nav a");
 
-const normalizeText = (text) => text.replace(/\r/g, "");
+const normalizeText = (text) => String(text ?? "").replace(/\r/g, "");
 
 const nonEmptyLines = (text) =>
   normalizeText(text)
@@ -31,6 +31,23 @@ const createParagraph = (className, text, lang) => {
   }
 
   return paragraph;
+};
+
+const escapeHtml = (value) =>
+  String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+const truncateText = (value, limit = 128) => {
+  const text = String(value ?? "").trim();
+  if (text.length <= limit) {
+    return text;
+  }
+
+  return `${text.slice(0, limit - 1).trimEnd()}...`;
 };
 
 const parseHomepage = (text) => {
@@ -143,24 +160,6 @@ const renderHomepage = (homepage) => {
       createParagraph("secondary-copy", homepage.intro.bodyZh, "zh-Hans"),
     );
   }
-
-  const cardsNode = document.querySelector("#homepage-cards");
-  if (!cardsNode || !homepage.cards.length) {
-    return;
-  }
-
-  cardsNode.innerHTML = "";
-  homepage.cards.forEach((card) => {
-    const article = document.createElement("article");
-    article.className = "feature-card";
-    article.innerHTML = `
-      <h2>${card.english}</h2>
-      <p class="secondary-heading" lang="zh-Hans">${card.chinese}</p>
-      <p class="primary-copy">${card.bodyEn}</p>
-      <p class="secondary-copy" lang="zh-Hans">${card.bodyZh}</p>
-    `;
-    cardsNode.append(article);
-  });
 };
 
 const renderServices = (services) => {
@@ -246,6 +245,249 @@ const renderTemplates = (templates) => {
   });
 };
 
+const setMetricCard = (valueSelector, noteSelector, value, note) => {
+  const valueNode = document.querySelector(valueSelector);
+  const noteNode = document.querySelector(noteSelector);
+
+  if (valueNode) {
+    valueNode.textContent = value;
+  }
+
+  if (noteNode) {
+    noteNode.textContent = note;
+  }
+};
+
+const setListFallback = (listSelector, statusSelector, message) => {
+  const listNode = document.querySelector(listSelector);
+  const statusNode = document.querySelector(statusSelector);
+
+  if (statusNode) {
+    statusNode.textContent = message;
+  }
+
+  if (listNode) {
+    listNode.innerHTML = `<li class="dashboard-list-empty">${escapeHtml(message)}</li>`;
+  }
+};
+
+const parseDateValue = (value) => {
+  const parsed = new Date(String(value ?? "").trim());
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+};
+
+const fetchJson = async (url, emptyKey) => {
+  const response = await fetch(url, { cache: "no-store" });
+  const contentType = response.headers.get("content-type") || "";
+
+  if (!contentType.includes("application/json")) {
+    throw new Error("No live data available");
+  }
+
+  const payload = await response.json();
+
+  if (!response.ok) {
+    throw new Error(payload.error || "No live data available");
+  }
+
+  return payload[emptyKey] || [];
+};
+
+const renderLatestRequests = (requests) => {
+  const listNode = document.querySelector("#latest-requests-list");
+  const statusNode = document.querySelector("#latest-requests-status");
+
+  if (!listNode || !statusNode) {
+    return;
+  }
+
+  if (!requests.length) {
+    setListFallback("#latest-requests-list", "#latest-requests-status", "No live data available");
+    return;
+  }
+
+  statusNode.textContent = `Showing ${Math.min(requests.length, 5)} live request items.`;
+  listNode.innerHTML = requests
+    .slice(0, 5)
+    .map(
+      (request) => `
+        <li class="dashboard-list-item">
+          <div class="dashboard-list-row">
+            <div>
+              <p class="dashboard-list-title">${escapeHtml(request.serviceType || "Service Request")}</p>
+              <p class="dashboard-list-meta">
+                ${escapeHtml(request.area || "Nanaimo Area")} · ${escapeHtml(request.contactMethod || "Platform follow-up")}
+              </p>
+            </div>
+            <span class="dashboard-list-badge">${escapeHtml(request.dateSubmitted || "Recent")}</span>
+          </div>
+          <p class="dashboard-list-description">${escapeHtml(truncateText(request.description || "No public description provided."))}</p>
+        </li>
+      `,
+    )
+    .join("");
+};
+
+const renderLatestProviders = (providers) => {
+  const listNode = document.querySelector("#latest-providers-list");
+  const statusNode = document.querySelector("#latest-providers-status");
+
+  if (!listNode || !statusNode) {
+    return;
+  }
+
+  const datedProviders = providers
+    .map((provider) => {
+      const dateValue =
+        provider.timestamp ||
+        provider.createdAt ||
+        provider.updatedAt ||
+        provider.submittedAt ||
+        provider.dateSubmitted;
+
+      return {
+        ...provider,
+        parsedDate: parseDateValue(dateValue),
+        displayDate: String(dateValue ?? "").trim(),
+      };
+    })
+    .filter((provider) => provider.parsedDate);
+
+  if (!datedProviders.length) {
+    setListFallback("#latest-providers-list", "#latest-providers-status", "Live data not connected");
+    return;
+  }
+
+  datedProviders.sort((a, b) => b.parsedDate.getTime() - a.parsedDate.getTime());
+  statusNode.textContent = `Showing ${Math.min(datedProviders.length, 5)} live provider items.`;
+  listNode.innerHTML = datedProviders
+    .slice(0, 5)
+    .map(
+      (provider) => `
+        <li class="dashboard-list-item">
+          <div class="dashboard-list-row">
+            <div>
+              <p class="dashboard-list-title">${escapeHtml(provider.name || "Service Provider")}</p>
+              <p class="dashboard-list-meta">
+                ${escapeHtml(provider.category || "Category unavailable")} · ${escapeHtml(provider.city || "Nanaimo Area")}
+              </p>
+            </div>
+            <span class="dashboard-list-badge">${escapeHtml(provider.displayDate)}</span>
+          </div>
+          <p class="dashboard-list-description">${escapeHtml(truncateText(provider.description || "No public description provided."))}</p>
+        </li>
+      `,
+    )
+    .join("");
+};
+
+const updateDashboardSummary = (state) => {
+  const summaryNode = document.querySelector("#dashboard-live-status");
+  if (!summaryNode) {
+    return;
+  }
+
+  if (!state.providersLive && !state.requestsLive) {
+    summaryNode.textContent = "No live data available.";
+    return;
+  }
+
+  const parts = [];
+
+  if (state.providersLive) {
+    parts.push("Providers count is live");
+  }
+
+  if (state.requestsLive) {
+    parts.push("Service requests are live");
+  }
+
+  if (!state.latestProvidersLive) {
+    parts.push("latest provider ordering is not connected");
+  }
+
+  if (!state.submissionsLive) {
+    parts.push("submission totals are not connected");
+  }
+
+  summaryNode.textContent = `${parts.join("; ")}.`;
+};
+
+const loadDashboardData = async () => {
+  const providersCountNode = document.querySelector("#providers-count");
+  if (!providersCountNode) {
+    return;
+  }
+
+  const state = {
+    providersLive: false,
+    requestsLive: false,
+    latestProvidersLive: false,
+    submissionsLive: false,
+  };
+
+  setMetricCard("#submissions-count", "#submissions-count-note", "--", "Live data not connected");
+
+  const [providersResult, requestsResult] = await Promise.allSettled([
+    fetchJson("/api/providers", "providers"),
+    fetchJson("/api/service-requests", "requests"),
+  ]);
+
+  if (providersResult.status === "fulfilled") {
+    const providers = providersResult.value;
+    const categories = [...new Set(providers.map((provider) => String(provider.category ?? "").trim()).filter(Boolean))];
+
+    state.providersLive = true;
+    setMetricCard(
+      "#providers-count",
+      "#providers-count-note",
+      String(providers.length),
+      "Live data connected",
+    );
+    setMetricCard(
+      "#categories-count",
+      "#categories-count-note",
+      String(categories.length),
+      "Live data connected",
+    );
+
+    const datedProviders = providers.filter(
+      (provider) =>
+        parseDateValue(
+          provider.timestamp ||
+            provider.createdAt ||
+            provider.updatedAt ||
+            provider.submittedAt ||
+            provider.dateSubmitted,
+        ),
+    );
+
+    state.latestProvidersLive = datedProviders.length > 0;
+    renderLatestProviders(providers);
+  } else {
+    setMetricCard("#providers-count", "#providers-count-note", "--", "No live data available");
+    setMetricCard("#categories-count", "#categories-count-note", "--", "No live data available");
+    setListFallback("#latest-providers-list", "#latest-providers-status", "No live data available");
+  }
+
+  if (requestsResult.status === "fulfilled") {
+    const requests = requestsResult.value;
+    state.requestsLive = true;
+    setMetricCard(
+      "#requests-count",
+      "#requests-count-note",
+      String(requests.length),
+      "Live data connected",
+    );
+    renderLatestRequests(requests);
+  } else {
+    setMetricCard("#requests-count", "#requests-count-note", "--", "No live data available");
+    setListFallback("#latest-requests-list", "#latest-requests-status", "No live data available");
+  }
+
+  updateDashboardSummary(state);
+};
+
 const loadContent = async () => {
   try {
     const [homepageText, servicesText, templatesText] = await Promise.all([
@@ -304,5 +546,6 @@ const observeNavigation = () => {
 };
 
 loadContent();
+loadDashboardData();
 observeSections();
 observeNavigation();

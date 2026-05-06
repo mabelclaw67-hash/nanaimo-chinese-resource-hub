@@ -11,367 +11,441 @@
     <link rel="preconnect" href="/" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="home-page">
     <div class="page-backdrop" aria-hidden="true">
       <div class="backdrop-orb backdrop-orb-a"></div>
       <div class="backdrop-orb backdrop-orb-b"></div>
     </div>
 
-    <header class="site-header">
-      <div class="container header-row">
-        <a class="brand" href="#home" aria-label="Nanaimo Chinese Services & Resources home">
-          <span class="brand-mark">N</span>
-          <span class="brand-copy">
-            <strong>Nanaimo Chinese Services &amp; Resources</strong>
-            <small>纳奈莫华人生活服务与资源平台</small>
-          </span>
-        </a>
+    <div class="dashboard-shell">
+      <header class="site-header dashboard-sidebar">
+        <div class="dashboard-sidebar-inner">
+          <a class="brand" href="#home" aria-label="Nanaimo Chinese Services & Resources home">
+            <span class="brand-mark">N</span>
+            <span class="brand-copy">
+              <strong>Nanaimo Chinese Services &amp; Resources</strong>
+              <small>纳奈莫华人生活服务与资源平台</small>
+            </span>
+          </a>
 
-        <nav class="site-nav" aria-label="Primary">
-          <a href="#home">Home / 首页</a>
-          <a href="/service-providers/">Service Providers / 提供服务名单</a>
-          <a href="/service-requests/">Service Requests / 服务需求</a>
-          <a href="#services">Services / 服务说明</a>
-          <a href="#templates">Templates / 模板</a>
-          <a href="#submissions">Submissions / 提交入口</a>
-          <a href="#contact">Contact / 联系我们</a>
-        </nav>
+          <nav class="site-nav" aria-label="Primary">
+            <a href="#home">Dashboard / 首页总览</a>
+            <a href="/service-providers/">Service Providers / 提供服务名单</a>
+            <a href="/service-requests/">Service Requests / 服务需求</a>
+            <a href="#services">Services / 服务说明</a>
+            <a href="#templates">Templates / 模板下载</a>
+            <a href="#submissions">Submissions / 提交入口</a>
+            <a href="#contact">Contact / 联系我们</a>
+          </nav>
+
+          <div class="dashboard-sidebar-note">
+            <p class="dashboard-sidebar-note-title">Platform Note</p>
+            <p class="secondary-copy">
+              Dashboard-first access to bilingual community services, requests, templates, and
+              submission tools.
+            </p>
+            <p class="secondary-copy" lang="zh-Hans">
+              以实用仪表盘方式整合双语服务信息、服务需求、模板与提交入口，方便快速查找与使用。
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="dashboard-main-column">
+        <main id="main-content" class="dashboard-main">
+          <section class="section dashboard-home is-visible" id="home">
+            <div class="container dashboard-container">
+              <div class="dashboard-topbar">
+                <div class="dashboard-title-block">
+                  <p class="eyebrow">Dashboard</p>
+                  <h1 id="hero-title-en">Nanaimo Chinese Services &amp; Resources</h1>
+                  <p class="headline-secondary" id="hero-title-zh">纳奈莫华人生活服务与资源平台</p>
+                  <div class="dashboard-subtitle" id="hero-intro">
+                    <p class="primary-copy" id="dashboard-subtitle-en">
+                      Practical bilingual information for local community services, service
+                      requests, templates, and submissions.
+                    </p>
+                    <p class="secondary-copy" id="dashboard-subtitle-zh" lang="zh-Hans">
+                      提供本地双语服务信息、服务需求、模板下载与提交入口，方便社区快速使用。
+                    </p>
+                  </div>
+                </div>
+
+                <div class="dashboard-live-card">
+                  <p class="dashboard-live-label">Live Dashboard Status</p>
+                  <p class="primary-copy" id="dashboard-live-status">
+                    Checking live providers and service requests.
+                  </p>
+                  <p class="secondary-copy" lang="zh-Hans">
+                    首页优先连接现有 live source；未连接的区块会明确显示 fallback 状态。
+                  </p>
+                </div>
+              </div>
+
+              <div class="dashboard-stats-grid">
+                <article class="dashboard-stat-card">
+                  <p class="dashboard-stat-label">Service Providers</p>
+                  <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">提供服务名单</p>
+                  <p class="dashboard-stat-value" id="providers-count">--</p>
+                  <p class="dashboard-stat-note" id="providers-count-note">Loading live data...</p>
+                </article>
+
+                <article class="dashboard-stat-card">
+                  <p class="dashboard-stat-label">Service Requests</p>
+                  <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">服务需求</p>
+                  <p class="dashboard-stat-value" id="requests-count">--</p>
+                  <p class="dashboard-stat-note" id="requests-count-note">Loading live data...</p>
+                </article>
+
+                <article class="dashboard-stat-card">
+                  <p class="dashboard-stat-label">New Submissions</p>
+                  <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">最新提交</p>
+                  <p class="dashboard-stat-value" id="submissions-count">--</p>
+                  <p class="dashboard-stat-note" id="submissions-count-note">Live data not connected</p>
+                </article>
+
+                <article class="dashboard-stat-card">
+                  <p class="dashboard-stat-label">Categories</p>
+                  <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">服务分类</p>
+                  <p class="dashboard-stat-value" id="categories-count">--</p>
+                  <p class="dashboard-stat-note" id="categories-count-note">Loading live data...</p>
+                </article>
+              </div>
+
+              <div class="dashboard-content-grid">
+                <div class="dashboard-list-stack">
+                  <section class="dashboard-panel">
+                    <div class="dashboard-panel-header">
+                      <div>
+                        <p class="dashboard-panel-kicker">Latest Service Requests</p>
+                        <h2>Latest Service Requests</h2>
+                        <p class="secondary-heading" lang="zh-Hans">最新服务需求</p>
+                      </div>
+                      <a class="dashboard-panel-link" href="/service-requests/">View all / 查看全部</a>
+                    </div>
+                    <p class="dashboard-panel-status" id="latest-requests-status">
+                      Checking live requests.
+                    </p>
+                    <ul class="dashboard-list" id="latest-requests-list">
+                      <li class="dashboard-list-empty">Loading live data...</li>
+                    </ul>
+                  </section>
+
+                  <section class="dashboard-panel">
+                    <div class="dashboard-panel-header">
+                      <div>
+                        <p class="dashboard-panel-kicker">Latest Service Providers</p>
+                        <h2>Latest Service Providers</h2>
+                        <p class="secondary-heading" lang="zh-Hans">最新服务名单</p>
+                      </div>
+                      <a class="dashboard-panel-link" href="/service-providers/">View all / 查看全部</a>
+                    </div>
+                    <p class="dashboard-panel-status" id="latest-providers-status">
+                      Checking live providers.
+                    </p>
+                    <ul class="dashboard-list" id="latest-providers-list">
+                      <li class="dashboard-list-empty">Loading live data...</li>
+                    </ul>
+                  </section>
+                </div>
+
+                <aside class="dashboard-side-stack">
+                  <section class="dashboard-panel dashboard-actions-panel">
+                    <div class="dashboard-panel-header dashboard-panel-header-compact">
+                      <div>
+                        <p class="dashboard-panel-kicker">Quick Actions</p>
+                        <h2>Quick Actions</h2>
+                        <p class="secondary-heading" lang="zh-Hans">快速入口</p>
+                      </div>
+                    </div>
+
+                    <div class="dashboard-action-grid">
+                      <a class="dashboard-action-card" href="/service-providers/">
+                        <strong>I need a service</strong>
+                        <span lang="zh-Hans">我要找服务</span>
+                      </a>
+                      <a
+                        class="dashboard-action-card"
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSenpCoMAR4kL7M_tH0TVUgy8qaiA0spse7bPrswfjRO3h35vA/viewform?usp=publish-editor"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <strong>I provide a service</strong>
+                        <span lang="zh-Hans">我要登记服务</span>
+                      </a>
+                      <a class="dashboard-action-card" href="#templates">
+                        <strong>Download templates</strong>
+                        <span lang="zh-Hans">下载模板</span>
+                      </a>
+                      <a class="dashboard-action-card" href="#contact">
+                        <strong>Contact platform</strong>
+                        <span lang="zh-Hans">联系平台</span>
+                      </a>
+                    </div>
+                  </section>
+                </aside>
+              </div>
+
+              <div class="dashboard-bottom-grid">
+                <article class="dashboard-panel dashboard-info-card">
+                  <p class="dashboard-panel-kicker">How It Works</p>
+                  <h2>How it works</h2>
+                  <p class="secondary-heading" lang="zh-Hans">如何使用</p>
+                  <p class="primary-copy">
+                    Browse providers, review service requests, open templates, and use the
+                    submission forms when you need to add new information.
+                  </p>
+                  <p class="secondary-copy" lang="zh-Hans">
+                    可先查看服务名单与服务需求，再按需要下载模板或通过提交入口补充新信息。
+                  </p>
+                </article>
+
+                <article class="dashboard-panel dashboard-info-card">
+                  <p class="dashboard-panel-kicker">Platform Notice</p>
+                  <h2>Platform Notice</h2>
+                  <p class="secondary-heading" lang="zh-Hans">平台说明</p>
+                  <p class="primary-copy">
+                    This homepage is designed for practical access to current platform content. It
+                    does not replace independent verification of services or arrangements.
+                  </p>
+                  <p class="secondary-copy" lang="zh-Hans">
+                    本首页以实用查找为主，不替代用户对具体服务、安排或合作内容的自行确认。
+                  </p>
+                </article>
+
+                <article class="dashboard-panel dashboard-info-card">
+                  <p class="dashboard-panel-kicker">Privacy</p>
+                  <h2>Privacy</h2>
+                  <p class="secondary-heading" lang="zh-Hans">隐私</p>
+                  <p class="primary-copy">
+                    Public dashboard content is limited to available live source data and approved
+                    contact details. Unavailable data remains hidden or marked as not connected.
+                  </p>
+                  <p class="secondary-copy" lang="zh-Hans">
+                    首页只显示现有公开 live data 与允许展示的信息；未连接或不适合公开的内容会保持隐藏或标记为未连接。
+                  </p>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="section dashboard-section" id="services">
+            <div class="container dashboard-container">
+              <div class="section-heading">
+                <p class="eyebrow">Services</p>
+                <h2 id="services-title-en">Services</h2>
+                <p class="headline-secondary" id="services-title-zh" lang="zh-Hans">服务说明</p>
+              </div>
+
+              <div class="service-grid" id="services-content">
+                <article class="service-card">
+                  <div class="card-heading">
+                    <h3>Overview</h3>
+                    <p class="secondary-heading" lang="zh-Hans">服务概览</p>
+                  </div>
+                  <div class="stack">
+                    <p class="primary-copy">
+                      The Nanaimo Chinese Resource Hub is intended to share information, improve
+                      access to local support, and provide practical tools that are easy to use and
+                      update.
+                    </p>
+                    <p class="secondary-copy" lang="zh-Hans">
+                      纳奈莫华人资源平台旨在分享信息、提升本地服务获取效率，并提供便于使用和更新的实用工具。
+                    </p>
+                    <p class="primary-copy">
+                      This website may include community contacts, provider listings, and editable
+                      templates for communication and organization.
+                    </p>
+                    <p class="secondary-copy" lang="zh-Hans">
+                      本网站可能包含社区联系信息、服务提供者列表，以及用于沟通和整理事务的可编辑模板。
+                    </p>
+                  </div>
+                </article>
+
+                <article class="service-card service-card-accent">
+                  <div class="card-heading">
+                    <h3>Disclaimer</h3>
+                    <p class="secondary-heading" lang="zh-Hans">免责声明</p>
+                  </div>
+                  <div class="stack">
+                    <p class="primary-copy">
+                      This website is for information and coordination support only. We do not act
+                      as an agent, broker, or transaction representative for any user, provider,
+                      landlord, tenant, buyer, or seller.
+                    </p>
+                    <p class="secondary-copy" lang="zh-Hans">
+                      本网站仅提供信息与协调支持。我们不作为任何用户、服务方、房东、租客、买方或卖方的代理人、经纪人或交易代表。
+                    </p>
+                    <p class="primary-copy">
+                      We are not responsible for negotiations, agreements, payments, disputes,
+                      service outcomes, or transactions between third parties. Users should
+                      independently verify all information and make their own decisions.
+                    </p>
+                    <p class="secondary-copy" lang="zh-Hans">
+                      对于第三方之间的协商、协议、付款、争议、服务结果或交易行为，我们不承担责任。用户应自行核实相关信息，并独立作出判断与决定。
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="section dashboard-section" id="submissions">
+            <div class="container dashboard-container">
+              <div class="contact-card submissions-card">
+                <div class="section-heading contact-heading">
+                  <p class="eyebrow">Submissions</p>
+                  <h2>Submit To The Nanaimo Resource Board</h2>
+                  <p class="headline-secondary" lang="zh-Hans">提交至纳奈莫资源平台系统</p>
+                </div>
+
+                <p class="primary-copy">
+                  Use the links below to submit new information to the Nanaimo Resource Board
+                  system. The forms are now live and will send submissions directly into the
+                  Nanaimo Resource Board workflow.
+                </p>
+                <p class="secondary-copy submissions-note" lang="zh-Hans">
+                  可通过以下入口将新信息提交至 Nanaimo Resource Board 系统。这些表单现已正式启用，提交内容将直接进入 Nanaimo Resource Board 工作流程。
+                </p>
+                <p class="secondary-copy submissions-note">
+                  To reduce spam, repeated or excessive submissions may be reviewed, limited, or
+                  removed.
+                </p>
+                <p class="secondary-copy submissions-note" lang="zh-Hans">
+                  为减少垃圾信息，重复或过量提交的内容可能会被审核、限制或删除。
+                </p>
+
+                <div class="submission-actions">
+                  <a
+                    class="button button-primary"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSenpCoMAR4kL7M_tH0TVUgy8qaiA0spse7bPrswfjRO3h35vA/viewform?usp=publish-editor"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Add Service Provider / 服务商登记</a
+                  >
+                  <a
+                    class="button button-primary"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSd9COadAJnwgEYyyNe2CblvAUmUkQJt1LCI4v3Ouk1LwQe2uQ/viewform?usp=publish-editor"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Request Service / 提交服务需求</a
+                  >
+                  <a
+                    class="button button-primary"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSeMNIuGx_JTfrqMJRpV__7ap1HJ4a2zeMWHBD_W8f4IJC__3A/viewform?usp=publish-editor"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Submit Client / Case / 提交客户个案</a
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section dashboard-section" id="templates">
+            <div class="container dashboard-container">
+              <div class="section-heading">
+                <p class="eyebrow">Templates</p>
+                <h2 id="templates-title-en">Templates</h2>
+                <p class="headline-secondary" id="templates-title-zh" lang="zh-Hans">模板</p>
+              </div>
+
+              <div class="template-intro">
+                <p class="primary-copy">Download the live Google Sheet templates below.</p>
+                <p class="secondary-copy" lang="zh-Hans">
+                  可在下方直接打开并使用正式的 Google Sheet 模板。
+                </p>
+              </div>
+
+              <div class="template-grid" id="templates-content">
+                <article class="template-card">
+                  <span class="template-index">01</span>
+                  <h3>Checklist Template</h3>
+                  <p class="secondary-heading" lang="zh-Hans">检查清单模板</p>
+                  <a
+                    class="template-link template-link-active"
+                    href="https://docs.google.com/spreadsheets/d/1V7WtZXHBlQTIsFfLR8fIrgnUmB_LvDOpDx-rqju2feU/edit?gid=773745263#gid=773745263"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Checklist Template / 检查清单模板</a
+                  >
+                </article>
+
+                <article class="template-card">
+                  <span class="template-index">02</span>
+                  <h3>Estimate Template</h3>
+                  <p class="secondary-heading" lang="zh-Hans">报价单模板</p>
+                  <a
+                    class="template-link template-link-active"
+                    href="https://docs.google.com/spreadsheets/d/1WOfwHLp-3jY3SDXgmhAaI9kS29Q7oZMX0xzsvpUjZ-E/edit?gid=956115894#gid=956115894"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Estimate Template / 报价单模板</a
+                  >
+                </article>
+
+                <article class="template-card">
+                  <span class="template-index">03</span>
+                  <h3>Invoice Template</h3>
+                  <p class="secondary-heading" lang="zh-Hans">发票模板</p>
+                  <a
+                    class="template-link template-link-active"
+                    href="https://docs.google.com/spreadsheets/d/1F9Fin6aulJolaltAUWfGaq2tKC9XcQCx3ejx-zFwCq8/edit?gid=1634526413#gid=1634526413"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Invoice Template / 发票模板</a
+                  >
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="section dashboard-section" id="contact">
+            <div class="container dashboard-container">
+              <div class="contact-card">
+                <div class="section-heading contact-heading">
+                  <p class="eyebrow">Contact</p>
+                  <h2>Get In Touch</h2>
+                  <p class="headline-secondary" lang="zh-Hans">欢迎联系</p>
+                </div>
+
+                <div class="contact-grid">
+                  <div class="contact-copy">
+                    <p class="primary-copy">
+                      If you have questions, suggestions, or would like to share a local resource,
+                      please reach out by email. We welcome community feedback and collaboration.
+                    </p>
+                    <p class="secondary-copy" lang="zh-Hans">
+                      如果你有问题、建议，或想分享本地资源，欢迎通过电子邮件联系我们。我们欢迎社区反馈与合作交流。
+                    </p>
+                  </div>
+
+                  <div class="contact-panel">
+                    <p class="contact-panel-label">Email</p>
+                    <a class="contact-email" href="mailto:nachinesehub@gmail.com"
+                      >nachinesehub@gmail.com</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer class="site-footer">
+          <div class="container dashboard-container footer-row">
+            <div>
+              <strong>Nanaimo Chinese Services &amp; Resources</strong>
+              <p class="secondary-copy" lang="zh-Hans">简洁、清晰、便于维护的双语信息页面。</p>
+            </div>
+            <div class="footer-contact">
+              <p class="footer-note">For community information and coordination support.</p>
+              <a class="footer-email" href="mailto:nachinesehub@gmail.com">nachinesehub@gmail.com</a>
+            </div>
+          </div>
+        </footer>
       </div>
-    </header>
-
-    <main id="main-content">
-      <section class="hero section is-visible" id="home">
-        <div class="container hero-grid">
-          <div class="hero-copy">
-            <div class="hero-badges">
-              <span class="hero-badge">Local Nanaimo Focus</span>
-              <span class="hero-badge hero-badge-soft">Bilingual Community Support</span>
-            </div>
-
-            <h1 id="hero-title-en">Nanaimo Chinese Services &amp; Resources</h1>
-            <p class="headline-secondary" id="hero-title-zh">纳奈莫华人生活服务与资源平台</p>
-
-            <div class="intro-block" id="hero-intro">
-              <p class="primary-copy">
-                Practical bilingual information for Chinese-speaking residents, newcomers, and
-                families in Nanaimo, including local service references, community resources, and
-                ready-to-use templates.
-              </p>
-              <p class="secondary-copy" lang="zh-Hans">
-                为纳奈莫华语居民、新移民与家庭提供实用双语信息，涵盖本地生活服务参考、社区资源整理与可直接使用的工作模板。
-              </p>
-            </div>
-
-            <div class="install-card" aria-label="Add to Home Screen instructions">
-              <p class="install-title">📱 添加到手机桌面</p>
-              <p class="primary-copy">
-                为了以后更方便使用，您可以把本网站保存到手机主屏幕，像 APP 一样直接打开。
-              </p>
-              <p class="secondary-copy install-step">
-                <strong>iPhone 用户：</strong>
-                请先用 Safari 打开本网站，然后点击底部“分享”按钮，选择“添加到主屏幕”。
-              </p>
-              <p class="secondary-copy install-step">
-                <strong>安卓手机用户：</strong>
-                请先用 Chrome 打开本网站，然后点击右上角菜单，选择“添加到主屏幕”。
-              </p>
-              <p class="secondary-copy">
-                添加后，手机桌面会出现本站图标，今后可直接点击进入。
-              </p>
-              <p class="install-title install-title-en">📱 Add to Home Screen</p>
-              <p class="primary-copy">
-                Save this website to your phone’s home screen and use it like an app.
-              </p>
-              <p class="secondary-copy install-step">
-                <strong>For iPhone:</strong>
-                Open this site in Safari, tap Share, then choose Add to Home Screen.
-              </p>
-              <p class="secondary-copy install-step">
-                <strong>For Android:</strong>
-                Open this site in Chrome, tap the menu, then choose Add to Home Screen.
-              </p>
-              <p class="secondary-copy">
-                After saving, the site icon will appear on your home screen for quick access.
-              </p>
-            </div>
-
-            <div class="trust-panel" aria-label="Local trust statement">
-              <p class="trust-label">Local Trust</p>
-              <p class="trust-title">Curated and maintained locally in Nanaimo.</p>
-              <p class="secondary-copy trust-copy" lang="zh-Hans">
-                内容由纳奈莫本地持续整理与维护，更贴近社区实际需求与使用场景。
-              </p>
-            </div>
-
-            <div class="hero-actions">
-              <a class="button button-primary" href="#services">Find Local Services</a>
-              <a class="button button-secondary" href="#templates">Download Free Templates</a>
-            </div>
-
-            <div class="hero-contact" aria-label="Primary contact email">
-              <span class="hero-contact-label">Email</span>
-              <a class="hero-contact-link" href="mailto:nachinesehub@gmail.com"
-                >nachinesehub@gmail.com</a
-              >
-            </div>
-          </div>
-
-          <aside class="hero-panel">
-            <div class="panel-kicker">What You Can Find Here</div>
-            <div class="feature-grid" id="homepage-cards">
-              <article class="feature-card">
-                <h2>Resources</h2>
-                <p class="secondary-heading" lang="zh-Hans">资源</p>
-                <p class="primary-copy">
-                  Browse essential local information, community supports, and practical references
-                  in one organized place.
-                </p>
-                <p class="secondary-copy" lang="zh-Hans">
-                  在一个清晰整合的页面中查看本地重要资讯、社区支持服务及实用参考信息。
-                </p>
-              </article>
-
-              <article class="feature-card">
-                <h2>Providers</h2>
-                <p class="secondary-heading" lang="zh-Hans">服务提供者</p>
-                <p class="primary-copy">
-                  Review service providers that may help with housing, settlement,
-                  interpretation, and related everyday needs.
-                </p>
-                <p class="secondary-copy" lang="zh-Hans">
-                  查看可协助住房、安家、翻译及相关日常需求的服务提供者信息。
-                </p>
-              </article>
-
-              <article class="feature-card">
-                <h2>Templates</h2>
-                <p class="secondary-heading" lang="zh-Hans">模板</p>
-                <p class="primary-copy">
-                  Use ready-to-edit templates and working documents for follow-up, coordination,
-                  and record keeping.
-                </p>
-                <p class="secondary-copy" lang="zh-Hans">
-                  使用可直接编辑的模板与工作文件，支持跟进、协调与资料整理。
-                </p>
-              </article>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="section" id="services">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Services</p>
-            <h2 id="services-title-en">Services</h2>
-            <p class="headline-secondary" id="services-title-zh" lang="zh-Hans">服务说明</p>
-          </div>
-
-          <div class="service-grid" id="services-content">
-            <article class="service-card">
-              <div class="card-heading">
-                <h3>Overview</h3>
-                <p class="secondary-heading" lang="zh-Hans">服务概览</p>
-              </div>
-              <div class="stack">
-                <p class="primary-copy">
-                  The Nanaimo Chinese Resource Hub is intended to share information, improve
-                  access to local support, and provide practical tools that are easy to use and
-                  update.
-                </p>
-                <p class="secondary-copy" lang="zh-Hans">
-                  纳奈莫华人资源平台旨在分享信息、提升本地服务获取效率，并提供便于使用和更新的实用工具。
-                </p>
-                <p class="primary-copy">
-                  This website may include community contacts, provider listings, and editable
-                  templates for communication and organization.
-                </p>
-                <p class="secondary-copy" lang="zh-Hans">
-                  本网站可能包含社区联系信息、服务提供者列表，以及用于沟通和整理事务的可编辑模板。
-                </p>
-              </div>
-            </article>
-
-            <article class="service-card service-card-accent">
-              <div class="card-heading">
-                <h3>Disclaimer</h3>
-                <p class="secondary-heading" lang="zh-Hans">免责声明</p>
-              </div>
-              <div class="stack">
-                <p class="primary-copy">
-                  This website is for information and coordination support only. We do not act as
-                  an agent, broker, or transaction representative for any user, provider,
-                  landlord, tenant, buyer, or seller.
-                </p>
-                <p class="secondary-copy" lang="zh-Hans">
-                  本网站仅提供信息与协调支持。我们不作为任何用户、服务方、房东、租客、买方或卖方的代理人、经纪人或交易代表。
-                </p>
-                <p class="primary-copy">
-                  We are not responsible for negotiations, agreements, payments, disputes, service
-                  outcomes, or transactions between third parties. Users should independently
-                  verify all information and make their own decisions.
-                </p>
-                <p class="secondary-copy" lang="zh-Hans">
-                  对于第三方之间的协商、协议、付款、争议、服务结果或交易行为，我们不承担责任。用户应自行核实相关信息，并独立作出判断与决定。
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="submissions">
-        <div class="container">
-          <div class="contact-card submissions-card">
-            <div class="section-heading contact-heading">
-              <p class="eyebrow">Submissions</p>
-              <h2>Submit To The Nanaimo Resource Board</h2>
-              <p class="headline-secondary" lang="zh-Hans">提交至纳奈莫资源平台系统</p>
-            </div>
-
-            <p class="primary-copy">
-              Use the links below to submit new information to the Nanaimo Resource Board system.
-              The forms are now live and will send submissions directly into the Nanaimo Resource
-              Board workflow.
-            </p>
-            <p class="secondary-copy submissions-note" lang="zh-Hans">
-              可通过以下入口将新信息提交至 Nanaimo Resource Board 系统。这些表单现已正式启用，提交内容将直接进入 Nanaimo Resource Board 工作流程。
-            </p>
-            <p class="secondary-copy submissions-note">
-              To reduce spam, repeated or excessive submissions may be reviewed, limited, or
-              removed.
-            </p>
-            <p class="secondary-copy submissions-note" lang="zh-Hans">
-              为减少垃圾信息，重复或过量提交的内容可能会被审核、限制或删除。
-            </p>
-
-            <div class="submission-actions">
-              <a
-                class="button button-primary"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSenpCoMAR4kL7M_tH0TVUgy8qaiA0spse7bPrswfjRO3h35vA/viewform?usp=publish-editor"
-                target="_blank"
-                rel="noreferrer"
-                >Add Service Provider / 服务商登记</a
-              >
-              <a
-                class="button button-primary"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSd9COadAJnwgEYyyNe2CblvAUmUkQJt1LCI4v3Ouk1LwQe2uQ/viewform?usp=publish-editor"
-                target="_blank"
-                rel="noreferrer"
-                >Request Service / 提交服务需求</a
-              >
-              <a
-                class="button button-primary"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSeMNIuGx_JTfrqMJRpV__7ap1HJ4a2zeMWHBD_W8f4IJC__3A/viewform?usp=publish-editor"
-                target="_blank"
-                rel="noreferrer"
-                >Submit Client / Case / 提交客户个案</a
-              >
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="templates">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Templates</p>
-            <h2 id="templates-title-en">Templates</h2>
-            <p class="headline-secondary" id="templates-title-zh" lang="zh-Hans">模板</p>
-          </div>
-
-          <div class="template-intro">
-            <p class="primary-copy">Download the live Google Sheet templates below.</p>
-            <p class="secondary-copy" lang="zh-Hans">可在下方直接打开并使用正式的 Google Sheet 模板。</p>
-          </div>
-
-          <div class="template-grid" id="templates-content">
-            <article class="template-card">
-              <span class="template-index">01</span>
-              <h3>Checklist Template</h3>
-              <p class="secondary-heading" lang="zh-Hans">检查清单模板</p>
-              <a
-                class="template-link template-link-active"
-                href="https://docs.google.com/spreadsheets/d/1V7WtZXHBlQTIsFfLR8fIrgnUmB_LvDOpDx-rqju2feU/edit?gid=773745263#gid=773745263"
-                target="_blank"
-                rel="noreferrer"
-                >Checklist Template / 检查清单模板</a
-              >
-            </article>
-
-            <article class="template-card">
-              <span class="template-index">02</span>
-              <h3>Estimate Template</h3>
-              <p class="secondary-heading" lang="zh-Hans">报价单模板</p>
-              <a
-                class="template-link template-link-active"
-                href="https://docs.google.com/spreadsheets/d/1WOfwHLp-3jY3SDXgmhAaI9kS29Q7oZMX0xzsvpUjZ-E/edit?gid=956115894#gid=956115894"
-                target="_blank"
-                rel="noreferrer"
-                >Estimate Template / 报价单模板</a
-              >
-            </article>
-
-            <article class="template-card">
-              <span class="template-index">03</span>
-              <h3>Invoice Template</h3>
-              <p class="secondary-heading" lang="zh-Hans">发票模板</p>
-              <a
-                class="template-link template-link-active"
-                href="https://docs.google.com/spreadsheets/d/1F9Fin6aulJolaltAUWfGaq2tKC9XcQCx3ejx-zFwCq8/edit?gid=1634526413#gid=1634526413"
-                target="_blank"
-                rel="noreferrer"
-                >Invoice Template / 发票模板</a
-              >
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="contact">
-        <div class="container">
-          <div class="contact-card">
-            <div class="section-heading contact-heading">
-              <p class="eyebrow">Contact</p>
-              <h2>Get In Touch</h2>
-              <p class="headline-secondary" lang="zh-Hans">欢迎联系</p>
-            </div>
-
-            <div class="contact-grid">
-              <div class="contact-copy">
-                <p class="primary-copy">
-                  If you have questions, suggestions, or would like to share a local resource,
-                  please reach out by email. We welcome community feedback and collaboration.
-                </p>
-                <p class="secondary-copy" lang="zh-Hans">
-                  如果你有问题、建议，或想分享本地资源，欢迎通过电子邮件联系我们。我们欢迎社区反馈与合作交流。
-                </p>
-              </div>
-
-              <div class="contact-panel">
-                <p class="contact-panel-label">Email</p>
-                <a class="contact-email" href="mailto:nachinesehub@gmail.com"
-                  >nachinesehub@gmail.com</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-row">
-        <div>
-          <strong>Nanaimo Chinese Services &amp; Resources</strong>
-          <p class="secondary-copy" lang="zh-Hans">简洁、清晰、便于维护的双语信息页面。</p>
-        </div>
-        <div class="footer-contact">
-          <p class="footer-note">For community information and coordination support.</p>
-          <a class="footer-email" href="mailto:nachinesehub@gmail.com">nachinesehub@gmail.com</a>
-        </div>
-      </div>
-    </footer>
+    </div>
 
     <noscript>
       <div class="noscript-banner">
