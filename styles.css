@@ -1169,6 +1169,7 @@ body.home-page {
   color: rgba(255, 255, 255, 0.88);
   font-size: 0.95rem;
   font-weight: 760;
+  line-height: 1.45;
   padding: 0.95rem 1rem;
   transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
 }
@@ -1197,9 +1198,10 @@ body.home-page {
   color: var(--home-sapphire);
   font-size: 0.76rem;
   font-weight: 800;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
   margin: 0;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .home-page .dashboard-sidebar-note-title {
@@ -1379,7 +1381,7 @@ body.home-page {
 .home-page .dashboard-stat-note {
   color: var(--home-muted);
   font-size: 0.88rem;
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0.45rem 0 0;
   position: relative;
 }
@@ -1420,6 +1422,7 @@ body.home-page {
 .home-page .dashboard-panel-status {
   color: var(--home-muted);
   font-size: 0.9rem;
+  line-height: 1.55;
   margin: 0 0 0.95rem;
   position: relative;
 }

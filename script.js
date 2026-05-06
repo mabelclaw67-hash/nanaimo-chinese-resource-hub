@@ -50,6 +50,27 @@ const truncateText = (value, limit = 128) => {
   return `${text.slice(0, limit - 1).trimEnd()}...`;
 };
 
+const UI_TEXT = {
+  loading: "Loading live data... / 正在读取实时数据...",
+  loadingRequests: "Checking live requests... / 正在检查实时服务需求...",
+  loadingProviders: "Checking live providers... / 正在检查实时服务提供者...",
+  loadingTemplates: "Checking template data... / 正在检查模板数据...",
+  liveConnected: "Live data connected / 实时数据已连接",
+  liveNotConnected: "Live data not connected / 实时数据未连接",
+  noLiveData: "No live data available / 暂无实时数据",
+  templatesNotConnected: "Templates not connected yet / 模板数据暂未连接",
+  sourceOrderOnly: "Source order shown; latest sorting unavailable / 按原始顺序显示，暂无法按最新排序",
+  liveRequestsShown: "Showing live request items / 显示实时服务需求",
+  liveProvidersShown: "Showing live provider items / 显示实时服务提供者",
+  noDescription: "No public description provided. / 暂无公开说明",
+  serviceRequest: "Service Request / 服务需求",
+  serviceProvider: "Service Provider / 服务提供者",
+  nanaimoArea: "Nanaimo Area / 纳奈莫地区",
+  recent: "Recent / 最近",
+  categoryUnavailable: "Category unavailable / 暂无分类",
+  platformFollowUp: "Platform follow-up / 平台跟进",
+};
+
 const parseHomepage = (text) => {
   const lines = nonEmptyLines(text);
   const result = {
@@ -202,16 +223,39 @@ const renderTemplates = (templates) => {
   setText("#templates-title-zh", templates.titleZh);
 
   const introNode = document.querySelector(".template-intro");
+  let statusNode = document.querySelector("#templates-data-status");
+
   if (introNode && templates.label.english && templates.label.chinese) {
     introNode.innerHTML = "";
     introNode.append(
       createParagraph("primary-copy", templates.label.english),
       createParagraph("secondary-copy", templates.label.chinese, "zh-Hans"),
     );
+
+    statusNode = document.createElement("p");
+    statusNode.className = "dashboard-panel-status";
+    statusNode.id = "templates-data-status";
+    introNode.append(statusNode);
   }
 
   const container = document.querySelector("#templates-content");
+
+  if (statusNode) {
+    statusNode.textContent = templates.items.length
+      ? `${templates.items.length} live templates / ${templates.items.length} 个实时模板`
+      : UI_TEXT.templatesNotConnected;
+  }
+
   if (!container || !templates.items.length) {
+    if (container) {
+      container.innerHTML = `
+        <article class="template-card">
+          <h3>Templates not connected yet</h3>
+          <p class="secondary-heading" lang="zh-Hans">模板数据暂未连接</p>
+          <p class="secondary-copy">${UI_TEXT.templatesNotConnected}</p>
+        </article>
+      `;
+    }
     return;
   }
 
@@ -227,11 +271,11 @@ const renderTemplates = (templates) => {
 
     const linkMarkup = hasRealLink
       ? `<a class="template-link template-link-active" href="${englishLinkValue}" target="_blank" rel="noreferrer">${bilingualLabel}</a>`
-      : `<p class="template-link template-link-disabled">Google Sheet link coming soon</p>`;
+      : `<p class="template-link template-link-disabled">${UI_TEXT.templatesNotConnected}</p>`;
 
     const chineseMarkup = hasRealLink
       ? ``
-      : `<p class="secondary-copy" lang="zh-Hans">Google Sheet 链接稍后补充</p>`;
+      : `<p class="secondary-copy" lang="zh-Hans">模板数据暂未连接</p>`;
 
     card.innerHTML = `
       <span class="template-index">${String(index + 1).padStart(2, "0")}</span>
@@ -271,6 +315,38 @@ const setListFallback = (listSelector, statusSelector, message) => {
   }
 };
 
+const splitCategoryTokens = (value) =>
+  String(value ?? "")
+    .split(/[;,，；]/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+const toBilingualContactMethod = (value) => {
+  const normalized = String(value ?? "").trim().toLowerCase();
+
+  if (!normalized) {
+    return UI_TEXT.platformFollowUp;
+  }
+
+  if (normalized.includes("wechat")) {
+    return "WeChat / 微信";
+  }
+
+  if (normalized.includes("email")) {
+    return "Email / 邮箱";
+  }
+
+  if (normalized.includes("text")) {
+    return "Text Message / 短信";
+  }
+
+  if (normalized.includes("phone") || normalized.includes("call")) {
+    return "Phone Call / 电话";
+  }
+
+  return `${value} / 联系方式`;
+};
+
 const parseDateValue = (value) => {
   const parsed = new Date(String(value ?? "").trim());
   return Number.isNaN(parsed.getTime()) ? null : parsed;
@@ -302,26 +378,41 @@ const renderLatestRequests = (requests) => {
   }
 
   if (!requests.length) {
-    setListFallback("#latest-requests-list", "#latest-requests-status", "No live data available");
+    setListFallback("#latest-requests-list", "#latest-requests-status", UI_TEXT.noLiveData);
     return;
   }
 
-  statusNode.textContent = `Showing ${Math.min(requests.length, 5)} live request items.`;
-  listNode.innerHTML = requests
+  const requestsWithDates = requests.filter((request) => parseDateValue(request.dateSubmitted));
+  statusNode.textContent = requestsWithDates.length
+    ? `${Math.min(requests.length, 5)} live request items / ${Math.min(requests.length, 5)} 条实时服务需求`
+    : UI_TEXT.sourceOrderOnly;
+
+  const sortedRequests = requestsWithDates.length
+    ? [...requests].sort((left, right) => {
+        const leftDate = parseDateValue(left.dateSubmitted);
+        const rightDate = parseDateValue(right.dateSubmitted);
+        if (!leftDate || !rightDate) {
+          return 0;
+        }
+        return rightDate.getTime() - leftDate.getTime();
+      })
+    : requests;
+
+  listNode.innerHTML = sortedRequests
     .slice(0, 5)
     .map(
       (request) => `
         <li class="dashboard-list-item">
           <div class="dashboard-list-row">
             <div>
-              <p class="dashboard-list-title">${escapeHtml(request.serviceType || "Service Request")}</p>
+              <p class="dashboard-list-title">${escapeHtml(request.serviceType || UI_TEXT.serviceRequest)}</p>
               <p class="dashboard-list-meta">
-                ${escapeHtml(request.area || "Nanaimo Area")} · ${escapeHtml(request.contactMethod || "Platform follow-up")}
+                ${escapeHtml(request.area || UI_TEXT.nanaimoArea)} · ${escapeHtml(toBilingualContactMethod(request.contactMethod))}
               </p>
             </div>
-            <span class="dashboard-list-badge">${escapeHtml(request.dateSubmitted || "Recent")}</span>
+            <span class="dashboard-list-badge">${escapeHtml(request.dateSubmitted || UI_TEXT.recent)}</span>
           </div>
-          <p class="dashboard-list-description">${escapeHtml(truncateText(request.description || "No public description provided."))}</p>
+          <p class="dashboard-list-description">${escapeHtml(truncateText(request.description || UI_TEXT.noDescription))}</p>
         </li>
       `,
     )
@@ -353,28 +444,34 @@ const renderLatestProviders = (providers) => {
     })
     .filter((provider) => provider.parsedDate);
 
-  if (!datedProviders.length) {
-    setListFallback("#latest-providers-list", "#latest-providers-status", "Live data not connected");
+  const providersToShow = datedProviders.length
+    ? [...datedProviders].sort((a, b) => b.parsedDate.getTime() - a.parsedDate.getTime())
+    : providers;
+
+  if (!providersToShow.length) {
+    setListFallback("#latest-providers-list", "#latest-providers-status", UI_TEXT.noLiveData);
     return;
   }
 
-  datedProviders.sort((a, b) => b.parsedDate.getTime() - a.parsedDate.getTime());
-  statusNode.textContent = `Showing ${Math.min(datedProviders.length, 5)} live provider items.`;
-  listNode.innerHTML = datedProviders
+  statusNode.textContent = datedProviders.length
+    ? `${Math.min(providersToShow.length, 5)} live provider items / ${Math.min(providersToShow.length, 5)} 条实时服务提供者`
+    : UI_TEXT.sourceOrderOnly;
+
+  listNode.innerHTML = providersToShow
     .slice(0, 5)
     .map(
       (provider) => `
         <li class="dashboard-list-item">
           <div class="dashboard-list-row">
             <div>
-              <p class="dashboard-list-title">${escapeHtml(provider.name || "Service Provider")}</p>
+              <p class="dashboard-list-title">${escapeHtml(provider.name || UI_TEXT.serviceProvider)}</p>
               <p class="dashboard-list-meta">
-                ${escapeHtml(provider.category || "Category unavailable")} · ${escapeHtml(provider.city || "Nanaimo Area")}
+                ${escapeHtml(provider.category || UI_TEXT.categoryUnavailable)} · ${escapeHtml(provider.city || UI_TEXT.nanaimoArea)}
               </p>
             </div>
-            <span class="dashboard-list-badge">${escapeHtml(provider.displayDate)}</span>
+            <span class="dashboard-list-badge">${escapeHtml(provider.displayDate || "Source Order / 原始顺序")}</span>
           </div>
-          <p class="dashboard-list-description">${escapeHtml(truncateText(provider.description || "No public description provided."))}</p>
+          <p class="dashboard-list-description">${escapeHtml(truncateText(provider.description || UI_TEXT.noDescription))}</p>
         </li>
       `,
     )
@@ -388,29 +485,29 @@ const updateDashboardSummary = (state) => {
   }
 
   if (!state.providersLive && !state.requestsLive) {
-    summaryNode.textContent = "No live data available.";
+    summaryNode.textContent = UI_TEXT.noLiveData;
     return;
   }
 
   const parts = [];
 
   if (state.providersLive) {
-    parts.push("Providers count is live");
+    parts.push("Providers live / 服务提供者已连接");
   }
 
   if (state.requestsLive) {
-    parts.push("Service requests are live");
+    parts.push("Requests live / 服务需求已连接");
   }
 
   if (!state.latestProvidersLive) {
-    parts.push("latest provider ordering is not connected");
+    parts.push("provider latest sorting unavailable / 服务提供者暂无法按最新排序");
   }
 
   if (!state.submissionsLive) {
-    parts.push("submission totals are not connected");
+    parts.push("submissions not connected / 最新提交未连接");
   }
 
-  summaryNode.textContent = `${parts.join("; ")}.`;
+  summaryNode.textContent = parts.join(" ; ");
 };
 
 const loadDashboardData = async () => {
@@ -426,7 +523,7 @@ const loadDashboardData = async () => {
     submissionsLive: false,
   };
 
-  setMetricCard("#submissions-count", "#submissions-count-note", "--", "Live data not connected");
+  setMetricCard("#submissions-count", "#submissions-count-note", "--", UI_TEXT.liveNotConnected);
 
   const [providersResult, requestsResult] = await Promise.allSettled([
     fetchJson("/api/providers", "providers"),
@@ -435,20 +532,16 @@ const loadDashboardData = async () => {
 
   if (providersResult.status === "fulfilled") {
     const providers = providersResult.value;
-    const categories = [...new Set(providers.map((provider) => String(provider.category ?? "").trim()).filter(Boolean))];
+    const categories = new Set(
+      providers.flatMap((provider) => splitCategoryTokens(provider.category)).filter(Boolean),
+    );
 
     state.providersLive = true;
     setMetricCard(
       "#providers-count",
       "#providers-count-note",
       String(providers.length),
-      "Live data connected",
-    );
-    setMetricCard(
-      "#categories-count",
-      "#categories-count-note",
-      String(categories.length),
-      "Live data connected",
+      UI_TEXT.liveConnected,
     );
 
     const datedProviders = providers.filter(
@@ -463,11 +556,11 @@ const loadDashboardData = async () => {
     );
 
     state.latestProvidersLive = datedProviders.length > 0;
+    state.providerCategories = categories;
     renderLatestProviders(providers);
   } else {
-    setMetricCard("#providers-count", "#providers-count-note", "--", "No live data available");
-    setMetricCard("#categories-count", "#categories-count-note", "--", "No live data available");
-    setListFallback("#latest-providers-list", "#latest-providers-status", "No live data available");
+    setMetricCard("#providers-count", "#providers-count-note", "--", UI_TEXT.noLiveData);
+    setListFallback("#latest-providers-list", "#latest-providers-status", UI_TEXT.noLiveData);
   }
 
   if (requestsResult.status === "fulfilled") {
@@ -477,12 +570,26 @@ const loadDashboardData = async () => {
       "#requests-count",
       "#requests-count-note",
       String(requests.length),
-      "Live data connected",
+      UI_TEXT.liveConnected,
+    );
+    state.requestCategories = new Set(
+      requests.flatMap((request) => splitCategoryTokens(request.serviceType)).filter(Boolean),
     );
     renderLatestRequests(requests);
   } else {
-    setMetricCard("#requests-count", "#requests-count-note", "--", "No live data available");
-    setListFallback("#latest-requests-list", "#latest-requests-status", "No live data available");
+    setMetricCard("#requests-count", "#requests-count-note", "--", UI_TEXT.noLiveData);
+    setListFallback("#latest-requests-list", "#latest-requests-status", UI_TEXT.noLiveData);
+  }
+
+  const categoryCount = new Set([
+    ...(state.providerCategories ? [...state.providerCategories] : []),
+    ...(state.requestCategories ? [...state.requestCategories] : []),
+  ]).size;
+
+  if (categoryCount) {
+    setMetricCard("#categories-count", "#categories-count-note", String(categoryCount), UI_TEXT.liveConnected);
+  } else {
+    setMetricCard("#categories-count", "#categories-count-note", "--", UI_TEXT.liveNotConnected);
   }
 
   updateDashboardSummary(state);
@@ -501,6 +608,10 @@ const loadContent = async () => {
     renderTemplates(parseTemplates(templatesText));
   } catch (error) {
     console.warn("Using built-in fallback content because the text files could not be loaded.", error);
+    const statusNode = document.querySelector("#templates-data-status");
+    if (statusNode) {
+      statusNode.textContent = UI_TEXT.templatesNotConnected;
+    }
   }
 };
 
