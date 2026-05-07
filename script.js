@@ -321,6 +321,46 @@ const splitCategoryTokens = (value) =>
     .map((part) => part.trim())
     .filter(Boolean);
 
+const sanitizePhoneHref = (value) => {
+  const cleaned = String(value ?? "").trim().replace(/[^\d+]/g, "");
+  const digitCount = cleaned.replace(/\D/g, "").length;
+  return digitCount >= 7 ? cleaned : "";
+};
+
+const renderLinkedInlineText = (value) => {
+  const text = String(value ?? "").trim();
+  if (!text) {
+    return "";
+  }
+
+  const tokenPattern = /([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})|(\+?\d[\d\s().-]{6,}\d)/gi;
+  let html = "";
+  let lastIndex = 0;
+
+  text.replace(tokenPattern, (match, email, phone, offset) => {
+    html += escapeHtml(text.slice(lastIndex, offset));
+
+    if (email) {
+      html += `<a class="detail-link" href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`;
+    } else {
+      const phoneHref = sanitizePhoneHref(phone);
+      html += phoneHref
+        ? `<a class="detail-link" href="tel:${escapeHtml(phoneHref)}">${escapeHtml(phone)}</a>`
+        : escapeHtml(phone);
+    }
+
+    lastIndex = offset + match.length;
+    return match;
+  });
+
+  if (!html) {
+    return escapeHtml(text);
+  }
+
+  html += escapeHtml(text.slice(lastIndex));
+  return html;
+};
+
 const toBilingualContactMethod = (value) => {
   const normalized = String(value ?? "").trim().toLowerCase();
 
@@ -412,7 +452,7 @@ const renderLatestRequests = (requests) => {
             </div>
             <span class="dashboard-list-badge">${escapeHtml(request.dateSubmitted || UI_TEXT.recent)}</span>
           </div>
-          <p class="dashboard-list-description">${escapeHtml(truncateText(request.description || UI_TEXT.noDescription))}</p>
+          <p class="dashboard-list-description">${renderLinkedInlineText(truncateText(request.description || UI_TEXT.noDescription))}</p>
         </li>
       `,
     )
@@ -471,7 +511,7 @@ const renderLatestProviders = (providers) => {
             </div>
             <span class="dashboard-list-badge">${escapeHtml(provider.displayDate || "Source Order / 原始顺序")}</span>
           </div>
-          <p class="dashboard-list-description">${escapeHtml(truncateText(provider.description || UI_TEXT.noDescription))}</p>
+          <p class="dashboard-list-description">${renderLinkedInlineText(truncateText(provider.description || UI_TEXT.noDescription))}</p>
         </li>
       `,
     )
