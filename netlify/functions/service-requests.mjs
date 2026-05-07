@@ -134,8 +134,10 @@ const formatSubmittedDate = (value) => {
 
 const toPublicRequest = (record) => {
   const explicitContactMethod = pickValue(record, KEY_ALIASES.contactMethod);
-  const hasPhone = Boolean(pickValue(record, KEY_ALIASES.phone));
-  const hasEmail = Boolean(pickValue(record, KEY_ALIASES.email));
+  const phone = pickValue(record, KEY_ALIASES.phone);
+  const email = pickValue(record, KEY_ALIASES.email);
+  const hasPhone = Boolean(phone);
+  const hasEmail = Boolean(email);
   const derivedContactMethod =
     explicitContactMethod || (hasPhone && hasEmail ? "Phone or Email" : hasPhone ? "Phone call" : hasEmail ? "Email" : "");
 
@@ -144,6 +146,8 @@ const toPublicRequest = (record) => {
     area: pickValue(record, KEY_ALIASES.area),
     description: pickValue(record, KEY_ALIASES.description),
     contactMethod: toMaskedContactMethod(derivedContactMethod),
+    phone,
+    email,
     dateSubmitted: formatSubmittedDate(pickValue(record, KEY_ALIASES.dateSubmitted)),
   };
 };
