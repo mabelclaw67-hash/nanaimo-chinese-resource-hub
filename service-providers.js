@@ -43,12 +43,12 @@ const renderProviders = (providers) => {
         <p class="secondary-heading" lang="zh-Hans">${escapeHtml(provider.category)}</p>
       </div>
       <div class="provider-meta">
-        <p><strong>Service Category</strong><span>${escapeHtml(provider.category)}</span></p>
-        <p><strong>City / Area</strong><span>${escapeHtml(provider.city)}</span></p>
-        <p><strong>Phone</strong><span>${escapeHtml(provider.phone || "Not provided")}</span></p>
-        <p><strong>${escapeHtml(provider.contactLabel)}</strong><span>${escapeHtml(provider.contactValue || "Not provided")}</span></p>
+        <p><strong>Service Category / 服务分类</strong><span>${escapeHtml(provider.category)}</span></p>
+        <p><strong>City / Area / 城市或区域</strong><span>${escapeHtml(provider.city)}</span></p>
+        <p><strong>Phone / 电话</strong><span>${escapeHtml(provider.phone || "Not provided / 未提供")}</span></p>
+        <p><strong>${escapeHtml(provider.contactLabel)}</strong><span>${escapeHtml(provider.contactValue || "Not provided / 未提供")}</span></p>
       </div>
-      <p class="primary-copy provider-description">${escapeHtml(provider.description || "No description provided.")}</p>
+      <p class="primary-copy provider-description">${escapeHtml(provider.description || "No description provided / 暂无说明")}</p>
     `;
     gridNode.append(article);
   });
@@ -57,7 +57,7 @@ const renderProviders = (providers) => {
 const updateCategoryOptions = (providers) => {
   const currentValue = categoryNode.value;
   const categories = [...new Set(providers.map((provider) => provider.category).filter(Boolean))].sort();
-  categoryNode.innerHTML = '<option value="">All categories</option>';
+  categoryNode.innerHTML = '<option value="">All categories / 全部分类</option>';
 
   categories.forEach((category) => {
     const option = document.createElement("option");
@@ -82,7 +82,9 @@ const applyFilters = () => {
   emptyNode.hidden = filtered.length !== 0;
   renderProviders(filtered);
   statusNode.textContent =
-    filtered.length === 1 ? "1 approved provider found." : `${filtered.length} approved providers found.`;
+    filtered.length === 1
+      ? "1 approved provider found / 已显示 1 条服务提供者"
+      : `${filtered.length} approved providers found / 已显示 ${filtered.length} 条服务提供者`;
 };
 
 const loadProviders = async () => {
@@ -102,12 +104,12 @@ const loadProviders = async () => {
     updateCategoryOptions(allProviders);
     applyFilters();
   } catch (error) {
-    statusNode.textContent = "Provider data is not available yet.";
+    statusNode.textContent = "Provider data is not available yet / 服务提供者数据暂不可用";
     emptyNode.hidden = false;
     gridNode.innerHTML = "";
     emptyNode.innerHTML = `
-      <p class="primary-copy">Provider data could not be loaded right now.</p>
-      <p class="secondary-copy" lang="zh-Hans">目前暂时无法载入服务提供者资料。</p>
+      <p class="primary-copy">Provider data could not be loaded right now / 目前暂时无法载入服务提供者资料。</p>
+      <p class="secondary-copy" lang="zh-Hans">Please try again shortly / 请稍后再试。</p>
       <p class="secondary-copy providers-error-detail">${escapeHtml(error.message)}</p>
     `;
   }

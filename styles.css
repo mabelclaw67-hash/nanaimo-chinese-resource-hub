@@ -528,6 +528,10 @@ h1 {
   padding-bottom: 2.25rem;
 }
 
+.directory-page .section {
+  padding: 1.25rem 0 2rem;
+}
+
 .providers-hero {
   padding: 2rem;
 }
@@ -538,6 +542,21 @@ h1 {
 
 .providers-title {
   font-size: clamp(2.4rem, 5vw, 3.6rem);
+}
+
+.directory-page .providers-title {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+}
+
+.directory-header {
+  margin-bottom: 0.9rem;
+}
+
+.directory-summary {
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.55;
+  margin: 0.45rem 0 0;
 }
 
 .providers-intro {
@@ -577,7 +596,7 @@ h1 {
 }
 
 .providers-status {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
 
 .directory-actions {
@@ -595,6 +614,10 @@ h1 {
 
 .providers-results-section {
   padding-top: 0;
+}
+
+.directory-page .providers-results-section {
+  padding-top: 1.1rem;
 }
 
 .provider-grid {
@@ -956,6 +979,10 @@ h1 {
   .providers-toolbar {
     gap: 0.75rem;
     margin-top: 1rem;
+  }
+
+  .directory-summary {
+    font-size: 0.9rem;
   }
 
   .providers-input {

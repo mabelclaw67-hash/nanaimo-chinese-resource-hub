@@ -26,12 +26,12 @@ const renderRequests = (requests) => {
         <p class="secondary-heading" lang="zh-Hans">${escapeRequestHtml(request.area)}</p>
       </div>
       <div class="provider-meta">
-        <p><strong>Type of Service Needed</strong><span>${escapeRequestHtml(request.serviceType)}</span></p>
-        <p><strong>Area / Location</strong><span>${escapeRequestHtml(request.area || "General Nanaimo area")}</span></p>
-        <p><strong>Preferred Contact Method</strong><span>${escapeRequestHtml(request.contactMethod || "Platform follow-up")}</span></p>
-        <p><strong>Date Submitted</strong><span>${escapeRequestHtml(request.dateSubmitted || "Recent")}</span></p>
+        <p><strong>Type of Service Needed / 所需服务</strong><span>${escapeRequestHtml(request.serviceType)}</span></p>
+        <p><strong>Area / Location / 地区位置</strong><span>${escapeRequestHtml(request.area || "General Nanaimo area / 纳奈莫地区")}</span></p>
+        <p><strong>Preferred Contact Method / 联系方式</strong><span>${escapeRequestHtml(request.contactMethod || "Platform follow-up / 平台跟进")}</span></p>
+        <p><strong>Date Submitted / 提交日期</strong><span>${escapeRequestHtml(request.dateSubmitted || "Recent / 最近")}</span></p>
       </div>
-      <p class="primary-copy provider-description">${escapeRequestHtml(request.description || "No public description provided.")}</p>
+      <p class="primary-copy provider-description">${escapeRequestHtml(request.description || "No public description provided / 暂无公开说明")}</p>
     `;
     requestsGridNode.append(article);
   });
@@ -50,14 +50,16 @@ const loadServiceRequests = async () => {
     requestsEmptyNode.hidden = allRequests.length !== 0;
     renderRequests(allRequests);
     requestsStatusNode.textContent =
-      allRequests.length === 1 ? "1 open request found." : `${allRequests.length} open requests found.`;
+      allRequests.length === 1
+        ? "1 open request found / 已显示 1 条公开需求"
+        : `${allRequests.length} open requests found / 已显示 ${allRequests.length} 条公开需求`;
   } catch (error) {
-    requestsStatusNode.textContent = "Service request data is not available yet.";
+    requestsStatusNode.textContent = "Service request data is not available yet / 服务需求数据暂不可用";
     requestsEmptyNode.hidden = false;
     requestsGridNode.innerHTML = "";
     requestsEmptyNode.innerHTML = `
-      <p class="primary-copy">Service request data could not be loaded right now.</p>
-      <p class="secondary-copy" lang="zh-Hans">目前暂时无法载入服务需求资料。</p>
+      <p class="primary-copy">Service request data could not be loaded right now / 目前暂时无法载入服务需求资料。</p>
+      <p class="secondary-copy" lang="zh-Hans">Please try again shortly / 请稍后再试。</p>
       <p class="secondary-copy providers-error-detail">${escapeRequestHtml(error.message)}</p>
     `;
   }

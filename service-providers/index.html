@@ -37,73 +37,39 @@
       </div>
     </header>
 
-    <main class="providers-page">
-      <section class="section is-visible">
+    <main class="providers-page directory-page">
+      <section class="section is-visible providers-results-section">
         <div class="container">
-          <div class="providers-hero contact-card">
-            <div class="section-heading providers-heading">
-              <p class="eyebrow">Service Providers</p>
-              <h1 class="providers-title">Service Providers</h1>
-              <p class="headline-secondary" lang="zh-Hans">提供服务名单</p>
-            </div>
+          <div class="directory-header">
+            <p class="eyebrow">Service Providers / 服务项目列表</p>
+            <h1 class="providers-title">Service Providers / 服务项目列表</h1>
+            <p class="directory-summary">
+              Browse listed local service providers / 浏览本地服务提供者名单
+            </p>
+          </div>
 
-            <div class="providers-intro">
-              <p class="primary-copy">
-                Browse approved service providers shared through the Nanaimo Resource Board system.
-                Only public business contact details are shown here.
-              </p>
-              <p class="secondary-copy" lang="zh-Hans">
-                浏览通过 Nanaimo Resource Board 系统审核后的服务提供者信息。此页面仅显示可公开分享的业务联系资料。
-              </p>
-            </div>
-
-            <div class="directory-actions">
-              <a class="button button-primary" href="/service-providers/">Service Providers / 提供服务名单</a>
-              <a class="button button-secondary" href="/service-requests/">Service Requests / 服务需求</a>
-              <a
-                class="button button-secondary"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSenpCoMAR4kL7M_tH0TVUgy8qaiA0spse7bPrswfjRO3h35vA/viewform?usp=publish-editor"
-                target="_blank"
-                rel="noreferrer"
-                >Add Service Provider / 添加服务商</a
-              >
-              <a
-                class="button button-secondary"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSd9COadAJnwgEYyyNe2CblvAUmUkQJt1LCI4v3Ouk1LwQe2uQ/viewform?usp=publish-editor"
-                target="_blank"
-                rel="noreferrer"
-                >Request Service / 提交服务需求</a
-              >
-            </div>
-
-            <div class="providers-toolbar" aria-label="Provider filters">
+          <div class="providers-toolbar" aria-label="Provider filters">
               <label class="providers-field">
-                <span class="providers-field-label">Search</span>
+                <span class="providers-field-label">Search / 搜索</span>
                 <input
                   id="provider-search"
                   class="providers-input"
                   type="search"
-                  placeholder="Search provider, category, city, or keyword"
+                  placeholder="Search provider, category, city, or keyword / 搜索服务商、分类、地区或关键词"
                 />
               </label>
 
               <label class="providers-field">
-                <span class="providers-field-label">Category</span>
+                <span class="providers-field-label">Category / 分类</span>
                 <select id="provider-category" class="providers-input">
-                  <option value="">All categories</option>
+                  <option value="">All categories / 全部分类</option>
                 </select>
               </label>
-            </div>
-
-            <p id="providers-status" class="secondary-copy providers-status" aria-live="polite">
-              Loading approved providers...
-            </p>
           </div>
-        </div>
-      </section>
 
-      <section class="section is-visible providers-results-section">
-        <div class="container">
+          <p id="providers-status" class="secondary-copy providers-status" aria-live="polite">
+            Loading approved providers... / 正在载入服务提供者...
+          </p>
           <div id="providers-grid" class="provider-grid"></div>
           <div id="providers-empty" class="provider-empty" hidden>
             <p class="primary-copy">No approved providers match your search yet.</p>

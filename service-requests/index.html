@@ -37,54 +37,20 @@
       </div>
     </header>
 
-    <main class="providers-page">
-      <section class="section is-visible">
-        <div class="container">
-          <div class="providers-hero contact-card">
-            <div class="section-heading providers-heading">
-              <p class="eyebrow">Service Requests</p>
-              <h1 class="providers-title">Service Requests</h1>
-              <p class="headline-secondary" lang="zh-Hans">服务需求</p>
-            </div>
-
-            <div class="providers-intro">
-              <p class="primary-copy">
-                Browse open community service requests shared through the Nanaimo Resource Board
-                workflow. Only limited public request details are shown here.
-              </p>
-              <p class="secondary-copy" lang="zh-Hans">
-                浏览通过 Nanaimo Resource Board 工作流程公开的服务需求。此页面仅显示有限的公开需求信息。
-              </p>
-            </div>
-
-            <div class="directory-actions">
-              <a class="button button-secondary" href="/service-providers/">Service Providers / 提供服务名单</a>
-              <a class="button button-primary" href="/service-requests/">Service Requests / 服务需求</a>
-              <a
-                class="button button-secondary"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSenpCoMAR4kL7M_tH0TVUgy8qaiA0spse7bPrswfjRO3h35vA/viewform?usp=publish-editor"
-                target="_blank"
-                rel="noreferrer"
-                >Add Service Provider / 添加服务商</a
-              >
-              <a
-                class="button button-secondary"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSd9COadAJnwgEYyyNe2CblvAUmUkQJt1LCI4v3Ouk1LwQe2uQ/viewform?usp=publish-editor"
-                target="_blank"
-                rel="noreferrer"
-                >Request Service / 提交服务需求</a
-              >
-            </div>
-
-            <p id="service-requests-status" class="secondary-copy providers-status" aria-live="polite">
-              Loading open requests...
-            </p>
-          </div>
-        </div>
-      </section>
-
+    <main class="providers-page directory-page">
       <section class="section is-visible providers-results-section">
         <div class="container">
+          <div class="directory-header">
+            <p class="eyebrow">Service Requests / 服务需求</p>
+            <h1 class="providers-title">Service Requests / 服务需求</h1>
+            <p class="directory-summary">
+              Browse current public service requests / 浏览当前公开服务需求
+            </p>
+          </div>
+
+          <p id="service-requests-status" class="secondary-copy providers-status" aria-live="polite">
+            Loading open requests... / 正在载入服务需求...
+          </p>
           <div id="service-requests-grid" class="provider-grid"></div>
           <div id="service-requests-empty" class="provider-empty" hidden>
             <p class="primary-copy">No open service requests are visible right now.</p>
