@@ -38,8 +38,12 @@ const parseFeedbackPayload = (payload) => {
     .filter((r) => pickRow(r, ["providername", "provider name"]))
     .map((r) => ({
       timestamp: pickRow(r, ["timestamp"]),
+      relatedServiceRequestId: pickRow(r, ["relatedservicerequestid", "related service request id"]),
+      sourcePage: pickRow(r, ["sourcepage", "source page"]),
       providerName: pickRow(r, ["providername", "provider name"]),
       serviceCategory: pickRow(r, ["servicecategory", "service category"]),
+      completedDate: pickRow(r, ["completeddate", "completed date"]),
+      finalCost: pickRow(r, ["finalcost", "final cost"]),
       rating: pickRow(r, ["rating"]),
       wouldUseAgain: pickRow(r, ["woulduseagain", "would use again"]),
       feedbackNote: pickRow(r, ["feedbacknote", "feedback note"]),
