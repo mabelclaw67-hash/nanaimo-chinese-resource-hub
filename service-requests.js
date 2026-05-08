@@ -902,7 +902,7 @@ const displayServiceRequestFeedbackFromSheet = async () => {
 
     document.querySelectorAll(".service-request-sheet-feedback").forEach((node) => node.remove());
 
-    const requestCards = Array.from(document.querySelectorAll(".request-card"));
+    const requestCards = Array.from(document.querySelectorAll(".provider-card"));
 
     requestFeedbackRows.forEach((feedback) => {
       const relatedId = feedback.relatedServiceRequestId || feedback["Related Service Request ID"] || "";
