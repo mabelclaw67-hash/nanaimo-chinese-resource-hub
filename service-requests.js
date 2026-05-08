@@ -16,6 +16,18 @@ const FEEDBACK_STORAGE_KEY = "nanaimo-service-request-feedback-v1";
 
 const normalizeRequestValue = (value) => String(value ?? "").trim();
 
+const getStableRequestId = (request) => normalizeRequestValue(
+  request?.requestId ||
+  request?.id ||
+  request?.timestamp ||
+  request?.Timestamp ||
+  request?.submittedAt ||
+  request?.dateSubmitted ||
+  request?.["Timestamp"] ||
+  request?.["Date Submitted"] ||
+  ""
+);
+
 const escapeRequestHtml = (value) =>
   normalizeRequestValue(value)
     .replace(/&/g, "&amp;")
@@ -564,7 +576,7 @@ const renderRequests = (requests) => {
 };
 
 const getRequestById = (requestId) =>
-  allRequests.find((request) => normalizeRequestValue(request.requestId) === normalizeRequestValue(requestId));
+  allRequests.find((request) => getStableRequestId(request) === normalizeRequestValue(requestId));
 
 const closeFeedbackModal = () => {
   if (!feedbackModalNode || !feedbackFormNode) {
@@ -583,7 +595,7 @@ const openFeedbackModal = (requestId) => {
     return;
   }
 
-  feedbackFormNode.elements.requestId.value = request.requestId;
+  feedbackFormNode.elements.requestId.value = getStableRequestId(request);
   feedbackFormNode.elements.status.value = normalizeFeedbackStatus(request.status);
   feedbackFormNode.elements.assignedProvider.value = request.assignedProvider || "";
   feedbackFormNode.elements.providerListedStatus.value = request.providerListedStatus || "";
