@@ -578,9 +578,7 @@ const renderRequests = (requests) => {
       <p class="primary-copy provider-description">${renderLinkedRequestText(request.description || "No public description provided / 暂无公开说明")}</p>
       ${buildFeedbackSummaryMarkup(request)}
       <div class="request-card-actions">
-        <button type="button" class="button button-secondary request-feedback-button" data-request-id="${escapeRequestHtml(
-          request.requestId,
-        )}">
+        <button type="button" class="button button-secondary request-feedback-button" data-request-id="${escapeRequestHtml(getStableRequestId(request))}">
           Add / Update Feedback
         </button>
       </div>
