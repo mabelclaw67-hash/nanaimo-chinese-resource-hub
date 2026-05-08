@@ -587,6 +587,39 @@ const renderRequests = (requests) => {
   });
 };
 
+
+const normalizeLooseDateKey = (value) => {
+  const text = normalizeRequestValue(value);
+  if (!text) return "";
+
+  const parsed = new Date(text);
+  if (!Number.isNaN(parsed.getTime())) {
+    return parsed.toISOString().slice(0, 10);
+  }
+
+  return text
+    .toLowerCase()
+    .replace(/[,]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
+const getRequestDateKey = (request) => normalizeLooseDateKey(
+  request?.dateSubmitted ||
+  request?.submittedAt ||
+  request?.Timestamp ||
+  request?.timestamp ||
+  request?.["Timestamp"] ||
+  request?.["Date Submitted"] ||
+  ""
+);
+
+const getFeedbackRequestDateKey = (feedback) => normalizeLooseDateKey(
+  feedback?.relatedServiceRequestId ||
+  feedback?.["Related Service Request ID"] ||
+  ""
+);
+
 const getRequestById = (requestId) =>
   allRequests.find((request) => getStableRequestId(request) === normalizeRequestValue(requestId));
 
@@ -797,3 +830,106 @@ document.addEventListener("keydown", (event) => {
 });
 
 loadServiceRequests();
+
+// ===== Patch: display Service Request feedback from Provider Feedback sheet =====
+const normalizeFeedbackDisplayText = (value) =>
+  String(value || "")
+    .toLowerCase()
+    .replace(/[,]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const makeFeedbackDisplayDateKeys = (value) => {
+  const text = String(value || "").trim();
+  if (!text) return [];
+
+  const keys = new Set();
+  keys.add(normalizeFeedbackDisplayText(text));
+
+  const parsed = new Date(text);
+  if (!Number.isNaN(parsed.getTime())) {
+    keys.add(parsed.toISOString().slice(0, 10));
+    keys.add(
+      parsed.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+      }).replace(",", "").toLowerCase()
+    );
+  }
+
+  return Array.from(keys);
+};
+
+const buildServiceRequestSheetFeedbackHtml = (feedback) => {
+  const providerName = feedback.providerName || feedback["Provider Name"] || "";
+  const completedDate = feedback.completedDate || feedback["Completed Date"] || "";
+  const finalCost = feedback.finalCost || feedback["Final Cost"] || "";
+  const rating = feedback.rating || feedback["Rating"] || "";
+  const wouldUseAgain = feedback.wouldUseAgain || feedback["Would Use Again"] || "";
+  const feedbackNote = feedback.feedbackNote || feedback["Feedback Note"] || "";
+
+  return `
+    <div class="provider-feedback-card service-request-sheet-feedback">
+      <h4>Completion Feedback / 完工反馈</h4>
+      ${providerName ? `<p><strong>Provider / 服务人员</strong><br>${providerName}</p>` : ""}
+      ${completedDate ? `<p><strong>Completed Date / 完成日期</strong><br>${completedDate}</p>` : ""}
+      ${finalCost ? `<p><strong>Final Cost / 最终费用</strong><br>${finalCost}</p>` : ""}
+      ${rating ? `<p><strong>Rating / 评分</strong><br>${rating} / 5</p>` : ""}
+      ${wouldUseAgain ? `<p><strong>Would Use Again / 是否愿意再次使用</strong><br>${wouldUseAgain}</p>` : ""}
+      ${feedbackNote ? `<p>${feedbackNote}</p>` : ""}
+    </div>
+  `;
+};
+
+const displayServiceRequestFeedbackFromSheet = async () => {
+  try {
+    const response = await fetch("/api/provider-feedback", {
+      headers: { Accept: "application/json" }
+    });
+
+    if (!response.ok) return;
+
+    const data = await response.json();
+    const rows = Array.isArray(data.rows) ? data.rows : [];
+
+    const requestFeedbackRows = rows.filter((row) => {
+      const sourcePage = String(row.sourcePage || row["Source Page"] || "").trim().toLowerCase();
+      return sourcePage === "service-requests";
+    });
+
+    if (!requestFeedbackRows.length) return;
+
+    document.querySelectorAll(".service-request-sheet-feedback").forEach((node) => node.remove());
+
+    const requestCards = Array.from(document.querySelectorAll(".request-card"));
+
+    requestFeedbackRows.forEach((feedback) => {
+      const relatedId = feedback.relatedServiceRequestId || feedback["Related Service Request ID"] || "";
+      const possibleKeys = makeFeedbackDisplayDateKeys(relatedId);
+
+      const matchedCard = requestCards.find((card) => {
+        const cardText = normalizeFeedbackDisplayText(card.textContent);
+        return possibleKeys.some((key) => key && cardText.includes(key));
+      });
+
+      if (!matchedCard) return;
+
+      const actionsNode = matchedCard.querySelector(".request-card-actions");
+      const feedbackBox = document.createElement("div");
+      feedbackBox.innerHTML = buildServiceRequestSheetFeedbackHtml(feedback);
+
+      if (actionsNode) {
+        matchedCard.insertBefore(feedbackBox.firstElementChild, actionsNode);
+      } else {
+        matchedCard.appendChild(feedbackBox.firstElementChild);
+      }
+    });
+  } catch (error) {
+    console.warn("Unable to display service request feedback:", error);
+  }
+};
+
+window.addEventListener("load", () => {
+  setTimeout(displayServiceRequestFeedbackFromSheet, 800);
+});
