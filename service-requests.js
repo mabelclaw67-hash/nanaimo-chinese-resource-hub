@@ -933,3 +933,14 @@ const displayServiceRequestFeedbackFromSheet = async () => {
 window.addEventListener("load", () => {
   setTimeout(displayServiceRequestFeedbackFromSheet, 800);
 });
+
+// ===== Patch: retry service request feedback display after async render =====
+window.addEventListener("load", () => {
+  [500, 1200, 2500, 4000].forEach((delay) => {
+    setTimeout(() => {
+      if (typeof displayServiceRequestFeedbackFromSheet === "function") {
+        displayServiceRequestFeedbackFromSheet();
+      }
+    }, delay);
+  });
+});
