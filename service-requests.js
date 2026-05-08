@@ -16,17 +16,31 @@ const FEEDBACK_STORAGE_KEY = "nanaimo-service-request-feedback-v1";
 
 const normalizeRequestValue = (value) => String(value ?? "").trim();
 
-const getStableRequestId = (request) => normalizeRequestValue(
-  request?.requestId ||
-  request?.id ||
-  request?.timestamp ||
-  request?.Timestamp ||
-  request?.submittedAt ||
-  request?.dateSubmitted ||
-  request?.["Timestamp"] ||
-  request?.["Date Submitted"] ||
-  ""
-);
+const getStableRequestId = (request) => {
+  const directId = normalizeRequestValue(
+    request?.requestId ||
+    request?.id ||
+    request?.timestamp ||
+    request?.Timestamp ||
+    request?.submittedAt ||
+    request?.dateSubmitted ||
+    request?.["Timestamp"] ||
+    request?.["Date Submitted"] ||
+    ""
+  );
+
+  if (directId) return directId;
+
+  return normalizeRequestValue([
+    request?.serviceType,
+    request?.serviceCategory,
+    request?.area,
+    request?.location,
+    request?.phone,
+    request?.email,
+    request?.description
+  ].filter(Boolean).join(" | "));
+};
 
 const escapeRequestHtml = (value) =>
   normalizeRequestValue(value)
