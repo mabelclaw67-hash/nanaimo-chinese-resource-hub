@@ -324,8 +324,13 @@ const renderFeedbackRecords = () => {
   }
 
   const listedProviderKeys = new Set(allProviders.map((provider) => provider.providerKey));
+  const listedProviderNames = new Set(allProviders.map((provider) => normalizeSearch(provider.name)));
   const standaloneEntries = Object.values(providerFeedbackMap)
-    .filter((entry) => !entry.providerKey || !listedProviderKeys.has(entry.providerKey))
+    .filter((entry) => {
+      if (entry.providerKey && listedProviderKeys.has(entry.providerKey)) return false;
+      if (entry.providerName && listedProviderNames.has(normalizeSearch(entry.providerName))) return false;
+      return true;
+    })
     .sort((a, b) => String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
 
   feedbackRecordsNode.hidden = standaloneEntries.length === 0;
