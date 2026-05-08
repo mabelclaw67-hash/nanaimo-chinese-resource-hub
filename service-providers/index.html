@@ -46,6 +46,11 @@
             <p class="directory-summary">
               Browse listed local service providers / 浏览本地服务提供者名单
             </p>
+            <div class="directory-actions">
+              <button id="open-provider-feedback" type="button" class="button button-secondary">
+                Add Provider Feedback / 添加服务评价
+              </button>
+            </div>
           </div>
 
           <div class="providers-toolbar" aria-label="Provider filters">
@@ -70,6 +75,15 @@
           <p id="providers-status" class="secondary-copy providers-status" aria-live="polite">
             Loading approved providers... / 正在载入服务提供者...
           </p>
+          <div id="provider-feedback-records" class="provider-feedback-records" hidden>
+            <div class="provider-feedback-records-header">
+              <p class="eyebrow">Saved Provider Feedback / 已记录服务评价</p>
+              <p class="secondary-copy" lang="zh-Hans">
+                这里会显示独立记录的服务评价，特别适用于不在当前公开名单中的服务人员。
+              </p>
+            </div>
+            <div id="provider-feedback-records-grid" class="provider-grid"></div>
+          </div>
           <div id="providers-grid" class="provider-grid"></div>
           <div id="providers-empty" class="provider-empty" hidden>
             <p class="primary-copy">No approved providers match your search yet.</p>
@@ -78,6 +92,124 @@
         </div>
       </section>
     </main>
+
+    <div id="provider-feedback-modal" class="request-modal" hidden>
+      <div class="request-modal-backdrop" data-close-provider-feedback="true"></div>
+      <div
+        class="request-modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="provider-feedback-title"
+      >
+        <button
+          type="button"
+          class="request-modal-close"
+          data-close-provider-feedback="true"
+          aria-label="Close provider feedback form"
+        >
+          ×
+        </button>
+
+        <div class="card-heading request-modal-heading">
+          <div>
+            <p class="eyebrow">Provider Feedback / 服务评价</p>
+            <h2 id="provider-feedback-title">Add Provider Feedback</h2>
+            <p id="provider-feedback-subtitle" class="secondary-heading" lang="zh-Hans">
+              添加服务评价
+            </p>
+          </div>
+        </div>
+
+        <form id="provider-feedback-form" class="request-feedback-form">
+          <input type="hidden" name="entryKey" />
+          <input type="hidden" name="providerKey" />
+
+          <label class="request-field">
+            <span>Provider Name / 服务人员名称</span>
+            <input type="text" name="providerName" maxlength="120" required />
+          </label>
+
+          <label class="request-field">
+            <span>Is This Provider Already Listed? / 该服务人员是否已在公开名单中？</span>
+            <select name="providerListedStatus" required>
+              <option value="">Select / 请选择</option>
+              <option value="Yes">Yes / 是</option>
+              <option value="No">No / 否</option>
+              <option value="Not sure">Not sure / 不确定</option>
+            </select>
+          </label>
+
+          <label class="request-field">
+            <span>Service Category / 服务分类</span>
+            <input type="text" name="serviceCategory" maxlength="120" />
+          </label>
+
+          <label class="request-field">
+            <span>City / Area / 城市或区域</span>
+            <input type="text" name="cityArea" maxlength="120" />
+          </label>
+
+          <label class="request-field">
+            <span>Phone / 电话</span>
+            <input type="text" name="phone" maxlength="60" inputmode="tel" />
+          </label>
+
+          <label class="request-field">
+            <span>Email / 邮箱</span>
+            <input type="email" name="email" maxlength="120" />
+          </label>
+
+          <label class="request-field">
+            <span>WECHAT / 微信</span>
+            <input type="text" name="wechat" maxlength="120" />
+          </label>
+
+          <label class="request-field">
+            <span>Rating / 评分</span>
+            <select name="rating">
+              <option value="">Select / 请选择</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+
+          <label class="request-field">
+            <span>Would Use Again / 是否愿意再次使用</span>
+            <select name="wouldUseAgain">
+              <option value="">Select / 请选择</option>
+              <option value="Yes">Yes / 是</option>
+              <option value="No">No / 否</option>
+            </select>
+          </label>
+
+          <label class="request-field">
+            <span>Recommend Adding To Public Provider List / 是否建议加入公开服务名单</span>
+            <select name="recommendPublicListing">
+              <option value="">Select / 请选择</option>
+              <option value="Yes">Yes / 是</option>
+              <option value="No">No / 否</option>
+            </select>
+          </label>
+
+          <label class="request-field request-field-full">
+            <span>Feedback Note / 反馈备注</span>
+            <textarea name="feedbackNote" rows="4" maxlength="600"></textarea>
+          </label>
+
+          <p id="provider-feedback-message" class="secondary-copy request-feedback-message" aria-live="polite"></p>
+
+          <div class="request-feedback-actions">
+            <button type="button" class="button button-secondary" data-close-provider-feedback="true">
+              Cancel / 取消
+            </button>
+            <button type="submit" class="button button-primary">Save Provider Feedback / 保存服务评价</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <footer class="site-footer">
       <div class="container footer-row">
@@ -91,6 +223,29 @@
         </div>
       </div>
     </footer>
+
+    <nav class="mobile-bottom-nav" aria-label="Mobile primary">
+      <a href="/">
+        <span>Home</span>
+        <small lang="zh-Hans">首页</small>
+      </a>
+      <a href="/service-providers/" aria-current="page">
+        <span>Providers</span>
+        <small lang="zh-Hans">服务</small>
+      </a>
+      <a href="/service-requests/">
+        <span>Requests</span>
+        <small lang="zh-Hans">需求</small>
+      </a>
+      <a href="/#submissions">
+        <span>Submit</span>
+        <small lang="zh-Hans">提交</small>
+      </a>
+      <a href="/#contact">
+        <span>Contact</span>
+        <small lang="zh-Hans">联系</small>
+      </a>
+    </nav>
 
     <script src="../service-providers.js"></script>
   </body>

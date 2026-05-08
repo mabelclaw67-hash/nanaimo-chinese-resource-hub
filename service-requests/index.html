@@ -60,6 +60,158 @@
       </section>
     </main>
 
+    <div id="service-request-feedback-modal" class="request-modal" hidden>
+      <div class="request-modal-backdrop" data-close-feedback="true"></div>
+      <div
+        class="request-modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="service-request-feedback-title"
+      >
+        <button
+          type="button"
+          class="request-modal-close"
+          data-close-feedback="true"
+          aria-label="Close completion feedback form"
+        >
+          ×
+        </button>
+
+        <div class="card-heading request-modal-heading">
+          <div>
+            <p class="eyebrow">Completion / Feedback / 完成反馈</p>
+            <h2 id="service-request-feedback-title">Update Service Request</h2>
+            <p id="service-request-feedback-subtitle" class="secondary-heading" lang="zh-Hans">
+              更新服务需求
+            </p>
+          </div>
+        </div>
+
+        <form id="service-request-feedback-form" class="request-feedback-form">
+          <input type="hidden" name="requestId" />
+
+          <label class="request-field">
+            <span>Status / 状态</span>
+            <select name="status" required>
+              <option value="Open">Open / 公开需求</option>
+              <option value="In Progress">In Progress / 处理中</option>
+              <option value="Completed">Completed / 已完成</option>
+            </select>
+          </label>
+
+          <label class="request-field">
+            <span>Assigned Provider / 指定服务人员</span>
+            <input type="text" name="assignedProvider" maxlength="120" />
+          </label>
+
+          <label class="request-field">
+            <span>Is This Provider Already Listed? / 该服务人员是否已在公开名单中？</span>
+            <select name="providerListedStatus">
+              <option value="">Select / 请选择</option>
+              <option value="Yes">Yes / 是</option>
+              <option value="No">No / 否</option>
+              <option value="Not sure">Not sure / 不确定</option>
+            </select>
+          </label>
+
+          <label class="request-field">
+            <span>Completed Date / 完成日期</span>
+            <input type="date" name="completedDate" />
+          </label>
+
+          <label class="request-field">
+            <span>Final Cost / 最终费用</span>
+            <input type="text" name="finalCost" maxlength="60" inputmode="decimal" />
+          </label>
+
+          <label class="request-field">
+            <span>Rating / 评分</span>
+            <select name="rating">
+              <option value="">Select / 请选择</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+
+          <label class="request-field">
+            <span>Would Use Again / 是否愿意再次使用</span>
+            <select name="wouldUseAgain">
+              <option value="">Select / 请选择</option>
+              <option value="Yes">Yes / 是</option>
+              <option value="No">No / 否</option>
+            </select>
+          </label>
+
+          <label class="request-field request-field-full">
+            <span>Feedback Note / 反馈备注</span>
+            <textarea name="feedbackNote" rows="4" maxlength="600"></textarea>
+          </label>
+
+          <div id="unlisted-provider-fields" class="request-subsection request-field-full" hidden>
+            <div class="request-subsection-heading">
+              <p class="request-subsection-title">Provider Not Yet Listed / 尚未公开列出的服务人员</p>
+              <p class="secondary-copy" lang="zh-Hans">
+                如该服务人员未在公开名单中，可在此记录基本信息与推荐意见。
+              </p>
+            </div>
+
+            <div class="request-feedback-form request-feedback-form-nested">
+              <label class="request-field">
+                <span>Provider Name / 服务人员名称</span>
+                <input type="text" name="providerName" maxlength="120" />
+              </label>
+
+              <label class="request-field">
+                <span>Phone / 电话</span>
+                <input type="text" name="providerPhone" maxlength="60" inputmode="tel" />
+              </label>
+
+              <label class="request-field">
+                <span>Email / 邮箱</span>
+                <input type="email" name="providerEmail" maxlength="120" />
+              </label>
+
+              <label class="request-field">
+                <span>WECHAT / 微信</span>
+                <input type="text" name="providerWechat" maxlength="120" />
+              </label>
+
+              <label class="request-field">
+                <span>Service Category / 服务分类</span>
+                <input type="text" name="providerServiceCategory" maxlength="120" />
+              </label>
+
+              <label class="request-field">
+                <span>Recommend Adding To Public Provider List / 是否建议加入公开服务名单</span>
+                <select name="recommendPublicListing">
+                  <option value="">Select / 请选择</option>
+                  <option value="Yes">Yes / 是</option>
+                  <option value="No">No / 否</option>
+                </select>
+              </label>
+
+              <label class="request-field request-field-full">
+                <span>Recommendation Note / 推荐备注</span>
+                <textarea name="recommendationNote" rows="4" maxlength="600"></textarea>
+              </label>
+            </div>
+          </div>
+
+          <p id="service-request-feedback-message" class="secondary-copy request-feedback-message" aria-live="polite"></p>
+
+          <div class="request-feedback-actions">
+            <button type="button" class="button button-secondary" data-close-feedback="true">
+              Cancel / 取消
+            </button>
+            <button type="submit" class="button button-primary">Save Feedback / 保存反馈</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <footer class="site-footer">
       <div class="container footer-row">
         <div>
@@ -72,6 +224,29 @@
         </div>
       </div>
     </footer>
+
+    <nav class="mobile-bottom-nav" aria-label="Mobile primary">
+      <a href="/">
+        <span>Home</span>
+        <small lang="zh-Hans">首页</small>
+      </a>
+      <a href="/service-providers/">
+        <span>Providers</span>
+        <small lang="zh-Hans">服务</small>
+      </a>
+      <a href="/service-requests/" aria-current="page">
+        <span>Requests</span>
+        <small lang="zh-Hans">需求</small>
+      </a>
+      <a href="/#submissions">
+        <span>Submit</span>
+        <small lang="zh-Hans">提交</small>
+      </a>
+      <a href="/#contact">
+        <span>Contact</span>
+        <small lang="zh-Hans">联系</small>
+      </a>
+    </nav>
 
     <script src="../service-requests.js"></script>
   </body>

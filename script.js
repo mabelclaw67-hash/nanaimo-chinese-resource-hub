@@ -1,5 +1,23 @@
 const sectionNodes = document.querySelectorAll(".section");
-const navLinks = document.querySelectorAll(".site-nav a");
+const navLinks = document.querySelectorAll(".site-nav a, .mobile-bottom-nav a");
+
+const getLinkHash = (link) => {
+  const href = link.getAttribute("href") || "";
+
+  if (!href) {
+    return "";
+  }
+
+  if (href.startsWith("#")) {
+    return href;
+  }
+
+  try {
+    return new URL(href, window.location.href).hash;
+  } catch (error) {
+    return "";
+  }
+};
 
 const normalizeText = (text) => String(text ?? "").replace(/\r/g, "");
 
@@ -682,7 +700,7 @@ const observeNavigation = () => {
         }
 
         navLinks.forEach((link) => {
-          const isActive = link.getAttribute("href") === `#${entry.target.id}`;
+          const isActive = getLinkHash(link) === `#${entry.target.id}`;
           link.classList.toggle("is-active", isActive);
         });
       });
