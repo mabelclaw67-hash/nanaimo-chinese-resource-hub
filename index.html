@@ -430,6 +430,114 @@
                     >
                   </div>
                 </div>
+
+                <div class="share-kit-trigger-row">
+                  <button
+                    class="button button-secondary share-kit-trigger"
+                    id="share-kit-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="share-kit-panel"
+                  >
+                    Admin Share Kit / 推广素材
+                  </button>
+                </div>
+
+                <section class="share-kit-panel" id="share-kit-panel" hidden aria-label="Admin Share Kit">
+                  <div class="share-kit-header">
+                    <div>
+                      <p class="contact-panel-label">Admin Share Kit / 推广素材</p>
+                      <p class="primary-copy">
+                        Copy a ready message below to share the website with groups, providers, or
+                        the public.
+                      </p>
+                      <p class="secondary-copy" lang="zh-Hans">
+                        可直接复制下方现成文案，用于微信群、Facebook 群、服务提供者邀请或一般网站分享。
+                      </p>
+                    </div>
+                    <button
+                      class="button button-secondary share-kit-copy-link"
+                      type="button"
+                      data-copy-link="true"
+                    >
+                      Copy Website Link / 复制网站链接
+                    </button>
+                  </div>
+
+                  <div class="share-kit-grid">
+                    <article class="share-kit-card">
+                      <div class="share-kit-card-header">
+                        <div>
+                          <h3>WeChat Group Version</h3>
+                          <p class="secondary-heading" lang="zh-Hans">微信群版本</p>
+                        </div>
+                        <button class="button button-secondary share-kit-copy-button" type="button" data-copy-target="share-kit-message-wechat">
+                          Copy / 复制
+                        </button>
+                      </div>
+                      <textarea
+                        class="share-kit-message"
+                        id="share-kit-message-wechat"
+                        readonly
+                        data-share-template="大家好，分享一个 Nanaimo Chinese Services &amp; Resources 网站，里面整理了纳奈莫本地华人常用服务信息、服务需求、模板下载和提交入口，方便大家找资源、找服务、发布信息。网站链接：{{websiteLink}}"
+                      ></textarea>
+                    </article>
+
+                    <article class="share-kit-card">
+                      <div class="share-kit-card-header">
+                        <div>
+                          <h3>Facebook Group Version</h3>
+                          <p class="secondary-heading" lang="zh-Hans">Facebook 群组版本</p>
+                        </div>
+                        <button class="button button-secondary share-kit-copy-button" type="button" data-copy-target="share-kit-message-facebook">
+                          Copy / 复制
+                        </button>
+                      </div>
+                      <textarea
+                        class="share-kit-message"
+                        id="share-kit-message-facebook"
+                        readonly
+                        data-share-template="Sharing a practical Nanaimo Chinese Services &amp; Resources website for local Chinese-speaking residents and families. It includes service providers, service requests, templates, and submission links. Website: {{websiteLink}}"
+                      ></textarea>
+                    </article>
+
+                    <article class="share-kit-card">
+                      <div class="share-kit-card-header">
+                        <div>
+                          <h3>Provider Invitation Version</h3>
+                          <p class="secondary-heading" lang="zh-Hans">服务提供者邀请版本</p>
+                        </div>
+                        <button class="button button-secondary share-kit-copy-button" type="button" data-copy-target="share-kit-message-provider">
+                          Copy / 复制
+                        </button>
+                      </div>
+                      <textarea
+                        class="share-kit-message"
+                        id="share-kit-message-provider"
+                        readonly
+                        data-share-template="Hello, we are building a practical Nanaimo Chinese Services &amp; Resources website for the local community. If you offer services and would like to be listed, please visit the website and use the provider submission form. Website: {{websiteLink}}"
+                      ></textarea>
+                    </article>
+
+                    <article class="share-kit-card">
+                      <div class="share-kit-card-header">
+                        <div>
+                          <h3>General Website Sharing Version</h3>
+                          <p class="secondary-heading" lang="zh-Hans">通用网站分享版本</p>
+                        </div>
+                        <button class="button button-secondary share-kit-copy-button" type="button" data-copy-target="share-kit-message-general">
+                          Copy / 复制
+                        </button>
+                      </div>
+                      <textarea
+                        class="share-kit-message"
+                        id="share-kit-message-general"
+                        readonly
+                        data-share-template="Nanaimo Chinese Services &amp; Resources is a simple bilingual website for local service information, service requests, templates, and community submissions. Website: {{websiteLink}}"
+                      ></textarea>
+                    </article>
+                  </div>
+                </section>
               </div>
             </div>
           </section>

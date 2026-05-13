@@ -957,6 +957,83 @@ h1 {
   word-break: break-word;
 }
 
+.share-kit-trigger-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.share-kit-trigger,
+.share-kit-copy-button,
+.share-kit-copy-link {
+  border: none;
+  cursor: pointer;
+  min-height: 2.8rem;
+}
+
+.share-kit-trigger {
+  font-size: 0.88rem;
+  min-height: 2.5rem;
+  padding: 0 1rem;
+}
+
+.share-kit-panel {
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(31, 55, 92, 0.08);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  margin-top: 1rem;
+  padding: 1.2rem;
+}
+
+.share-kit-header {
+  align-items: start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.share-kit-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.share-kit-card {
+  background: rgba(255, 248, 232, 0.48);
+  border: 1px solid rgba(140, 106, 42, 0.14);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.share-kit-card-header {
+  align-items: center;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.share-kit-card-header h3 {
+  font-size: 1.02rem;
+  margin: 0;
+}
+
+.share-kit-message {
+  background: #fffdf8;
+  border: 1px solid rgba(140, 106, 42, 0.14);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.94rem;
+  line-height: 1.6;
+  min-height: 10.5rem;
+  padding: 0.9rem;
+  resize: vertical;
+  width: 100%;
+}
+
 .site-footer {
   padding: 0 0 2rem;
 }
@@ -998,6 +1075,7 @@ h1 {
 @media (max-width: 980px) {
   .hero-grid,
   .contact-grid,
+  .share-kit-grid,
   .providers-toolbar,
   .provider-grid,
   .service-grid,
@@ -1234,6 +1312,22 @@ h1 {
   .providers-status,
   .submissions-note {
     margin-top: 0.7rem;
+  }
+
+  .share-kit-header,
+  .share-kit-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .share-kit-trigger-row {
+    justify-content: stretch;
+  }
+
+  .share-kit-trigger,
+  .share-kit-copy-button,
+  .share-kit-copy-link {
+    width: 100%;
   }
 
   .provider-grid,
@@ -1863,6 +1957,28 @@ body.home-page {
 
 .home-page .contact-grid {
   grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+}
+
+.home-page .share-kit-panel,
+.home-page .share-kit-card {
+  backdrop-filter: blur(14px);
+  box-shadow: var(--home-shadow-soft);
+}
+
+.home-page .share-kit-panel {
+  background: rgba(255, 253, 248, 0.94);
+  border: 1px solid #e8dcc2;
+}
+
+.home-page .share-kit-card {
+  background: rgba(255, 248, 232, 0.72);
+  border: 1px solid rgba(140, 106, 42, 0.18);
+}
+
+.home-page .share-kit-message {
+  background: #fffdf8;
+  border: 1px solid #e8dcc2;
+  color: var(--home-text);
 }
 
 .home-page .contact-email,

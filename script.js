@@ -756,22 +756,114 @@ observeNavigation();
 // Share FAB
 const shareFab = document.getElementById("share-fab");
 const shareToast = document.getElementById("share-toast");
+const shareKitToggle = document.getElementById("share-kit-toggle");
+const shareKitPanel = document.getElementById("share-kit-panel");
+const shareKitMessageNodes = document.querySelectorAll("[data-share-template]");
+const shareKitCopyButtons = document.querySelectorAll("[data-copy-target]");
+const shareKitLinkButton = document.querySelector("[data-copy-link='true']");
+
+const getWebsiteLink = () => `${window.location.origin}${window.location.pathname}`;
+
+const showShareToast = (message = "Link copied / 链接已复制") => {
+  if (!shareToast) {
+    return;
+  }
+
+  if (showShareToast.timer) {
+    clearTimeout(showShareToast.timer);
+  }
+
+  shareToast.textContent = message;
+  shareToast.classList.add("is-visible");
+  showShareToast.timer = setTimeout(() => shareToast.classList.remove("is-visible"), 2400);
+};
+
+showShareToast.timer = null;
+
+const fallbackCopyText = (value) => {
+  const helper = document.createElement("textarea");
+  helper.value = value;
+  helper.setAttribute("readonly", "readonly");
+  helper.style.position = "fixed";
+  helper.style.opacity = "0";
+  document.body.append(helper);
+  helper.focus();
+  helper.select();
+  helper.setSelectionRange(0, helper.value.length);
+
+  let succeeded = false;
+
+  try {
+    succeeded = document.execCommand("copy");
+  } catch (error) {
+    succeeded = false;
+  }
+
+  helper.remove();
+  return succeeded;
+};
+
+const copyText = async (value) => {
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(value);
+      return true;
+    } catch (error) {
+      return fallbackCopyText(value);
+    }
+  }
+
+  return fallbackCopyText(value);
+};
+
+shareKitMessageNodes.forEach((node) => {
+  const template = node.dataset.shareTemplate || "";
+  node.value = template.split("{{websiteLink}}").join(getWebsiteLink());
+});
+
+if (shareKitToggle && shareKitPanel) {
+  shareKitToggle.addEventListener("click", () => {
+    const isExpanded = shareKitToggle.getAttribute("aria-expanded") === "true";
+    shareKitPanel.hidden = isExpanded;
+    shareKitToggle.setAttribute("aria-expanded", String(!isExpanded));
+
+    if (!isExpanded) {
+      shareKitPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
+
+shareKitCopyButtons.forEach((button) => {
+  button.addEventListener("click", async () => {
+    const targetId = button.getAttribute("data-copy-target");
+    const target = targetId ? document.getElementById(targetId) : null;
+
+    if (!target) {
+      return;
+    }
+
+    const copied = await copyText(target.value);
+    if (copied) {
+      showShareToast("Message copied / 文案已复制");
+    }
+  });
+});
+
+if (shareKitLinkButton) {
+  shareKitLinkButton.addEventListener("click", async () => {
+    const copied = await copyText(getWebsiteLink());
+    if (copied) {
+      showShareToast("Website link copied / 网站链接已复制");
+    }
+  });
+}
 
 if (shareFab) {
-  let toastTimer = null;
-
-  const showToast = () => {
-    if (!shareToast) return;
-    shareToast.classList.add("is-visible");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => shareToast.classList.remove("is-visible"), 2400);
-  };
-
   shareFab.addEventListener("click", async () => {
     const shareData = {
       title: "Nanaimo Chinese Services & Resources",
       text: "纳奈莫华人生活服务与资源平台 — Practical bilingual information for Chinese-speaking residents in Nanaimo.",
-      url: window.location.href,
+      url: getWebsiteLink(),
     };
 
     if (navigator.share) {
@@ -781,15 +873,15 @@ if (shareFab) {
         if (err.name !== "AbortError") {
           // User dismissed — ignore; other errors fall through to clipboard
           try {
-            await navigator.clipboard.writeText(window.location.href);
-            showToast();
+            await copyText(getWebsiteLink());
+            showShareToast();
           } catch (_) {}
         }
       }
     } else {
       try {
-        await navigator.clipboard.writeText(window.location.href);
-        showToast();
+        await copyText(getWebsiteLink());
+        showShareToast();
       } catch (_) {}
     }
   });
