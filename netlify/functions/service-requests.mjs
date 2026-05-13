@@ -2,6 +2,7 @@ const SERVICE_REQUESTS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbyYOi0LVLDXZUGVQG94vl0K0zGYKhMaefM16n5NKAKn25-QkQI-1rqdtToBH1AFsc7ZYw/exec";
 
 const KEY_ALIASES = {
+  requestId: ["timestamp", "datesubmitted", "submittedat", "createdat", "date"],
   serviceType: [
     "typeofserviceneeded",
     "serviceneeded",
@@ -25,7 +26,15 @@ const KEY_ALIASES = {
   contactMethod: ["preferredcontactmethod", "contactmethod", "contactpreference"],
   phone: ["contactphone", "phone", "联系电话contactphone"],
   email: ["email", "emailaddress", "电子邮箱emailaddress"],
+  wechat: ["wechat", "wechatid", "weixin", "微信wechat"],
   dateSubmitted: ["datesubmitted", "submittedat", "createdat", "timestamp", "date"],
+  status: ["status", "requeststatus", "completionstatus", "feedbackstatus"],
+  assignedProvider: ["assignedprovider", "provider", "serviceprovider", "providername"],
+  completedDate: ["completeddate", "datecompleted", "finishdate"],
+  finalCost: ["finalcost", "cost", "totalcost", "amountpaid"],
+  rating: ["rating", "feedbackrating", "servicerating"],
+  feedbackNote: ["feedbacknote", "feedback", "completionnote", "reviewnote"],
+  wouldUseAgain: ["woulduseagain", "useagain", "hireagain", "bookagain"],
 };
 
 const normalizeKey = (value) => String(value ?? "").toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -132,23 +141,91 @@ const formatSubmittedDate = (value) => {
   });
 };
 
+const normalizeStatus = (value) => {
+  const normalized = normalizeText(value).toLowerCase();
+
+  if (!normalized) {
+    return "";
+  }
+
+  if (normalized.includes("complete") || normalized.includes("done") || normalized.includes("finished")) {
+    return "Completed";
+  }
+
+  if (normalized.includes("progress") || normalized.includes("processing")) {
+    return "In Progress";
+  }
+
+  if (normalized.includes("open") || normalized.includes("new") || normalized.includes("pending")) {
+    return "Open";
+  }
+
+  return normalizeText(value);
+};
+
+const normalizeBinaryChoice = (value) => {
+  const normalized = normalizeText(value).toLowerCase();
+
+  if (!normalized) {
+    return "";
+  }
+
+  if (["yes", "y", "true"].includes(normalized)) {
+    return "Yes";
+  }
+
+  if (["no", "n", "false"].includes(normalized)) {
+    return "No";
+  }
+
+  return normalizeText(value);
+};
+
+const toSortTime = (value) => {
+  const parsed = new Date(normalizeText(value));
+  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+};
+
 const toPublicRequest = (record) => {
+  const requestId = pickValue(record, KEY_ALIASES.requestId);
   const explicitContactMethod = pickValue(record, KEY_ALIASES.contactMethod);
   const phone = pickValue(record, KEY_ALIASES.phone);
   const email = pickValue(record, KEY_ALIASES.email);
+  const wechat = pickValue(record, KEY_ALIASES.wechat);
+  const submittedAt = pickValue(record, KEY_ALIASES.dateSubmitted);
   const hasPhone = Boolean(phone);
   const hasEmail = Boolean(email);
+  const hasWechat = Boolean(wechat);
   const derivedContactMethod =
-    explicitContactMethod || (hasPhone && hasEmail ? "Phone or Email" : hasPhone ? "Phone call" : hasEmail ? "Email" : "");
+    explicitContactMethod ||
+    (hasPhone && hasEmail
+      ? "Phone or Email"
+      : hasPhone
+        ? "Phone call"
+        : hasEmail
+          ? "Email"
+          : hasWechat
+            ? "WeChat"
+            : "");
 
   return {
+    requestId,
     serviceType: pickValue(record, KEY_ALIASES.serviceType),
     area: pickValue(record, KEY_ALIASES.area),
     description: pickValue(record, KEY_ALIASES.description),
     contactMethod: toMaskedContactMethod(derivedContactMethod),
     phone,
     email,
-    dateSubmitted: formatSubmittedDate(pickValue(record, KEY_ALIASES.dateSubmitted)),
+    wechat,
+    dateSubmitted: formatSubmittedDate(submittedAt),
+    status: normalizeStatus(pickValue(record, KEY_ALIASES.status)),
+    assignedProvider: pickValue(record, KEY_ALIASES.assignedProvider),
+    completedDate: pickValue(record, KEY_ALIASES.completedDate),
+    finalCost: pickValue(record, KEY_ALIASES.finalCost),
+    rating: pickValue(record, KEY_ALIASES.rating),
+    feedbackNote: pickValue(record, KEY_ALIASES.feedbackNote),
+    wouldUseAgain: normalizeBinaryChoice(pickValue(record, KEY_ALIASES.wouldUseAgain)),
+    sortTime: toSortTime(submittedAt),
   };
 };
 
@@ -172,8 +249,9 @@ export default async (_req, _context) => {
     const requests = extractRows(payload)
       .map(toPublicRequest)
       .filter(Boolean)
-      .filter((request) => request.serviceType)
-      .sort((a, b) => String(b.dateSubmitted).localeCompare(String(a.dateSubmitted)));
+      .filter((request) => request.serviceType && request.requestId)
+      .sort((a, b) => b.sortTime - a.sortTime)
+      .map(({ sortTime, ...request }) => request);
 
     return Response.json({ requests });
   } catch (error) {

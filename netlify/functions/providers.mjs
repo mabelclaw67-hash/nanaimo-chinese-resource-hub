@@ -107,6 +107,8 @@ const toPublicProvider = (record) => {
     category: pickValue(record, KEY_ALIASES.category),
     city,
     phone: pickValue(record, KEY_ALIASES.phone),
+    email,
+    wechat,
     contactLabel: email ? "Email" : "WeChat",
     contactValue: email || wechat,
     description: pickValue(record, KEY_ALIASES.description),

@@ -2470,3 +2470,84 @@ body.home-page {
     gap: 0.75rem;
   }
 }
+
+/* Share FAB — hidden on desktop, shown on mobile */
+.share-fab {
+  display: none;
+}
+
+.share-toast {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .share-fab {
+    align-items: center;
+    background: var(--accent);
+    border: none;
+    border-radius: 999px;
+    bottom: calc(5.7rem + env(safe-area-inset-bottom) + 0.9rem);
+    box-shadow: 0 4px 18px rgba(80, 50, 20, 0.22);
+    color: #fffdf8;
+    cursor: pointer;
+    display: flex;
+    gap: 0.45rem;
+    padding: 0.55rem 1rem 0.55rem 0.75rem;
+    position: fixed;
+    right: 1rem;
+    transition: background-color 160ms ease, box-shadow 160ms ease, transform 120ms ease;
+    z-index: 39;
+  }
+
+  .share-fab:active {
+    background: var(--accent-deep);
+    box-shadow: 0 2px 8px rgba(80, 50, 20, 0.18);
+    transform: scale(0.96);
+  }
+
+  .share-fab-icon {
+    flex-shrink: 0;
+    height: 1.15rem;
+    width: 1.15rem;
+  }
+
+  .share-fab-label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .share-fab-label small {
+    display: block;
+    font-size: 0.63rem;
+    font-weight: 400;
+    opacity: 0.88;
+  }
+
+  .share-toast {
+    background: var(--text);
+    border-radius: 999px;
+    bottom: calc(5.7rem + env(safe-area-inset-bottom) + 0.9rem + 3.5rem);
+    color: #fffdf8;
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    left: 50%;
+    opacity: 0;
+    padding: 0.45rem 1.1rem;
+    pointer-events: none;
+    position: fixed;
+    right: auto;
+    transform: translateX(-50%) translateY(6px);
+    transition: opacity 220ms ease, transform 220ms ease;
+    white-space: nowrap;
+    z-index: 50;
+  }
+
+  .share-toast.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

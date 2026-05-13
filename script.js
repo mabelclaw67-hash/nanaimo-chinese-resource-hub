@@ -624,9 +624,16 @@ const loadDashboardData = async () => {
   if (requestsResult.status === "fulfilled") {
     const requests = requestsResult.value;
     state.requestsLive = true;
+    state.submissionsLive = true;
     setMetricCard(
       "#requests-count",
       "#requests-count-note",
+      String(requests.length),
+      UI_TEXT.liveConnected,
+    );
+    setMetricCard(
+      "#submissions-count",
+      "#submissions-count-note",
       String(requests.length),
       UI_TEXT.liveConnected,
     );
@@ -718,3 +725,45 @@ loadContent();
 loadDashboardData();
 observeSections();
 observeNavigation();
+
+// Share FAB
+const shareFab = document.getElementById("share-fab");
+const shareToast = document.getElementById("share-toast");
+
+if (shareFab) {
+  let toastTimer = null;
+
+  const showToast = () => {
+    if (!shareToast) return;
+    shareToast.classList.add("is-visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => shareToast.classList.remove("is-visible"), 2400);
+  };
+
+  shareFab.addEventListener("click", async () => {
+    const shareData = {
+      title: "Nanaimo Chinese Services & Resources",
+      text: "纳奈莫华人生活服务与资源平台 — Practical bilingual information for Chinese-speaking residents in Nanaimo.",
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        if (err.name !== "AbortError") {
+          // User dismissed — ignore; other errors fall through to clipboard
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            showToast();
+          } catch (_) {}
+        }
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        showToast();
+      } catch (_) {}
+    }
+  });
+}

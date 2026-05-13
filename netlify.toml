@@ -10,3 +10,8 @@
   from = "/api/service-requests"
   to = "/.netlify/functions/service-requests"
   status = 200
+
+[[redirects]]
+  from = "/api/provider-feedback"
+  to = "/.netlify/functions/provider-feedback"
+  status = 200
