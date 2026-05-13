@@ -583,39 +583,66 @@ const loadDashboardData = async () => {
 
   setMetricCard("#submissions-count", "#submissions-count-note", "--", UI_TEXT.liveNotConnected);
 
+  const fetchProviders = async () => {
+    const response = await fetch("/api/providers", { cache: "no-store" });
+    const contentType = response.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) {
+      throw new Error("No live data available");
+    }
+    const payload = await response.json();
+    if (!response.ok) {
+      throw new Error(payload.error || "No live data available");
+    }
+    // Try all known field names the API may use for the providers array
+    const raw =
+      payload.providers ??
+      payload.data ??
+      payload.items ??
+      payload.rows ??
+      payload.records ??
+      (Array.isArray(payload) ? payload : []);
+    return Array.isArray(raw) ? raw : [];
+  };
+
   const [providersResult, requestsResult] = await Promise.allSettled([
-    fetchJson("/api/providers", "providers"),
+    fetchProviders(),
     fetchJson("/api/service-requests", "requests"),
   ]);
 
   if (providersResult.status === "fulfilled") {
-    const providers = providersResult.value;
-    const categories = new Set(
-      providers.flatMap((provider) => splitCategoryTokens(provider.category)).filter(Boolean),
-    );
+    try {
+      const providers = providersResult.value;
+      const categories = new Set(
+        providers.flatMap((provider) => splitCategoryTokens(provider.category)).filter(Boolean),
+      );
 
-    state.providersLive = true;
-    setMetricCard(
-      "#providers-count",
-      "#providers-count-note",
-      String(providers.length),
-      UI_TEXT.liveConnected,
-    );
+      state.providersLive = true;
+      setMetricCard(
+        "#providers-count",
+        "#providers-count-note",
+        String(providers.length),
+        UI_TEXT.liveConnected,
+      );
 
-    const datedProviders = providers.filter(
-      (provider) =>
-        parseDateValue(
-          provider.timestamp ||
-            provider.createdAt ||
-            provider.updatedAt ||
-            provider.submittedAt ||
-            provider.dateSubmitted,
-        ),
-    );
+      const datedProviders = providers.filter(
+        (provider) =>
+          parseDateValue(
+            provider.timestamp ||
+              provider.createdAt ||
+              provider.updatedAt ||
+              provider.submittedAt ||
+              provider.dateSubmitted,
+          ),
+      );
 
-    state.latestProvidersLive = datedProviders.length > 0;
-    state.providerCategories = categories;
-    renderLatestProviders(providers);
+      state.latestProvidersLive = datedProviders.length > 0;
+      state.providerCategories = categories;
+      renderLatestProviders(providers);
+    } catch (providerRenderError) {
+      console.warn("Providers render error:", providerRenderError);
+      setMetricCard("#providers-count", "#providers-count-note", "--", UI_TEXT.noLiveData);
+      setListFallback("#latest-providers-list", "#latest-providers-status", UI_TEXT.noLiveData);
+    }
   } else {
     setMetricCard("#providers-count", "#providers-count-note", "--", UI_TEXT.noLiveData);
     setListFallback("#latest-providers-list", "#latest-providers-status", UI_TEXT.noLiveData);
