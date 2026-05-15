@@ -21,7 +21,12 @@
       <header class="site-header dashboard-sidebar">
         <div class="dashboard-sidebar-inner">
           <a class="brand" href="#home" aria-label="Nanaimo Chinese Services & Resources home">
-            <span class="brand-mark">N</span>
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+              </svg>
+            </span>
             <span class="brand-copy">
               <strong>Nanaimo Chinese Services &amp; Resources</strong>
               <small>纳奈莫华人生活服务与资源平台</small>
@@ -29,13 +34,38 @@
           </a>
 
           <nav class="site-nav" aria-label="Primary">
-            <a href="#home">Dashboard / 首页总览</a>
-            <a href="/service-providers/">Service Providers / 服务项目列表</a>
-            <a href="/service-requests/">Service Requests / 服务需求</a>
-            <a href="#services">Services / 服务说明</a>
-            <a href="#templates">Templates / 模板下载</a>
-            <a href="#submissions">Submissions / 提交入口</a>
-            <a href="#contact">Contact Us / 联系我们</a>
+            <a href="#home">
+              <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+              <span class="nav-label">Dashboard / 首页总览</span>
+            </a>
+            <a href="/service-providers/">
+              <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
+              <span class="nav-label">Service Providers / 服务提供者<small>服务提供者 / 服务项目列表</small></span>
+            </a>
+            <a href="/service-requests/">
+              <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></span>
+              <span class="nav-label">Service Requests / 服务需求<small>服务需求列表</small></span>
+            </a>
+            <a href="#submissions">
+              <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
+              <span class="nav-label">New Submissions / 最新提交<small>最新提交的内容</small></span>
+            </a>
+            <a href="#services">
+              <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+              <span class="nav-label">Categories / 服务分类<small>服务分类浏览</small></span>
+            </a>
+            <a href="#templates">
+              <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+              <span class="nav-label">Templates / 模板下载<small>实用模板与表格下载</small></span>
+            </a>
+            <a href="#contact">
+              <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+              <span class="nav-label">Contact Us / 联系我们<small>平台说明与联系方式</small></span>
+            </a>
+            <a href="/promotion-qr/">
+              <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="5" y="5" width="3" height="3" fill="currentColor"/><rect x="16" y="5" width="3" height="3" fill="currentColor"/><rect x="5" y="16" width="3" height="3" fill="currentColor"/><line x1="14" y1="14" x2="14" y2="20"/><line x1="14" y1="17" x2="20" y2="17"/><line x1="17" y1="20" x2="20" y2="20"/><line x1="20" y1="14" x2="20" y2="14"/></svg></span>
+              <span class="nav-label">Promotion QR / 宣传二维码<small>分享平台 / 扫码访问</small></span>
+            </a>
           </nav>
 
           <div class="dashboard-sidebar-note">
@@ -57,6 +87,22 @@
             <div class="container dashboard-container">
               <div class="dashboard-topbar">
                 <div class="dashboard-title-block">
+                  <!-- Botanical decorative accent -->
+                  <div class="hero-botanical" aria-hidden="true">
+                    <svg class="hero-botanical-svg" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+                      <ellipse cx="188" cy="95" rx="78" ry="128" transform="rotate(-18 188 95)" fill="rgba(45,106,79,0.065)"/>
+                      <ellipse cx="232" cy="128" rx="52" ry="90" transform="rotate(22 232 128)" fill="rgba(82,183,136,0.05)"/>
+                      <ellipse cx="152" cy="55" rx="32" ry="58" transform="rotate(-42 152 55)" fill="rgba(45,106,79,0.045)"/>
+                      <ellipse cx="255" cy="70" rx="28" ry="50" transform="rotate(10 255 70)" fill="rgba(82,183,136,0.04)"/>
+                      <path d="M183,238 C174,198 178,158 188,118 C193,98 202,82 197,66" stroke="rgba(45,106,79,0.09)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                      <path d="M188,120 C172,114 156,120 147,132" stroke="rgba(45,106,79,0.07)" stroke-width="1" fill="none" stroke-linecap="round"/>
+                      <path d="M190,145 C176,139 162,150 158,164" stroke="rgba(45,106,79,0.07)" stroke-width="1" fill="none" stroke-linecap="round"/>
+                      <path d="M185,96 C174,86 163,80 158,70" stroke="rgba(45,106,79,0.07)" stroke-width="1" fill="none" stroke-linecap="round"/>
+                      <circle cx="148" cy="133" r="3" fill="rgba(82,183,136,0.18)"/>
+                      <circle cx="158" cy="165" r="2.5" fill="rgba(82,183,136,0.14)"/>
+                      <circle cx="158" cy="70" r="2" fill="rgba(82,183,136,0.14)"/>
+                    </svg>
+                  </div>
                   <p class="eyebrow">Dashboard / 首页总览</p>
                   <h1 id="hero-title-en">Nanaimo Chinese Services &amp; Resources</h1>
                   <p class="headline-secondary" id="hero-title-zh">纳奈莫华人生活服务与资源平台</p>
@@ -84,6 +130,7 @@
 
               <div class="dashboard-stats-grid">
                 <article class="dashboard-stat-card">
+                  <div class="stat-icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
                   <p class="dashboard-stat-label">Service Providers / 服务提供者</p>
                   <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">服务提供者 / 服务项目列表</p>
                   <p class="dashboard-stat-value" id="providers-count">--</p>
@@ -91,6 +138,7 @@
                 </article>
 
                 <article class="dashboard-stat-card">
+                  <div class="stat-icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
                   <p class="dashboard-stat-label">Service Requests / 服务需求</p>
                   <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">服务需求</p>
                   <p class="dashboard-stat-value" id="requests-count">--</p>
@@ -98,6 +146,7 @@
                 </article>
 
                 <article class="dashboard-stat-card">
+                  <div class="stat-icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
                   <p class="dashboard-stat-label">New Submissions / 最新提交</p>
                   <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">最新提交</p>
                   <p class="dashboard-stat-value" id="submissions-count">--</p>
@@ -105,6 +154,7 @@
                 </article>
 
                 <article class="dashboard-stat-card">
+                  <div class="stat-icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
                   <p class="dashboard-stat-label">Categories / 服务分类</p>
                   <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">服务分类</p>
                   <p class="dashboard-stat-value" id="categories-count">--</p>
@@ -117,16 +167,16 @@
                   <section class="dashboard-panel">
                     <div class="dashboard-panel-header">
                       <div>
-                        <p class="dashboard-panel-kicker">Latest Service Requests / 最新服务需求</p>
-                        <h2>Latest Service Requests</h2>
-                        <p class="secondary-heading" lang="zh-Hans">最新服务需求</p>
+                        <p class="dashboard-panel-kicker">Latest Service Providers / 最新服务提供者</p>
+                        <h2>Latest Service Providers</h2>
+                        <p class="secondary-heading" lang="zh-Hans">最新服务提供者</p>
                       </div>
-                      <a class="dashboard-panel-link" href="/service-requests/">View all / 查看全部</a>
+                      <a class="dashboard-panel-link" href="/service-providers/">View all / 查看全部 →</a>
                     </div>
-                    <p class="dashboard-panel-status" id="latest-requests-status">
-                      Checking live requests... / 正在检查实时服务需求...
+                    <p class="dashboard-panel-status" id="latest-providers-status">
+                      Checking live providers... / 正在检查实时服务提供者...
                     </p>
-                    <ul class="dashboard-list" id="latest-requests-list">
+                    <ul class="dashboard-list" id="latest-providers-list">
                       <li class="dashboard-list-empty">Loading live data... / 正在读取实时数据...</li>
                     </ul>
                   </section>
@@ -134,16 +184,16 @@
                   <section class="dashboard-panel">
                     <div class="dashboard-panel-header">
                       <div>
-                        <p class="dashboard-panel-kicker">Latest Service Providers / 最新服务提供者</p>
-                        <h2>Latest Service Providers</h2>
-                        <p class="secondary-heading" lang="zh-Hans">最新服务提供者</p>
+                        <p class="dashboard-panel-kicker">Latest Service Requests / 最新服务需求</p>
+                        <h2>Latest Service Requests</h2>
+                        <p class="secondary-heading" lang="zh-Hans">最新服务需求</p>
                       </div>
-                      <a class="dashboard-panel-link" href="/service-providers/">View all / 查看全部</a>
+                      <a class="dashboard-panel-link" href="/service-requests/">View all / 查看全部 →</a>
                     </div>
-                    <p class="dashboard-panel-status" id="latest-providers-status">
-                      Checking live providers... / 正在检查实时服务提供者...
+                    <p class="dashboard-panel-status" id="latest-requests-status">
+                      Checking live requests... / 正在检查实时服务需求...
                     </p>
-                    <ul class="dashboard-list" id="latest-providers-list">
+                    <ul class="dashboard-list" id="latest-requests-list">
                       <li class="dashboard-list-empty">Loading live data... / 正在读取实时数据...</li>
                     </ul>
                   </section>
@@ -161,6 +211,7 @@
 
                     <div class="dashboard-action-grid">
                       <a class="dashboard-action-card" href="/service-providers/">
+                        <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
                         <strong>I need a service</strong>
                         <span lang="zh-Hans">我要找服务</span>
                       </a>
@@ -170,16 +221,29 @@
                         target="_blank"
                         rel="noreferrer"
                       >
+                        <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></span>
                         <strong>I provide a service</strong>
                         <span lang="zh-Hans">我要登记服务</span>
                       </a>
                       <a class="dashboard-action-card" href="#templates">
+                        <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
                         <strong>Download templates</strong>
                         <span lang="zh-Hans">下载模板</span>
                       </a>
                       <a class="dashboard-action-card" href="#contact">
+                        <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
                         <strong>Contact platform</strong>
                         <span lang="zh-Hans">联系平台</span>
+                      </a>
+                      <a class="dashboard-action-card" href="/promotion-qr/">
+                        <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="5" y="5" width="3" height="3" fill="currentColor"/><rect x="16" y="5" width="3" height="3" fill="currentColor"/><rect x="5" y="16" width="3" height="3" fill="currentColor"/></svg></span>
+                        <strong>Promotion QR / 宣传二维码</strong>
+                        <span lang="zh-Hans">分享平台 / 扫码访问</span>
+                      </a>
+                      <a class="dashboard-action-card" id="share-homepage-action" href="#contact">
+                        <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+                        <strong>Share Homepage / 分享主页</strong>
+                        <span lang="zh-Hans">推广素材与分享</span>
                       </a>
                     </div>
                   </section>

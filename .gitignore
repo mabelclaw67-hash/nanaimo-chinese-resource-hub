@@ -1,2 +1,8 @@
 # Local Netlify folder
 .netlify
+.env.local
+styles.css.bak-before-green-theme
+.DS_Store
+netlify/.DS_Store
+service-requests.js.bak*
+*.before-*

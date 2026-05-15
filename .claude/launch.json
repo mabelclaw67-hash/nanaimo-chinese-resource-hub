@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nanaimo-chinese",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["local-dev-server.mjs"],
+      "port": 5180
+    }
+  ]
+}

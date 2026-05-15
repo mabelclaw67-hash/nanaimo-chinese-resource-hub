@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Scan or share the QR code for Nanaimo Chinese Services & Resources — a bilingual community resource platform for Chinese-speaking residents in Nanaimo."
+    />
+    <title>Promotion QR / 宣传二维码 — Nanaimo Chinese Services &amp; Resources</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="qr-page">
+    <div class="qr-page-shell">
+
+      <!-- Logo mark -->
+      <div class="qr-page-logo" aria-hidden="true">N</div>
+
+      <!-- Title -->
+      <h1 class="qr-page-title">
+        Nanaimo Chinese<br />Services &amp; Resources
+      </h1>
+      <p class="qr-page-subtitle" lang="zh-Hans">纳奈莫华人生活服务与资源平台</p>
+
+      <!-- Community tagline -->
+      <span class="qr-page-tagline">Free · Bilingual · Community Resource / 免费 · 双语 · 公益平台</span>
+
+      <!-- QR code block -->
+      <div class="qr-page-code-block" id="qr-container">
+        <!--
+          QR code image — generated from the site URL.
+          Uses Google Charts API (no tracking, no login required).
+          Falls back to a text URL if image fails to load.
+        -->
+        <img
+          id="qr-img"
+          alt="QR Code for Nanaimo Chinese Services & Resources"
+          width="220"
+          height="220"
+        />
+        <noscript>
+          <p style="font-size:0.88rem;color:#4a5e4a;margin-top:0.8rem;">
+            Scan with your phone camera or visit the URL below.
+          </p>
+        </noscript>
+      </div>
+
+      <!-- URL display -->
+      <p class="qr-page-url" id="qr-url">nanaimochinese.com</p>
+
+      <!-- Description -->
+      <p class="qr-page-desc">
+        Practical bilingual information for Chinese-speaking residents,
+        newcomers, and families in Nanaimo — including local service references,
+        community resources, and ready-to-use templates.
+      </p>
+      <p class="qr-page-desc" lang="zh-Hans">
+        为纳奈莫华语居民、新移民与家庭提供实用双语信息，涵盖本地生活服务参考、社区资源整理与可直接使用的工作模板。
+      </p>
+
+      <!-- Back link -->
+      <a class="qr-page-back" href="/">← Back to Homepage / 返回首页</a>
+    </div>
+
+    <script>
+      (function () {
+        // Build the QR code using Google Charts API (no login, no tracking)
+        var siteUrl = window.location.origin || 'https://nanaimochinese.com';
+        var urlDisplay = siteUrl.replace(/^https?:\/\//, '');
+        var qrImg = document.getElementById('qr-img');
+        var qrUrl = document.getElementById('qr-url');
+
+        if (qrUrl) {
+          qrUrl.textContent = urlDisplay;
+        }
+
+        if (qrImg) {
+          var encoded = encodeURIComponent(siteUrl);
+          qrImg.src =
+            'https://chart.googleapis.com/chart?cht=qr&chs=440x440&chld=M|2&chl=' +
+            encoded;
+          qrImg.onerror = function () {
+            // Fallback: show text if image fails
+            var container = document.getElementById('qr-container');
+            if (container) {
+              container.innerHTML =
+                '<p style="font-size:0.9rem;color:#4a5e4a;padding:1rem 0;">' +
+                'Visit: <strong style="color:#1b4332;">' + urlDisplay + '</strong></p>';
+            }
+          };
+        }
+
+        // Wire up the back link to use actual origin
+        var backLink = document.querySelector('.qr-page-back');
+        if (backLink) {
+          backLink.href = siteUrl + '/';
+        }
+      })();
+    </script>
+  </body>
+</html>
