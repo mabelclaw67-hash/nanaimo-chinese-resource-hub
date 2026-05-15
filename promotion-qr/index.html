@@ -29,7 +29,7 @@
       <div class="qr-page-code-block" id="qr-container">
         <!--
           QR code image — generated from the site URL.
-          Uses Google Charts API (no tracking, no login required).
+          Uses QRServer API to generate the QR code.
           Falls back to a text URL if image fails to load.
         -->
         <img
@@ -46,7 +46,7 @@
       </div>
 
       <!-- URL display -->
-      <p class="qr-page-url" id="qr-url">nanaimochinese.com</p>
+      <p class="qr-page-url" id="qr-url">nanaimochinese-resource.netlify.app</p>
 
       <!-- Description -->
       <p class="qr-page-desc">
@@ -64,8 +64,8 @@
 
     <script>
       (function () {
-        // Build the QR code using Google Charts API (no login, no tracking)
-        var siteUrl = window.location.origin || 'https://nanaimochinese.com';
+        // Build the QR code using QRServer API
+        var siteUrl = 'https://nanaimochinese-resource.netlify.app';
         var urlDisplay = siteUrl.replace(/^https?:\/\//, '');
         var qrImg = document.getElementById('qr-img');
         var qrUrl = document.getElementById('qr-url');
@@ -77,7 +77,7 @@
         if (qrImg) {
           var encoded = encodeURIComponent(siteUrl);
           qrImg.src =
-            'https://chart.googleapis.com/chart?cht=qr&chs=440x440&chld=M|2&chl=' +
+            'https://api.qrserver.com/v1/create-qr-code/?size=440x440&data=' +
             encoded;
           qrImg.onerror = function () {
             // Fallback: show text if image fails
