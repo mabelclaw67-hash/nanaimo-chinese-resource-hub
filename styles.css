@@ -665,6 +665,104 @@ h1 {
   margin-top: 1rem;
 }
 
+.admin-tools-summary {
+  margin-top: 1.4rem;
+}
+
+.admin-auth-page {
+  min-height: 100vh;
+}
+
+.admin-auth-shell {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+.admin-auth-card {
+  background: linear-gradient(180deg, rgba(248, 251, 248, 0.97), rgba(240, 250, 242, 0.94));
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 1.25rem;
+  max-width: 34rem;
+  padding: 2rem;
+  width: min(100%, 34rem);
+}
+
+.admin-auth-brand {
+  justify-self: start;
+}
+
+.admin-auth-heading {
+  margin-bottom: 0;
+}
+
+.admin-auth-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.admin-auth-input::placeholder {
+  color: transparent;
+}
+
+.admin-auth-input {
+  font-size: 1rem;
+}
+
+.admin-auth-button {
+  width: 100%;
+}
+
+.admin-auth-error {
+  color: #b42318;
+  display: none;
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+  min-height: 1.5rem;
+}
+
+#admin-tools-content {
+  display: none;
+}
+
+body:has(#admin-password:not(:placeholder-shown):invalid) .admin-auth-error {
+  display: block;
+}
+
+body:has(#admin-password:valid) #admin-auth-shell {
+  display: none;
+}
+
+body:has(#admin-password:valid) #admin-tools-content {
+  display: block;
+}
+
+.admin-tools-grid {
+  align-items: stretch;
+}
+
+.admin-tool-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-tool-actions {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.admin-tool-actions .button,
+.admin-tool-actions .template-link {
+  width: 100%;
+}
+
 .provider-feedback-button {
   min-height: 2.95rem;
 }
@@ -906,6 +1004,48 @@ h1 {
   border-radius: 16px;
   box-shadow: var(--shadow-soft);
   padding: 1.5rem;
+}
+
+.provider-admin-summary {
+  margin-top: 1.4rem;
+}
+
+.provider-admin-toolbar {
+  align-items: end;
+}
+
+.provider-admin-toolbar-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.provider-admin-toolbar-actions .button {
+  width: 100%;
+}
+
+.provider-admin-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.provider-admin-links {
+  border-top: 1px solid rgba(20, 60, 30, 0.08);
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.provider-admin-links p {
+  margin: 0;
+}
+
+.provider-admin-edit-button {
+  min-height: 2.95rem;
+}
+
+.provider-admin-message {
+  grid-column: 1 / -1;
 }
 
 .providers-error-detail {
@@ -3094,6 +3234,139 @@ body.qr-page {
     display: flex;
   }
   .nav-icon {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HOMEPAGE QUICK ACTIONS — Chinese-first top buttons
+═══════════════════════════════════════════════════════════════════ */
+
+.homepage-quick-actions {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 1.2rem;
+}
+
+.homepage-action-btn {
+  align-items: center;
+  background: linear-gradient(145deg, #40916c, #2d6a4f);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(45, 106, 79, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  justify-content: center;
+  min-height: 4.5rem;
+  padding: 1rem 1.3rem;
+  text-align: center;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.homepage-action-btn:hover {
+  box-shadow: 0 20px 45px rgba(45, 106, 79, 0.32);
+  transform: translateY(-2px);
+}
+
+.homepage-action-zh {
+  display: block;
+  font-family: Georgia, "Times New Roman", "Songti SC", serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.homepage-action-en {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.3;
+  opacity: 0.82;
+}
+
+@media (max-width: 1200px) {
+  .homepage-quick-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .homepage-quick-actions {
+    gap: 0.6rem;
+    grid-template-columns: 1fr;
+    margin-bottom: 0.85rem;
+  }
+
+  .homepage-action-btn {
+    border-radius: 14px;
+    flex-direction: row;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    min-height: 3.4rem;
+    padding: 0.8rem 1rem;
+    text-align: left;
+  }
+
+  .homepage-action-zh {
+    font-size: 1.05rem;
+  }
+
+  .homepage-action-en {
+    font-size: 0.75rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   COMMUNITY NOTICE — compact footer note
+═══════════════════════════════════════════════════════════════════ */
+
+.community-notice {
+  border-top: 1px solid var(--line);
+  margin-top: 0.85rem;
+  padding: 0.75rem 0 0.75rem;
+}
+
+.community-notice-title {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+}
+
+.community-notice-text,
+.community-notice-text-en {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0 0 0.2rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   QR PAGE — mobile padding fix
+   The global @768px rule sets body padding-bottom: 5.7rem for the
+   mobile bottom nav. The QR page has no bottom nav — override it.
+═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  body.qr-page {
+    align-items: flex-start;
+    padding: 1.5rem 1rem 2.5rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE: Hide live-card status block (keep data loading, hide card)
+   Stats and actions are more useful as first-screen content.
+═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .home-page .dashboard-live-card {
     display: none;
   }
 }
