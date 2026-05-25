@@ -23,16 +23,22 @@
           <span class="brand-mark">N</span>
           <span class="brand-copy">
             <strong>Nanaimo Chinese Services &amp; Resources</strong>
-            <small>纳奈莫华人生活服务与资源平台</small>
+            <small class="zh-text">纳奈莫华人生活服务与资源平台</small>
           </span>
         </a>
 
+        <!-- Language switcher -->
+        <div class="lang-switcher" role="group" aria-label="Language / 语言">
+          <button class="lang-btn is-active" data-lang="en" type="button">English</button>
+          <button class="lang-btn" data-lang="zh" type="button">中文</button>
+        </div>
+
         <nav class="site-nav" aria-label="Primary">
-          <a href="/">Home / 首页</a>
-          <a href="/service-providers/" aria-current="page">Service Providers / 提供服务名单</a>
-          <a href="/service-requests/">Service Requests / 服务需求</a>
-          <a href="/#submissions">Submissions / 提交入口</a>
-          <a href="/#contact">Contact / 联系我们</a>
+          <a href="/"><span class="en-text">Home</span><span class="zh-text">首页</span></a>
+          <a href="/service-providers/" aria-current="page"><span class="en-text">Service Providers</span><span class="zh-text">服务提供者</span></a>
+          <a href="/service-requests/"><span class="en-text">Service Requests</span><span class="zh-text">服务需求</span></a>
+          <a href="/#submissions"><span class="en-text">Submissions</span><span class="zh-text">提交入口</span></a>
+          <a href="/#contact"><span class="en-text">Contact</span><span class="zh-text">联系我们</span></a>
         </nav>
       </div>
     </header>
@@ -41,44 +47,53 @@
       <section class="section is-visible providers-results-section">
         <div class="container">
           <div class="directory-header">
-            <p class="eyebrow">Service Providers / 服务项目列表</p>
-            <h1 class="providers-title">Service Providers / 服务项目列表</h1>
-            <p class="directory-summary">
-              Browse listed local service providers / 浏览本地服务提供者名单
+            <p class="eyebrow en-text">Service Providers</p>
+            <p class="eyebrow zh-text">服务项目列表</p>
+            <h1 class="providers-title en-text">Service Providers</h1>
+            <h1 class="providers-title zh-text">服务提供者名单</h1>
+            <p class="directory-summary en-text">
+              Browse listed local service providers
+            </p>
+            <p class="directory-summary zh-text">
+              浏览本地服务提供者名单
             </p>
             <div class="directory-actions">
               <button id="open-provider-feedback" type="button" class="button button-secondary">
-                Add Provider Feedback / 添加服务评价
+                <span class="en-text">Add Provider Feedback</span>
+                <span class="zh-text">添加服务评价</span>
               </button>
             </div>
           </div>
 
           <div class="providers-toolbar" aria-label="Provider filters">
               <label class="providers-field">
-                <span class="providers-field-label">Search / 搜索</span>
+                <span class="providers-field-label en-text">Search</span>
+                <span class="providers-field-label zh-text">搜索</span>
                 <input
                   id="provider-search"
                   class="providers-input"
                   type="search"
-                  placeholder="Search provider, category, city, or keyword / 搜索服务商、分类、地区或关键词"
+                  placeholder="Search provider, category, city, or keyword"
                 />
               </label>
 
               <label class="providers-field">
-                <span class="providers-field-label">Category / 分类</span>
+                <span class="providers-field-label en-text">Category</span>
+                <span class="providers-field-label zh-text">分类</span>
                 <select id="provider-category" class="providers-input">
-                  <option value="">All categories / 全部分类</option>
+                  <option value="" data-en="All categories" data-zh="全部分类">All categories</option>
                 </select>
               </label>
           </div>
 
           <p id="providers-status" class="secondary-copy providers-status" aria-live="polite">
-            Loading approved providers... / 正在载入服务提供者...
+            Loading approved providers...
           </p>
           <div id="provider-feedback-records" class="provider-feedback-records" hidden>
             <div class="provider-feedback-records-header">
-              <p class="eyebrow">Saved Provider Feedback / 已记录服务评价</p>
-              <p class="secondary-copy" lang="zh-Hans">
+              <p class="eyebrow en-text">Saved Provider Feedback</p>
+              <p class="eyebrow zh-text">已记录服务评价</p>
+              <p class="secondary-copy zh-text" lang="zh-Hans">
                 这里会显示独立记录的服务评价，特别适用于不在当前公开名单中的服务人员。
               </p>
             </div>
@@ -86,8 +101,8 @@
           </div>
           <div id="providers-grid" class="provider-grid"></div>
           <div id="providers-empty" class="provider-empty" hidden>
-            <p class="primary-copy">No approved providers match your search yet.</p>
-            <p class="secondary-copy" lang="zh-Hans">目前没有符合筛选条件的已审核服务提供者。</p>
+            <p class="primary-copy en-text">No approved providers match your search yet.</p>
+            <p class="primary-copy zh-text" lang="zh-Hans">目前没有符合筛选条件的已审核服务提供者。</p>
           </div>
         </div>
       </section>
@@ -112,11 +127,10 @@
 
         <div class="card-heading request-modal-heading">
           <div>
-            <p class="eyebrow">Provider Feedback / 服务评价</p>
-            <h2 id="provider-feedback-title">Add Provider Feedback</h2>
-            <p id="provider-feedback-subtitle" class="secondary-heading" lang="zh-Hans">
-              添加服务评价
-            </p>
+            <p class="eyebrow en-text">Provider Feedback</p>
+            <p class="eyebrow zh-text">服务评价</p>
+            <h2 id="provider-feedback-title" class="en-text">Add Provider Feedback</h2>
+            <h2 class="zh-text">添加服务评价</h2>
           </div>
         </div>
 
@@ -125,14 +139,16 @@
           <input type="hidden" name="providerKey" />
 
           <label class="request-field">
-            <span>Provider Name / 服务人员名称</span>
+            <span class="en-text">Provider Name</span>
+            <span class="zh-text">服务人员名称</span>
             <input type="text" name="providerName" maxlength="120" required />
           </label>
 
           <label class="request-field">
-            <span>Is This Provider Already Listed? / 该服务人员是否已在公开名单中？</span>
+            <span class="en-text">Is This Provider Already Listed?</span>
+            <span class="zh-text">该服务人员是否已在公开名单中？</span>
             <select name="providerListedStatus" required>
-              <option value="">Select / 请选择</option>
+              <option value=""><span class="en-text">Select</span></option>
               <option value="Yes">Yes / 是</option>
               <option value="No">No / 否</option>
               <option value="Not sure">Not sure / 不确定</option>
@@ -140,32 +156,37 @@
           </label>
 
           <label class="request-field">
-            <span>Service Category / 服务分类</span>
+            <span class="en-text">Service Category</span>
+            <span class="zh-text">服务分类</span>
             <input type="text" name="serviceCategory" maxlength="120" />
           </label>
 
           <label class="request-field">
-            <span>City / Area / 城市或区域</span>
+            <span class="en-text">City / Area</span>
+            <span class="zh-text">城市或区域</span>
             <input type="text" name="cityArea" maxlength="120" />
           </label>
 
           <label class="request-field">
-            <span>Phone / 电话</span>
+            <span class="en-text">Phone</span>
+            <span class="zh-text">电话</span>
             <input type="text" name="phone" maxlength="60" inputmode="tel" />
           </label>
 
           <label class="request-field">
-            <span>Email / 邮箱</span>
+            <span class="en-text">Email</span>
+            <span class="zh-text">邮箱</span>
             <input type="email" name="email" maxlength="120" />
           </label>
 
           <label class="request-field">
-            <span>WECHAT / 微信</span>
+            <span>WeChat / 微信</span>
             <input type="text" name="wechat" maxlength="120" />
           </label>
 
           <label class="request-field">
-            <span>Rating / 评分</span>
+            <span class="en-text">Rating</span>
+            <span class="zh-text">评分</span>
             <select name="rating">
               <option value="">Select / 请选择</option>
               <option value="1">1</option>
@@ -177,7 +198,8 @@
           </label>
 
           <label class="request-field">
-            <span>Would Use Again / 是否愿意再次使用</span>
+            <span class="en-text">Would Use Again</span>
+            <span class="zh-text">是否愿意再次使用</span>
             <select name="wouldUseAgain">
               <option value="">Select / 请选择</option>
               <option value="Yes">Yes / 是</option>
@@ -186,7 +208,8 @@
           </label>
 
           <label class="request-field">
-            <span>Recommend Adding To Public Provider List / 是否建议加入公开服务名单</span>
+            <span class="en-text">Recommend Adding To Public Provider List</span>
+            <span class="zh-text">是否建议加入公开服务名单</span>
             <select name="recommendPublicListing">
               <option value="">Select / 请选择</option>
               <option value="Yes">Yes / 是</option>
@@ -195,7 +218,8 @@
           </label>
 
           <label class="request-field request-field-full">
-            <span>Feedback Note / 反馈备注</span>
+            <span class="en-text">Feedback Note</span>
+            <span class="zh-text">反馈备注</span>
             <textarea name="feedbackNote" rows="4" maxlength="600"></textarea>
           </label>
 
@@ -203,9 +227,13 @@
 
           <div class="request-feedback-actions">
             <button type="button" class="button button-secondary" data-close-provider-feedback="true">
-              Cancel / 取消
+              <span class="en-text">Cancel</span>
+              <span class="zh-text">取消</span>
             </button>
-            <button type="submit" class="button button-primary">Save Provider Feedback / 保存服务评价</button>
+            <button type="submit" class="button button-primary">
+              <span class="en-text">Save Provider Feedback</span>
+              <span class="zh-text">保存服务评价</span>
+            </button>
           </div>
         </form>
       </div>
@@ -215,10 +243,12 @@
       <div class="container footer-row">
         <div>
           <strong>Nanaimo Chinese Services &amp; Resources</strong>
-          <p class="secondary-copy" lang="zh-Hans">简洁、清晰、便于维护的双语信息页面。</p>
+          <p class="secondary-copy en-text">Community information platform for Nanaimo.</p>
+          <p class="secondary-copy zh-text" lang="zh-Hans">简洁、清晰、便于维护的双语信息页面。</p>
         </div>
         <div class="footer-contact">
-          <p class="footer-note">For community information and coordination support.</p>
+          <p class="footer-note en-text">For community information and coordination support.</p>
+          <p class="footer-note zh-text">社区信息与协调支持。</p>
           <a class="footer-email" href="mailto:nachinesehub@gmail.com">nachinesehub@gmail.com</a>
         </div>
       </div>
@@ -226,27 +256,28 @@
 
     <nav class="mobile-bottom-nav" aria-label="Mobile primary">
       <a href="/">
-        <span>Home</span>
-        <small lang="zh-Hans">首页</small>
+        <span class="en-text">Home</span>
+        <span class="zh-text">首页</span>
       </a>
       <a href="/service-providers/" aria-current="page">
-        <span>Providers</span>
-        <small lang="zh-Hans">服务</small>
+        <span class="en-text">Providers</span>
+        <span class="zh-text">服务商</span>
       </a>
       <a href="/service-requests/">
-        <span>Requests</span>
-        <small lang="zh-Hans">需求</small>
+        <span class="en-text">Requests</span>
+        <span class="zh-text">需求</span>
       </a>
       <a href="/#submissions">
-        <span>Submit</span>
-        <small lang="zh-Hans">提交</small>
+        <span class="en-text">Submit</span>
+        <span class="zh-text">提交</span>
       </a>
       <a href="/#contact">
-        <span>Contact</span>
-        <small lang="zh-Hans">联系</small>
+        <span class="en-text">Contact</span>
+        <span class="zh-text">联系</span>
       </a>
     </nav>
 
+    <script src="../script.js"></script>
     <script src="../service-providers.js"></script>
   </body>
 </html>

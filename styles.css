@@ -3370,3 +3370,51 @@ body.qr-page {
     display: none;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   LANGUAGE SWITCHER
+   Default = English. .zh-text hidden; .en-text visible.
+   body.lang-zh flips visibility.
+═══════════════════════════════════════════════════════════════════ */
+
+.zh-text { display: none; }
+
+body.lang-zh .zh-text { display: revert; }
+body.lang-zh .en-text { display: none; }
+
+/* inline spans need inline, not block */
+span.zh-text { display: none; }
+span.en-text { display: inline; }
+body.lang-zh span.zh-text { display: inline; }
+body.lang-zh span.en-text { display: none; }
+
+/* Language toggle buttons */
+.lang-switcher {
+  display: flex;
+  gap: 4px;
+  margin: 10px 0 14px 0;
+}
+
+.lang-btn {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border, #d0d5dd);
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-secondary, #6b7280);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.lang-btn:hover {
+  border-color: var(--brand, #2d6a4f);
+  color: var(--brand, #2d6a4f);
+}
+
+.lang-btn.is-active {
+  background: var(--brand, #2d6a4f);
+  color: #fff;
+  border-color: var(--brand, #2d6a4f);
+}

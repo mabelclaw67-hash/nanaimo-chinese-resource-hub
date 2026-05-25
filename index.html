@@ -29,56 +29,89 @@
             </span>
             <span class="brand-copy">
               <strong>Nanaimo Chinese Services &amp; Resources</strong>
-              <small>纳奈莫华人生活服务与资源平台</small>
+              <small class="zh-text">纳奈莫华人生活服务与资源平台</small>
             </span>
           </a>
+
+          <!-- Language switcher -->
+          <div class="lang-switcher" role="group" aria-label="Language / 语言">
+            <button class="lang-btn is-active" data-lang="en" type="button">English</button>
+            <button class="lang-btn" data-lang="zh" type="button">中文</button>
+          </div>
 
           <nav class="site-nav" aria-label="Primary">
             <a href="#home">
               <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
-              <span class="nav-label">Dashboard / 首页总览</span>
+              <span class="nav-label">
+                <span class="en-text">Dashboard</span><span class="zh-text">首页总览</span>
+                <small class="en-text">Home overview</small><small class="zh-text">首页仪表盘</small>
+              </span>
             </a>
             <a href="/service-providers/">
               <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
-              <span class="nav-label">Service Providers / 服务提供者<small>服务提供者 / 服务项目列表</small></span>
+              <span class="nav-label">
+                <span class="en-text">Service Providers</span><span class="zh-text">服务提供者</span>
+                <small class="en-text">Provider directory</small><small class="zh-text">服务项目列表</small>
+              </span>
             </a>
             <a href="/service-requests/">
               <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></span>
-              <span class="nav-label">Service Requests / 服务需求<small>服务需求列表</small></span>
+              <span class="nav-label">
+                <span class="en-text">Service Requests</span><span class="zh-text">服务需求</span>
+                <small class="en-text">Request list</small><small class="zh-text">服务需求列表</small>
+              </span>
             </a>
             <a href="#submissions">
               <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
-              <span class="nav-label">New Submissions / 最新提交<small>最新提交的内容</small></span>
+              <span class="nav-label">
+                <span class="en-text">New Submissions</span><span class="zh-text">最新提交</span>
+                <small class="en-text">Latest submissions</small><small class="zh-text">最新提交的内容</small>
+              </span>
             </a>
             <a href="#services">
               <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
-              <span class="nav-label">Categories / 服务分类<small>服务分类浏览</small></span>
+              <span class="nav-label">
+                <span class="en-text">Categories</span><span class="zh-text">服务分类</span>
+                <small class="en-text">Browse by category</small><small class="zh-text">服务分类浏览</small>
+              </span>
             </a>
             <a href="#templates">
               <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
-              <span class="nav-label">Templates / 模板下载<small>实用模板与表格下载</small></span>
+              <span class="nav-label">
+                <span class="en-text">Templates</span><span class="zh-text">模板下载</span>
+                <small class="en-text">Download templates</small><small class="zh-text">实用模板与表格下载</small>
+              </span>
             </a>
             <a href="#contact">
               <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-              <span class="nav-label">Contact Us / 联系我们<small>平台说明与联系方式</small></span>
+              <span class="nav-label">
+                <span class="en-text">Contact Us</span><span class="zh-text">联系我们</span>
+                <small class="en-text">Platform info &amp; contact</small><small class="zh-text">平台说明与联系方式</small>
+              </span>
             </a>
             <a href="/promotion-qr/">
               <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="5" y="5" width="3" height="3" fill="currentColor"/><rect x="16" y="5" width="3" height="3" fill="currentColor"/><rect x="5" y="16" width="3" height="3" fill="currentColor"/><line x1="14" y1="14" x2="14" y2="20"/><line x1="14" y1="17" x2="20" y2="17"/><line x1="17" y1="20" x2="20" y2="20"/><line x1="20" y1="14" x2="20" y2="14"/></svg></span>
-              <span class="nav-label">Promotion QR / 宣传二维码<small>分享平台 / 扫码访问</small></span>
+              <span class="nav-label">
+                <span class="en-text">Promotion QR</span><span class="zh-text">宣传二维码</span>
+                <small class="en-text">Share &amp; scan</small><small class="zh-text">分享平台 / 扫码访问</small>
+              </span>
             </a>
             <a href="/admin-tools/">
               <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 2l7 4v6c0 5-3.4 9.74-7 10-3.6-.26-7-5-7-10V6l7-4z"/><path d="M12 8v8"/><path d="M8.5 11.5H15.5"/></svg></span>
-              <span class="nav-label">Admin Tools / 管理入口<small>管理员外部快捷链接</small></span>
+              <span class="nav-label">
+                <span class="en-text">Admin Tools</span><span class="zh-text">管理入口</span>
+                <small class="en-text">Admin quick links</small><small class="zh-text">管理员外部快捷链接</small>
+              </span>
             </a>
           </nav>
 
           <div class="dashboard-sidebar-note">
-            <p class="dashboard-sidebar-note-title">Platform Note / 平台说明</p>
-            <p class="secondary-copy">
-              Dashboard-first access to bilingual community services, requests, templates, and
-              submission tools.
+            <p class="dashboard-sidebar-note-title en-text">Platform Note</p>
+            <p class="dashboard-sidebar-note-title zh-text">平台说明</p>
+            <p class="secondary-copy en-text">
+              Dashboard-first access to bilingual community services, requests, templates, and submission tools.
             </p>
-            <p class="secondary-copy" lang="zh-Hans">
+            <p class="secondary-copy zh-text" lang="zh-Hans">
               以实用仪表盘方式整合双语服务信息、服务需求、模板与提交入口，方便快速查找与使用。
             </p>
           </div>
@@ -107,21 +140,23 @@
                       <circle cx="158" cy="70" r="2" fill="rgba(82,183,136,0.14)"/>
                     </svg>
                   </div>
-                  <p class="eyebrow">社区资源平台 / Community Resources</p>
-                  <h1 id="hero-title-zh">纳奈莫华人生活服务平台</h1>
-                  <p class="headline-secondary" id="hero-title-en">Nanaimo Chinese Community Resources</p>
+                  <p class="eyebrow en-text">Community Resources</p>
+                  <p class="eyebrow zh-text">社区资源平台</p>
+                  <h1 class="en-text" id="hero-title-en">Nanaimo Chinese Community Resources</h1>
+                  <h1 class="zh-text" id="hero-title-zh">纳奈莫华人生活服务平台</h1>
                   <div class="dashboard-subtitle" id="hero-intro">
-                    <p class="primary-copy" id="dashboard-subtitle-zh" lang="zh-Hans">找服务｜发需求｜找模板</p>
-                    <p class="secondary-copy" id="dashboard-subtitle-en">Services · Requests · Templates</p>
+                    <p class="primary-copy en-text" id="dashboard-subtitle-en">Services · Requests · Templates</p>
+                    <p class="primary-copy zh-text" id="dashboard-subtitle-zh" lang="zh-Hans">找服务｜发需求｜找模板</p>
                   </div>
                 </div>
 
                 <div class="dashboard-live-card">
-                  <p class="dashboard-live-label">Live Dashboard Status / 实时数据状态</p>
+                  <p class="dashboard-live-label en-text">Live Dashboard Status</p>
+                  <p class="dashboard-live-label zh-text">实时数据状态</p>
                   <p class="primary-copy" id="dashboard-live-status">
-                    Checking live data... / 正在检查实时数据...
+                    Checking live data...
                   </p>
-                  <p class="secondary-copy" lang="zh-Hans">
+                  <p class="secondary-copy zh-text" lang="zh-Hans">
                     首页优先连接现有 live source；未连接的区块会明确显示 fallback 状态。
                   </p>
                 </div>
@@ -130,50 +165,50 @@
               <!-- ── Main Action Buttons ── -->
               <div class="homepage-quick-actions">
                 <a class="homepage-action-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSenpCoMAR4kL7M_tH0TVUgy8qaiA0spse7bPrswfjRO3h35vA/viewform?usp=publish-editor" target="_blank" rel="noreferrer">
-                  <span class="homepage-action-zh">服务商登记</span>
-                  <small class="homepage-action-en">Add Service Provider</small>
+                  <span class="en-text">Add Service Provider</span>
+                  <span class="zh-text">服务商登记</span>
                 </a>
                 <a class="homepage-action-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSd9COadAJnwgEYyyNe2CblvAUmUkQJt1LCI4v3Ouk1LwQe2uQ/viewform?usp=publish-editor" target="_blank" rel="noreferrer">
-                  <span class="homepage-action-zh">提交服务需求</span>
-                  <small class="homepage-action-en">Request Service</small>
+                  <span class="en-text">Request Service</span>
+                  <span class="zh-text">提交服务需求</span>
                 </a>
                 <a class="homepage-action-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeMNIuGx_JTfrqMJRpV__7ap1HJ4a2zeMWHBD_W8f4IJC__3A/viewform?usp=publish-editor" target="_blank" rel="noreferrer">
-                  <span class="homepage-action-zh">提交客户个案</span>
-                  <small class="homepage-action-en">Submit Client / Case</small>
+                  <span class="en-text">Submit Client / Case</span>
+                  <span class="zh-text">提交客户个案</span>
                 </a>
               </div>
 
               <div class="dashboard-stats-grid">
                 <article class="dashboard-stat-card">
                   <div class="stat-icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-                  <p class="dashboard-stat-label">Service Providers / 服务提供者</p>
-                  <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">服务提供者 / 服务项目列表</p>
+                  <p class="dashboard-stat-label en-text">Service Providers</p>
+                  <p class="dashboard-stat-label zh-text" lang="zh-Hans">服务提供者</p>
                   <p class="dashboard-stat-value" id="providers-count">--</p>
-                  <p class="dashboard-stat-note" id="providers-count-note">Loading live data... / 正在读取实时数据...</p>
+                  <p class="dashboard-stat-note" id="providers-count-note">Loading...</p>
                 </article>
 
                 <article class="dashboard-stat-card">
                   <div class="stat-icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
-                  <p class="dashboard-stat-label">Service Requests / 服务需求</p>
-                  <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">服务需求</p>
+                  <p class="dashboard-stat-label en-text">Service Requests</p>
+                  <p class="dashboard-stat-label zh-text" lang="zh-Hans">服务需求</p>
                   <p class="dashboard-stat-value" id="requests-count">--</p>
-                  <p class="dashboard-stat-note" id="requests-count-note">Loading live data... / 正在读取实时数据...</p>
+                  <p class="dashboard-stat-note" id="requests-count-note">Loading...</p>
                 </article>
 
                 <article class="dashboard-stat-card">
                   <div class="stat-icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-                  <p class="dashboard-stat-label">New Submissions / 最新提交</p>
-                  <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">最新提交</p>
+                  <p class="dashboard-stat-label en-text">New Submissions</p>
+                  <p class="dashboard-stat-label zh-text" lang="zh-Hans">最新提交</p>
                   <p class="dashboard-stat-value" id="submissions-count">--</p>
-                  <p class="dashboard-stat-note" id="submissions-count-note">Live data not connected / 实时数据未连接</p>
+                  <p class="dashboard-stat-note" id="submissions-count-note">Live data not connected</p>
                 </article>
 
                 <article class="dashboard-stat-card">
                   <div class="stat-icon-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
-                  <p class="dashboard-stat-label">Categories / 服务分类</p>
-                  <p class="dashboard-stat-label secondary-heading" lang="zh-Hans">服务分类</p>
+                  <p class="dashboard-stat-label en-text">Categories</p>
+                  <p class="dashboard-stat-label zh-text" lang="zh-Hans">服务分类</p>
                   <p class="dashboard-stat-value" id="categories-count">--</p>
-                  <p class="dashboard-stat-note" id="categories-count-note">Loading live data... / 正在读取实时数据...</p>
+                  <p class="dashboard-stat-note" id="categories-count-note">Loading...</p>
                 </article>
               </div>
 
@@ -182,34 +217,38 @@
                   <section class="dashboard-panel">
                     <div class="dashboard-panel-header">
                       <div>
-                        <p class="dashboard-panel-kicker">Latest Service Providers / 最新服务提供者</p>
-                        <h2>Latest Service Providers</h2>
-                        <p class="secondary-heading" lang="zh-Hans">最新服务提供者</p>
+                        <p class="dashboard-panel-kicker en-text">Latest Service Providers</p>
+                        <p class="dashboard-panel-kicker zh-text">最新服务提供者</p>
+                        <h2 class="en-text">Latest Service Providers</h2>
+                        <h2 class="zh-text">最新服务提供者</h2>
                       </div>
-                      <a class="dashboard-panel-link" href="/service-providers/">View all / 查看全部 →</a>
+                      <a class="dashboard-panel-link en-text" href="/service-providers/">View all →</a>
+                      <a class="dashboard-panel-link zh-text" href="/service-providers/">查看全部 →</a>
                     </div>
                     <p class="dashboard-panel-status" id="latest-providers-status">
-                      Checking live providers... / 正在检查实时服务提供者...
+                      Checking live providers...
                     </p>
                     <ul class="dashboard-list" id="latest-providers-list">
-                      <li class="dashboard-list-empty">Loading live data... / 正在读取实时数据...</li>
+                      <li class="dashboard-list-empty">Loading live data...</li>
                     </ul>
                   </section>
 
                   <section class="dashboard-panel">
                     <div class="dashboard-panel-header">
                       <div>
-                        <p class="dashboard-panel-kicker">Latest Service Requests / 最新服务需求</p>
-                        <h2>Latest Service Requests</h2>
-                        <p class="secondary-heading" lang="zh-Hans">最新服务需求</p>
+                        <p class="dashboard-panel-kicker en-text">Latest Service Requests</p>
+                        <p class="dashboard-panel-kicker zh-text">最新服务需求</p>
+                        <h2 class="en-text">Latest Service Requests</h2>
+                        <h2 class="zh-text">最新服务需求</h2>
                       </div>
-                      <a class="dashboard-panel-link" href="/service-requests/">View all / 查看全部 →</a>
+                      <a class="dashboard-panel-link en-text" href="/service-requests/">View all →</a>
+                      <a class="dashboard-panel-link zh-text" href="/service-requests/">查看全部 →</a>
                     </div>
                     <p class="dashboard-panel-status" id="latest-requests-status">
-                      Checking live requests... / 正在检查实时服务需求...
+                      Checking live requests...
                     </p>
                     <ul class="dashboard-list" id="latest-requests-list">
-                      <li class="dashboard-list-empty">Loading live data... / 正在读取实时数据...</li>
+                      <li class="dashboard-list-empty">Loading live data...</li>
                     </ul>
                   </section>
                 </div>
@@ -218,17 +257,18 @@
                   <section class="dashboard-panel dashboard-actions-panel">
                     <div class="dashboard-panel-header dashboard-panel-header-compact">
                       <div>
-                        <p class="dashboard-panel-kicker">Quick Actions / 快捷操作</p>
-                        <h2>Quick Actions</h2>
-                        <p class="secondary-heading" lang="zh-Hans">快捷操作</p>
+                        <p class="dashboard-panel-kicker en-text">Quick Actions</p>
+                        <p class="dashboard-panel-kicker zh-text">快捷操作</p>
+                        <h2 class="en-text">Quick Actions</h2>
+                        <h2 class="zh-text">快捷操作</h2>
                       </div>
                     </div>
 
                     <div class="dashboard-action-grid">
                       <a class="dashboard-action-card" href="/service-providers/">
                         <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-                        <strong>I need a service</strong>
-                        <span lang="zh-Hans">我要找服务</span>
+                        <strong class="en-text">I need a service</strong>
+                        <strong class="zh-text">我要找服务</strong>
                       </a>
                       <a
                         class="dashboard-action-card"
@@ -237,28 +277,28 @@
                         rel="noreferrer"
                       >
                         <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></span>
-                        <strong>I provide a service</strong>
-                        <span lang="zh-Hans">我要登记服务</span>
+                        <strong class="en-text">I provide a service</strong>
+                        <strong class="zh-text">我要登记服务</strong>
                       </a>
                       <a class="dashboard-action-card" href="#templates">
                         <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-                        <strong>Download templates</strong>
-                        <span lang="zh-Hans">下载模板</span>
+                        <strong class="en-text">Download templates</strong>
+                        <strong class="zh-text">下载模板</strong>
                       </a>
                       <a class="dashboard-action-card" href="#contact">
                         <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-                        <strong>Contact platform</strong>
-                        <span lang="zh-Hans">联系平台</span>
+                        <strong class="en-text">Contact platform</strong>
+                        <strong class="zh-text">联系平台</strong>
                       </a>
                       <a class="dashboard-action-card" href="/promotion-qr/">
                         <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="5" y="5" width="3" height="3" fill="currentColor"/><rect x="16" y="5" width="3" height="3" fill="currentColor"/><rect x="5" y="16" width="3" height="3" fill="currentColor"/></svg></span>
-                        <strong>Promotion QR / 宣传二维码</strong>
-                        <span lang="zh-Hans">分享平台 / 扫码访问</span>
+                        <strong class="en-text">Promotion QR</strong>
+                        <strong class="zh-text">宣传二维码</strong>
                       </a>
                       <a class="dashboard-action-card" id="share-homepage-action" href="#contact">
                         <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
-                        <strong>Share Homepage / 分享主页</strong>
-                        <span lang="zh-Hans">推广素材与分享</span>
+                        <strong class="en-text">Share Homepage</strong>
+                        <strong class="zh-text">分享主页</strong>
                       </a>
                     </div>
                   </section>
@@ -273,18 +313,22 @@
             <div class="container dashboard-container">
               <div class="contact-card submissions-card">
                 <div class="section-heading contact-heading">
-                  <p class="eyebrow">提交入口 / Submissions</p>
-                  <h2>提交至纳奈莫资源平台</h2>
-                  <p class="headline-secondary">Submit To The Nanaimo Resource Board</p>
+                  <p class="eyebrow en-text">Submissions</p>
+                  <p class="eyebrow zh-text">提交入口</p>
+                  <h2 class="en-text">Submit To The Nanaimo Resource Board</h2>
+                  <h2 class="zh-text">提交至纳奈莫资源平台</h2>
                 </div>
 
-                <p class="primary-copy" lang="zh-Hans">
-                  可通过以下入口将新信息提交至系统，提交内容将直接进入工作流程。
-                </p>
-                <p class="secondary-copy submissions-note">
+                <p class="primary-copy en-text">
                   Use the links below to submit new information. Forms are live and route directly into the workflow.
                 </p>
-                <p class="secondary-copy submissions-note" lang="zh-Hans">
+                <p class="primary-copy zh-text" lang="zh-Hans">
+                  可通过以下入口将新信息提交至系统，提交内容将直接进入工作流程。
+                </p>
+                <p class="secondary-copy submissions-note en-text">
+                  To reduce spam, duplicate or excessive submissions may be reviewed, limited, or removed.
+                </p>
+                <p class="secondary-copy submissions-note zh-text" lang="zh-Hans">
                   为减少垃圾信息，重复或过量提交的内容可能会被审核、限制或删除。
                 </p>
 
@@ -294,22 +338,28 @@
                     href="https://docs.google.com/forms/d/e/1FAIpQLSenpCoMAR4kL7M_tH0TVUgy8qaiA0spse7bPrswfjRO3h35vA/viewform?usp=publish-editor"
                     target="_blank"
                     rel="noreferrer"
-                    >服务商登记 / Add Service Provider</a
                   >
+                    <span class="en-text">Add Service Provider</span>
+                    <span class="zh-text">服务商登记</span>
+                  </a>
                   <a
                     class="button button-primary"
                     href="https://docs.google.com/forms/d/e/1FAIpQLSd9COadAJnwgEYyyNe2CblvAUmUkQJt1LCI4v3Ouk1LwQe2uQ/viewform?usp=publish-editor"
                     target="_blank"
                     rel="noreferrer"
-                    >提交服务需求 / Request Service</a
                   >
+                    <span class="en-text">Request Service</span>
+                    <span class="zh-text">提交服务需求</span>
+                  </a>
                   <a
                     class="button button-primary"
                     href="https://docs.google.com/forms/d/e/1FAIpQLSeMNIuGx_JTfrqMJRpV__7ap1HJ4a2zeMWHBD_W8f4IJC__3A/viewform?usp=publish-editor"
                     target="_blank"
                     rel="noreferrer"
-                    >提交客户个案 / Submit Client / Case</a
                   >
+                    <span class="en-text">Submit Client / Case</span>
+                    <span class="zh-text">提交客户个案</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -318,59 +368,66 @@
           <section class="section dashboard-section" id="templates">
             <div class="container dashboard-container">
               <div class="section-heading">
-                <p class="eyebrow">Templates / 模板下载</p>
-                <h2 id="templates-title-en">Templates</h2>
-                <p class="headline-secondary" id="templates-title-zh" lang="zh-Hans">模板</p>
+                <p class="eyebrow en-text">Templates</p>
+                <p class="eyebrow zh-text">模板下载</p>
+                <h2 class="en-text" id="templates-title-en">Templates</h2>
+                <h2 class="zh-text" id="templates-title-zh" lang="zh-Hans">模板</h2>
               </div>
 
               <div class="template-intro">
-                <p class="primary-copy">Download the live Google Sheet templates below.</p>
-                <p class="secondary-copy" lang="zh-Hans">
+                <p class="primary-copy en-text">Download the live Google Sheet templates below.</p>
+                <p class="primary-copy zh-text" lang="zh-Hans">
                   可在下方直接打开并使用正式的 Google Sheet 模板。
                 </p>
                 <p class="dashboard-panel-status" id="templates-data-status">
-                  Checking template data... / 正在检查模板数据...
+                  Checking template data...
                 </p>
               </div>
 
               <div class="template-grid" id="templates-content">
                 <article class="template-card">
                   <span class="template-index">01</span>
-                  <h3>Checklist Template</h3>
-                  <p class="secondary-heading" lang="zh-Hans">检查清单模板</p>
+                  <h3 class="en-text">Checklist Template</h3>
+                  <h3 class="zh-text">检查清单模板</h3>
                   <a
                     class="template-link template-link-active"
                     href="https://docs.google.com/spreadsheets/d/1V7WtZXHBlQTIsFfLR8fIrgnUmB_LvDOpDx-rqju2feU/edit?gid=773745263#gid=773745263"
                     target="_blank"
                     rel="noreferrer"
-                    >Checklist Template / 检查清单模板</a
                   >
+                    <span class="en-text">Open Checklist Template</span>
+                    <span class="zh-text">打开检查清单模板</span>
+                  </a>
                 </article>
 
                 <article class="template-card">
                   <span class="template-index">02</span>
-                  <h3>Estimate Template</h3>
-                  <p class="secondary-heading" lang="zh-Hans">报价单模板</p>
+                  <h3 class="en-text">Estimate Template</h3>
+                  <h3 class="zh-text">报价单模板</h3>
                   <a
                     class="template-link template-link-active"
                     href="https://docs.google.com/spreadsheets/d/1WOfwHLp-3jY3SDXgmhAaI9kS29Q7oZMX0xzsvpUjZ-E/edit?gid=956115894#gid=956115894"
                     target="_blank"
                     rel="noreferrer"
-                    >Estimate Template / 报价单模板</a
                   >
+                    <span class="en-text">Open Estimate Template</span>
+                    <span class="zh-text">打开报价单模板</span>
+                  </a>
                 </article>
 
                 <article class="template-card">
                   <span class="template-index">03</span>
-                  <h3>Invoice Template</h3>
-                  <p class="secondary-heading" lang="zh-Hans">发票模板</p>
+                  <h3 class="en-text">Invoice Template</h3>
+                  <h3 class="zh-text">发票模板</h3>
                   <a
                     class="template-link template-link-active"
                     href="https://docs.google.com/spreadsheets/d/1F9Fin6aulJolaltAUWfGaq2tKC9XcQCx3ejx-zFwCq8/edit?gid=1634526413#gid=1634526413"
                     target="_blank"
                     rel="noreferrer"
-                    >Invoice Template / 发票模板</a
                   >
+                    <span class="en-text">Open Invoice Template</span>
+                    <span class="zh-text">打开发票模板</span>
+                  </a>
                 </article>
               </div>
             </div>
@@ -380,24 +437,26 @@
             <div class="container dashboard-container">
               <div class="contact-card">
                 <div class="section-heading contact-heading">
-                  <p class="eyebrow">Contact Us / 联系我们</p>
-                  <h2>Contact Us</h2>
-                  <p class="headline-secondary" lang="zh-Hans">联系我们</p>
+                  <p class="eyebrow en-text">Contact Us</p>
+                  <p class="eyebrow zh-text">联系我们</p>
+                  <h2 class="en-text">Contact Us</h2>
+                  <h2 class="zh-text">联系我们</h2>
                 </div>
 
                 <div class="contact-grid">
                   <div class="contact-copy">
-                    <p class="primary-copy">
+                    <p class="primary-copy en-text">
                       If you have questions, suggestions, or would like to share a local resource,
                       please reach out by email. We welcome community feedback and collaboration.
                     </p>
-                    <p class="secondary-copy" lang="zh-Hans">
+                    <p class="primary-copy zh-text" lang="zh-Hans">
                       如果你有问题、建议，或想分享本地资源，欢迎通过电子邮件联系我们。我们欢迎社区反馈与合作交流。
                     </p>
                   </div>
 
                   <div class="contact-panel">
-                    <p class="contact-panel-label">Email / 邮箱</p>
+                    <p class="contact-panel-label en-text">Email</p>
+                    <p class="contact-panel-label zh-text">邮箱</p>
                     <a class="contact-email" href="mailto:nachinesehub@gmail.com"
                       >nachinesehub@gmail.com</a
                     >
@@ -412,19 +471,21 @@
                     aria-expanded="false"
                     aria-controls="share-kit-panel"
                   >
-                    Admin Share Kit / 推广素材
+                    <span class="en-text">Admin Share Kit</span>
+                    <span class="zh-text">推广素材</span>
                   </button>
                 </div>
 
                 <section class="share-kit-panel" id="share-kit-panel" hidden aria-label="Admin Share Kit">
                   <div class="share-kit-header">
                     <div>
-                      <p class="contact-panel-label">Admin Share Kit / 推广素材</p>
-                      <p class="primary-copy">
+                      <p class="contact-panel-label en-text">Admin Share Kit</p>
+                      <p class="contact-panel-label zh-text">推广素材</p>
+                      <p class="primary-copy en-text">
                         Copy a ready message below to share the website with groups, providers, or
                         the public.
                       </p>
-                      <p class="secondary-copy" lang="zh-Hans">
+                      <p class="primary-copy zh-text" lang="zh-Hans">
                         可直接复制下方现成文案，用于微信群、Facebook 群、服务提供者邀请或一般网站分享。
                       </p>
                     </div>
@@ -433,7 +494,8 @@
                       type="button"
                       data-copy-link="true"
                     >
-                      Copy Website Link / 复制网站链接
+                      <span class="en-text">Copy Website Link</span>
+                      <span class="zh-text">复制网站链接</span>
                     </button>
                   </div>
 
@@ -441,11 +503,12 @@
                     <article class="share-kit-card">
                       <div class="share-kit-card-header">
                         <div>
-                          <h3>WeChat Group Version</h3>
-                          <p class="secondary-heading" lang="zh-Hans">微信群版本</p>
+                          <h3 class="en-text">WeChat Group Version</h3>
+                          <h3 class="zh-text">微信群版本</h3>
                         </div>
                         <button class="button button-secondary share-kit-copy-button" type="button" data-copy-target="share-kit-message-wechat">
-                          Copy / 复制
+                          <span class="en-text">Copy</span>
+                          <span class="zh-text">复制</span>
                         </button>
                       </div>
                       <textarea
@@ -459,11 +522,12 @@
                     <article class="share-kit-card">
                       <div class="share-kit-card-header">
                         <div>
-                          <h3>Facebook Group Version</h3>
-                          <p class="secondary-heading" lang="zh-Hans">Facebook 群组版本</p>
+                          <h3 class="en-text">Facebook Group Version</h3>
+                          <h3 class="zh-text">Facebook 群组版本</h3>
                         </div>
                         <button class="button button-secondary share-kit-copy-button" type="button" data-copy-target="share-kit-message-facebook">
-                          Copy / 复制
+                          <span class="en-text">Copy</span>
+                          <span class="zh-text">复制</span>
                         </button>
                       </div>
                       <textarea
@@ -477,11 +541,12 @@
                     <article class="share-kit-card">
                       <div class="share-kit-card-header">
                         <div>
-                          <h3>Provider Invitation Version</h3>
-                          <p class="secondary-heading" lang="zh-Hans">服务提供者邀请版本</p>
+                          <h3 class="en-text">Provider Invitation Version</h3>
+                          <h3 class="zh-text">服务提供者邀请版本</h3>
                         </div>
                         <button class="button button-secondary share-kit-copy-button" type="button" data-copy-target="share-kit-message-provider">
-                          Copy / 复制
+                          <span class="en-text">Copy</span>
+                          <span class="zh-text">复制</span>
                         </button>
                       </div>
                       <textarea
@@ -495,11 +560,12 @@
                     <article class="share-kit-card">
                       <div class="share-kit-card-header">
                         <div>
-                          <h3>General Website Sharing Version</h3>
-                          <p class="secondary-heading" lang="zh-Hans">通用网站分享版本</p>
+                          <h3 class="en-text">General Website Sharing Version</h3>
+                          <h3 class="zh-text">通用网站分享版本</h3>
                         </div>
                         <button class="button button-secondary share-kit-copy-button" type="button" data-copy-target="share-kit-message-general">
-                          Copy / 复制
+                          <span class="en-text">Copy</span>
+                          <span class="zh-text">复制</span>
                         </button>
                       </div>
                       <textarea
@@ -519,8 +585,9 @@
         <footer class="site-footer">
           <div class="container dashboard-container footer-row">
             <div>
-              <strong>纳奈莫华人生活服务平台</strong>
-              <p class="secondary-copy">Nanaimo Chinese Services &amp; Resources</p>
+              <strong class="en-text">Nanaimo Chinese Services &amp; Resources</strong>
+              <strong class="zh-text">纳奈莫华人生活服务平台</strong>
+              <p class="secondary-copy zh-text">Nanaimo Chinese Services &amp; Resources</p>
             </div>
             <div class="footer-contact">
               <a class="footer-email" href="mailto:nachinesehub@gmail.com">nachinesehub@gmail.com</a>
@@ -528,44 +595,48 @@
           </div>
           <div class="container dashboard-container">
             <div class="community-notice">
-              <p class="community-notice-title">社区说明 / Community Notice</p>
-              <p class="community-notice-text" lang="zh-Hans">本平台用于纳奈莫华人社区资源分享与连接。请用户自行核实相关服务与信息。</p>
-              <p class="community-notice-text-en">For community information and connection only. Please independently verify services and arrangements.</p>
+              <p class="community-notice-title en-text">Community Notice</p>
+              <p class="community-notice-title zh-text">社区说明</p>
+              <p class="community-notice-text en-text">For community information and connection only. Please independently verify services and arrangements.</p>
+              <p class="community-notice-text zh-text" lang="zh-Hans">本平台用于纳奈莫华人社区资源分享与连接。请用户自行核实相关服务与信息。</p>
             </div>
           </div>
         </footer>
       </div>
     </div>
 
-    <button class="share-fab" id="share-fab" aria-label="Share this page / 分享本页" type="button">
+    <button class="share-fab" id="share-fab" aria-label="Share this page" type="button">
       <svg class="share-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
         <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
       </svg>
-      <span class="share-fab-label">Share<br><small lang="zh-Hans">分享</small></span>
+      <span class="share-fab-label en-text">Share</span>
+      <span class="share-fab-label zh-text">分享</span>
     </button>
-    <div class="share-toast" id="share-toast" role="status" aria-live="polite">Link copied / 链接已复制</div>
+    <div class="share-toast" id="share-toast" role="status" aria-live="polite">
+      <span class="en-text">Link copied</span><span class="zh-text">链接已复制</span>
+    </div>
 
     <nav class="mobile-bottom-nav" aria-label="Mobile primary">
       <a href="#home">
-        <span>Home</span>
-        <small lang="zh-Hans">首页</small>
+        <span class="en-text">Home</span>
+        <span class="zh-text">首页</span>
       </a>
       <a href="/service-providers/">
-        <span>Providers</span>
-        <small lang="zh-Hans">服务</small>
+        <span class="en-text">Providers</span>
+        <span class="zh-text">服务商</span>
       </a>
       <a href="/service-requests/">
-        <span>Requests</span>
-        <small lang="zh-Hans">需求</small>
+        <span class="en-text">Requests</span>
+        <span class="zh-text">需求</span>
       </a>
       <a href="#templates">
-        <span>Templates</span>
-        <small lang="zh-Hans">模板</small>
+        <span class="en-text">Templates</span>
+        <span class="zh-text">模板</span>
       </a>
       <a href="#contact">
-        <span>Contact</span>
-        <small lang="zh-Hans">联系</small>
+        <span class="en-text">Contact</span>
+        <span class="zh-text">联系</span>
       </a>
     </nav>
 

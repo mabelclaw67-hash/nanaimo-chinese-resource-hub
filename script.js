@@ -1,3 +1,35 @@
+// ── Language switcher ────────────────────────────────────────────
+const LANG_KEY = "naChineseLang";
+
+const applyLang = (lang) => {
+  if (lang === "zh") {
+    document.body.classList.add("lang-zh");
+  } else {
+    document.body.classList.remove("lang-zh");
+  }
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    btn.classList.toggle("is-active", btn.dataset.lang === lang);
+  });
+  try {
+    localStorage.setItem(LANG_KEY, lang);
+  } catch (_) {}
+};
+
+const initLang = () => {
+  let saved = "en";
+  try {
+    saved = localStorage.getItem(LANG_KEY) || "en";
+  } catch (_) {}
+  applyLang(saved);
+
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+  });
+};
+
+initLang();
+// ── End language switcher ────────────────────────────────────────
+
 const sectionNodes = document.querySelectorAll(".section");
 const navLinks = document.querySelectorAll(".site-nav a, .mobile-bottom-nav a");
 
