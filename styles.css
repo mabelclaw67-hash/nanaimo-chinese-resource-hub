@@ -3377,16 +3377,24 @@ body.qr-page {
    body.lang-zh flips visibility.
 ═══════════════════════════════════════════════════════════════════ */
 
-.zh-text { display: none; }
+/* Hide Chinese by default; show English by default */
+.zh-text { display: none !important; }
 
-body.lang-zh .zh-text { display: revert; }
-body.lang-zh .en-text { display: none; }
+/* Chinese mode: hide English, show Chinese */
+body.lang-zh .zh-text { display: revert !important; }
+body.lang-zh .en-text { display: none !important; }
 
-/* inline spans need inline, not block */
-span.zh-text { display: none; }
-span.en-text { display: inline; }
-body.lang-zh span.zh-text { display: inline; }
-body.lang-zh span.en-text { display: none; }
+/* inline spans: restore correct display type */
+span.zh-text { display: none !important; }
+span.en-text { display: inline !important; }
+body.lang-zh span.zh-text { display: inline !important; }
+body.lang-zh span.en-text { display: none !important; }
+
+/* inline smalls (nav subtitles, brand, etc.) */
+small.zh-text { display: none !important; }
+small.en-text { display: inline !important; }
+body.lang-zh small.zh-text { display: inline !important; }
+body.lang-zh small.en-text { display: none !important; }
 
 /* Language toggle buttons */
 .lang-switcher {
