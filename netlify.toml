@@ -15,3 +15,8 @@
   from = "/api/provider-feedback"
   to = "/.netlify/functions/provider-feedback"
   status = 200
+
+[[redirects]]
+  from = "/api/admin/providers"
+  to = "/.netlify/functions/admin-providers"
+  status = 200

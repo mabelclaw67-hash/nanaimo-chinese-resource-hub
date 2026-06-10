@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Admin tools links for Nanaimo Chinese Services & Resources."
+    />
+    <title>Admin Tools | Nanaimo Chinese Services &amp; Resources</title>
+    <link rel="preconnect" href="/" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="admin-auth-page">
+    <div class="page-backdrop" aria-hidden="true">
+      <div class="backdrop-orb backdrop-orb-a"></div>
+      <div class="backdrop-orb backdrop-orb-b"></div>
+    </div>
+
+    <section class="admin-auth-shell" id="admin-auth-shell">
+      <div class="admin-auth-card">
+        <a class="brand admin-auth-brand" href="/" aria-label="Nanaimo Chinese Services & Resources home">
+          <span class="brand-mark">N</span>
+          <span class="brand-copy">
+            <strong>Nanaimo Chinese Services &amp; Resources</strong>
+            <small>纳奈莫华人生活服务与资源平台</small>
+          </span>
+        </a>
+
+        <div class="section-heading providers-heading admin-auth-heading">
+          <p class="eyebrow">Admin Tools</p>
+          <h1 class="providers-title">Admin Tools</h1>
+          <p class="headline-secondary" lang="zh-Hans">管理入口密码验证</p>
+        </div>
+
+        <div class="providers-intro">
+          <p class="primary-copy">
+            Enter the admin password to reveal the tool links on this page.
+          </p>
+          <p class="secondary-copy" lang="zh-Hans">
+            请输入管理员密码后查看本页的管理工具外部链接。
+          </p>
+        </div>
+
+        <form
+          class="admin-auth-form"
+          id="admin-auth-form"
+          novalidate
+        >
+          <label class="providers-field" for="admin-password">
+            <span class="providers-field-label">Password / 密码</span>
+            <input
+              class="providers-input admin-auth-input"
+              id="admin-password"
+              name="password"
+              type="password"
+              inputmode="numeric"
+              autocomplete="off"
+              pattern="246810"
+              maxlength="6"
+              placeholder=" "
+              required
+            />
+          </label>
+          <button
+            class="button button-primary admin-auth-button"
+            id="admin-auth-button"
+            type="submit"
+          >
+            Enter / 进入
+          </button>
+          <p class="admin-auth-error" id="admin-auth-error" role="alert" aria-live="polite">
+            Incorrect password. Please try again. / 密码错误，请重试。
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <div id="admin-tools-content">
+      <header class="site-header">
+        <div class="container header-row">
+          <a class="brand" href="/" aria-label="Nanaimo Chinese Services & Resources home">
+            <span class="brand-mark">N</span>
+            <span class="brand-copy">
+              <strong>Nanaimo Chinese Services &amp; Resources</strong>
+              <small>纳奈莫华人生活服务与资源平台</small>
+            </span>
+          </a>
+
+          <nav class="site-nav" aria-label="Primary">
+            <a href="/">Home / 首页</a>
+            <a href="/service-providers/">Service Providers / 服务提供者</a>
+            <a href="/service-requests/">Service Requests / 服务需求</a>
+            <a href="/promotion-qr/">Promotion QR / 宣传二维码</a>
+            <a class="is-active" href="/admin-tools/">Admin Tools / 管理入口</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="providers-page admin-tools-page">
+        <section class="section is-visible">
+          <div class="container">
+            <div class="providers-hero contact-card">
+              <div class="section-heading providers-heading">
+                <p class="eyebrow">Admin Tools</p>
+                <h1 class="providers-title">Admin Tools</h1>
+                <p class="headline-secondary" lang="zh-Hans">管理入口</p>
+              </div>
+
+              <div class="providers-intro">
+                <p class="primary-copy">
+                  External-only admin shortcuts for editing database sheets, Google Drive access,
+                  and promotion sharing.
+                </p>
+                <p class="secondary-copy" lang="zh-Hans">
+                  这里集中放置管理员常用的外部快捷入口，用于编辑数据库表、打开 Google Drive 与宣传二维码页面。
+                </p>
+              </div>
+
+              <div class="trust-panel admin-tools-summary">
+                <p class="trust-label">Admin Access Note</p>
+                <p class="trust-title">
+                  Link-only page. Simple front-end password gate only. No backend change.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section is-visible providers-results-section">
+          <div class="container">
+            <div class="provider-grid admin-tools-grid">
+              <article class="provider-card admin-tool-card">
+                <div class="card-heading">
+                  <h2>Edit Service Providers Database</h2>
+                  <p class="secondary-heading" lang="zh-Hans">编辑服务商数据库</p>
+                </div>
+                <p class="primary-copy">
+                  Open the lightweight provider admin editor to manage provider records on webpages.
+                </p>
+                <p class="secondary-copy" lang="zh-Hans">
+                  打开轻量服务商网页管理页，在网页中编辑与管理服务商资料。
+                </p>
+                <div class="provider-card-actions admin-tool-actions">
+                  <a
+                    class="button button-primary"
+                    href="/provider-admin/"
+                    >Open Link / 打开链接</a
+                  >
+                </div>
+              </article>
+
+              <article class="provider-card admin-tool-card">
+                <div class="card-heading">
+                  <h2>Edit Service Requests Database</h2>
+                  <p class="secondary-heading" lang="zh-Hans">编辑服务需求数据库</p>
+                </div>
+                <p class="primary-copy">
+                  Open the Google Sheet used to edit and manage service request database records.
+                </p>
+                <p class="secondary-copy" lang="zh-Hans">
+                  打开服务需求数据库 Google Sheet，用于编辑与管理服务需求记录。
+                </p>
+                <div class="provider-card-actions admin-tool-actions">
+                  <a
+                    class="button button-primary"
+                    href="https://docs.google.com/spreadsheets/d/1Zu6P4UTVcTYNhE8zOSzHBx7aERT6mUTU4gJunyysaWU/edit?gid=1727764972#gid=1727764972"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Open Link / 打开链接</a
+                  >
+                </div>
+              </article>
+
+              <article class="provider-card admin-tool-card">
+                <div class="card-heading">
+                  <h2>Google Drive Folder</h2>
+                  <p class="secondary-heading" lang="zh-Hans">Google Drive 文件夹</p>
+                </div>
+                <p class="primary-copy">
+                  Open the official Google Drive folder used for database-related files and admin
+                  management access.
+                </p>
+                <p class="secondary-copy" lang="zh-Hans">
+                  打开正式 Google Drive 文件夹，用于数据库相关文件与管理员管理入口访问。
+                </p>
+                <div class="provider-card-actions admin-tool-actions">
+                  <a
+                    class="button button-primary"
+                    href="https://drive.google.com/drive/u/0/folders/1dLtZgtrhc84J9BvAB3p-iekBKGyoY1Gq"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Open Link / 打开链接</a
+                  >
+                </div>
+              </article>
+
+              <article class="provider-card admin-tool-card">
+                <div class="card-heading">
+                  <h2>Promotion QR Page</h2>
+                  <p class="secondary-heading" lang="zh-Hans">宣传二维码页面</p>
+                </div>
+                <p class="primary-copy">
+                  Open the live QR page for sharing the platform with groups, partners, and the
+                  public.
+                </p>
+                <p class="secondary-copy" lang="zh-Hans">
+                  打开线上宣传二维码页面，便于向群组、合作方或公众分享平台。
+                </p>
+                <div class="provider-card-actions admin-tool-actions">
+                  <a
+                    class="button button-primary"
+                    href="https://nanaimochinese-resource.netlify.app/promotion-qr/"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Open Link / 打开链接</a
+                  >
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-row">
+          <div>
+            <strong>Nanaimo Chinese Services &amp; Resources</strong>
+            <p class="secondary-copy" lang="zh-Hans">简洁、清晰、便于维护的双语信息页面。</p>
+          </div>
+          <div class="footer-contact">
+            <p class="footer-note">For community information and coordination support.</p>
+            <a class="footer-email" href="mailto:nachinesehub@gmail.com">nachinesehub@gmail.com</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Private provider admin editor for Nanaimo Chinese Services & Resources."
+    />
+    <title>Provider Admin | Nanaimo Chinese Services &amp; Resources</title>
+    <link rel="preconnect" href="/" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="page-backdrop" aria-hidden="true">
+      <div class="backdrop-orb backdrop-orb-a"></div>
+      <div class="backdrop-orb backdrop-orb-b"></div>
+    </div>
+
+    <header class="site-header">
+      <div class="container header-row">
+        <a class="brand" href="/" aria-label="Nanaimo Chinese Services & Resources home">
+          <span class="brand-mark">N</span>
+          <span class="brand-copy">
+            <strong>Nanaimo Chinese Services &amp; Resources</strong>
+            <small>纳奈莫华人生活服务与资源平台</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/">Home / 首页</a>
+          <a href="/service-providers/">Service Providers / 服务提供者</a>
+          <a href="/admin-tools/">Admin Tools / 管理入口</a>
+          <a href="/provider-admin/" aria-current="page">Provider Admin / 服务商编辑</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="providers-page directory-page">
+      <section class="section is-visible providers-results-section">
+        <div class="container">
+          <div class="providers-hero contact-card">
+            <div class="section-heading providers-heading">
+              <p class="eyebrow">Provider Admin</p>
+              <h1 class="providers-title">Provider Admin Editor</h1>
+              <p class="headline-secondary" lang="zh-Hans">服务商网页编辑页</p>
+            </div>
+
+            <div class="providers-intro">
+              <p class="primary-copy">
+                Edit existing provider records in a lightweight web editor and save changes back to
+                the current Google Sheet workflow.
+              </p>
+              <p class="secondary-copy" lang="zh-Hans">
+                在轻量网页编辑器中修改现有服务商记录，并将变更保存回当前 Google Sheet 工作流。
+              </p>
+            </div>
+
+            <div class="trust-panel provider-admin-summary">
+              <p class="trust-label">Admin Scope</p>
+              <p class="trust-title">
+                Minimal admin layer only. Existing Google Sheet structure, Apps Script flow, and
+                public live data remain in place.
+              </p>
+            </div>
+          </div>
+
+          <div class="providers-toolbar provider-admin-toolbar" aria-label="Provider admin tools">
+            <label class="providers-field">
+              <span class="providers-field-label">Search / 搜索</span>
+              <input
+                id="provider-admin-search"
+                class="providers-input"
+                type="search"
+                placeholder="Search provider name, category, phone, email, or notes / 搜索名称、分类、电话、邮箱或备注"
+              />
+            </label>
+
+            <div class="provider-admin-toolbar-actions">
+              <a class="button button-secondary" href="/admin-tools/">Back To Admin Tools / 返回管理入口</a>
+            </div>
+          </div>
+
+          <p id="provider-admin-status" class="secondary-copy providers-status" aria-live="polite">
+            Loading provider admin data... / 正在载入服务商管理数据...
+          </p>
+
+          <div id="provider-admin-grid" class="provider-grid"></div>
+          <div id="provider-admin-empty" class="provider-empty" hidden>
+            <p class="primary-copy">No providers match your search right now.</p>
+            <p class="secondary-copy" lang="zh-Hans">当前没有符合搜索条件的服务商记录。</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="provider-admin-modal" class="request-modal" hidden>
+      <div class="request-modal-backdrop" data-close-provider-admin="true"></div>
+      <div
+        class="request-modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="provider-admin-title"
+      >
+        <button
+          type="button"
+          class="request-modal-close"
+          data-close-provider-admin="true"
+          aria-label="Close provider admin editor"
+        >
+          ×
+        </button>
+
+        <div class="card-heading request-modal-heading">
+          <div>
+            <p class="eyebrow">Provider Admin Edit / 服务商资料编辑</p>
+            <h2 id="provider-admin-title">Edit Provider Record</h2>
+            <p id="provider-admin-subtitle" class="secondary-heading" lang="zh-Hans">
+              编辑服务商记录
+            </p>
+          </div>
+        </div>
+
+        <form id="provider-admin-form" class="request-feedback-form">
+          <input type="hidden" name="rowNumber" />
+          <input type="hidden" name="providerId" />
+
+          <label class="request-field">
+            <span>Name / 名称</span>
+            <input type="text" name="name" maxlength="180" required />
+          </label>
+
+          <label class="request-field">
+            <span>Category / 分类</span>
+            <input type="text" name="category" maxlength="220" required />
+          </label>
+
+          <label class="request-field">
+            <span>Phone / 电话</span>
+            <input type="text" name="phone" maxlength="80" inputmode="tel" />
+          </label>
+
+          <label class="request-field">
+            <span>Email / 邮箱</span>
+            <input type="email" name="email" maxlength="180" />
+          </label>
+
+          <label class="request-field request-field-full">
+            <span>Description / 说明</span>
+            <textarea name="description" rows="5" maxlength="1200"></textarea>
+          </label>
+
+          <label class="request-field request-field-full">
+            <span>Business Card URL / 名片链接</span>
+            <input type="url" name="businessCardUrl" maxlength="500" placeholder="https://..." />
+          </label>
+
+          <p id="provider-admin-message" class="secondary-copy request-feedback-message provider-admin-message" aria-live="polite"></p>
+
+          <div class="request-feedback-actions">
+            <button type="button" class="button button-secondary" data-close-provider-admin="true">
+              Cancel / 取消
+            </button>
+            <button type="submit" class="button button-primary">Save Provider Changes / 保存服务商修改</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <div>
+          <strong>Nanaimo Chinese Services &amp; Resources</strong>
+          <p class="secondary-copy" lang="zh-Hans">简洁、清晰、便于维护的双语信息页面。</p>
+        </div>
+        <div class="footer-contact">
+          <p class="footer-note">For community information and coordination support.</p>
+          <a class="footer-email" href="mailto:nachinesehub@gmail.com">nachinesehub@gmail.com</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../provider-admin.js"></script>
+  </body>
+</html>

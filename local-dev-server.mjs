@@ -91,6 +91,22 @@ const extractRows = (payload, containerKeys) => {
   return single ? [single] : [];
 };
 
+const readJsonBody = (req) =>
+  new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', (chunk) => {
+      body += chunk;
+    });
+    req.on('end', () => {
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (error) {
+        reject(error);
+      }
+    });
+    req.on('error', reject);
+  });
+
 // ─── Providers logic (mirrored from netlify/functions/providers.mjs) ──────────
 
 const PROVIDER_KEYS = {
@@ -129,6 +145,31 @@ function toPublicProvider(record) {
     contactLabel: email ? 'Email' : 'WeChat',
     contactValue: email || wechat,
     description: pickValue(record, PROVIDER_KEYS.description),
+  };
+}
+
+function toAdminProvider(record, index) {
+  return {
+    rowNumber: index + 2,
+    providerId: pickValue(record, ['Provider_ID', 'Provider ID', 'ID']),
+    name: pickValue(record, PROVIDER_KEYS.name),
+    category: pickValue(record, PROVIDER_KEYS.category),
+    phone: pickValue(record, PROVIDER_KEYS.phone),
+    email: pickValue(record, PROVIDER_KEYS.email),
+    description:
+      pickValue(record, [
+        'Notes', 'Description', 'Public Description', 'Short Description',
+        ...PROVIDER_KEYS.description,
+      ]) || pickValue(record, ['Skills']),
+    businessCardUrl: pickValue(record, [
+      'Business_Card_URL',
+      'Business Card URL',
+      'BusinessCardURL',
+      'BusinessCardUrl',
+      'Card URL',
+      'Card_URL',
+    ]),
+    status: pickValue(record, ['Status']),
   };
 }
 
@@ -185,6 +226,157 @@ async function handleProviders(env) {
     return {
       status: 500,
       body: JSON.stringify({ error: err.message || 'Unable to load provider data.', providers: [] }),
+    };
+  }
+}
+
+async function handleAdminProvidersGet(env) {
+  const endpoint =
+    env['GOOGLE_SERVICE_PROVIDERS_SCRIPT_URL'] || env['GOOGLE_APPS_SCRIPT_URL'];
+
+  if (!endpoint) {
+    return {
+      status: 500,
+      body: JSON.stringify({ error: 'Missing GOOGLE_SERVICE_PROVIDERS_SCRIPT_URL in .env.local.', providers: [] }),
+    };
+  }
+
+  try {
+    const upstream = await fetch(endpoint, { headers: { Accept: 'application/json' } });
+
+    if (!upstream.ok) {
+      return {
+        status: 502,
+        body: JSON.stringify({
+          error: `Upstream provider request failed with status ${upstream.status}.`,
+          providers: [],
+        }),
+      };
+    }
+
+    const ct = upstream.headers.get('content-type') || '';
+    if (!ct.includes('application/json')) {
+      return {
+        status: 502,
+        body: JSON.stringify({ error: 'Provider source returned non-JSON content.', providers: [] }),
+      };
+    }
+
+    const payload = await upstream.json();
+    const providers = extractRows(payload, PROVIDER_CONTAINER_KEYS)
+      .map((record, index) => toAdminProvider(record, index))
+      .filter((provider) => provider.name);
+
+    return { status: 200, body: JSON.stringify({ providers }) };
+  } catch (error) {
+    return {
+      status: 500,
+      body: JSON.stringify({
+        error: error.message || 'Unable to load provider admin data.',
+        providers: [],
+      }),
+    };
+  }
+}
+
+async function handleAdminProvidersPost(env, req) {
+  const endpoint =
+    env['GOOGLE_SERVICE_PROVIDERS_SCRIPT_URL'] || env['GOOGLE_APPS_SCRIPT_URL'];
+
+  if (!endpoint) {
+    return {
+      status: 500,
+      body: JSON.stringify({ error: 'Missing GOOGLE_SERVICE_PROVIDERS_SCRIPT_URL in .env.local.' }),
+    };
+  }
+
+  try {
+    const payload = await readJsonBody(req);
+    const rowNumber = Number(payload?.rowNumber);
+
+    if (!Number.isInteger(rowNumber) || rowNumber < 2) {
+      return { status: 400, body: JSON.stringify({ error: 'A valid rowNumber is required.' }) };
+    }
+
+    if (!normalizeText(payload?.name)) {
+      return { status: 400, body: JSON.stringify({ error: 'Provider name is required.' }) };
+    }
+
+    const upstreamPayload = {
+      action: 'updateProvider',
+      rowNumber,
+      provider: {
+        Provider_ID: normalizeText(payload.providerId),
+        Name: normalizeText(payload.name),
+        Service_Category: normalizeText(payload.category),
+        Phone: normalizeText(payload.phone),
+        Email: normalizeText(payload.email),
+        Notes: normalizeText(payload.description),
+        Business_Card_URL: normalizeText(payload.businessCardUrl),
+      },
+    };
+
+    const upstream = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(upstreamPayload),
+    });
+
+    const responseText = await upstream.text();
+    const contentType = upstream.headers.get('content-type') || '';
+    const missingDoPost = responseText.includes('Script function not found: doPost');
+    if (!upstream.ok || missingDoPost || !contentType.includes('application/json')) {
+      return {
+        status: 502,
+        body: JSON.stringify({
+          error: missingDoPost
+            ? 'Provider Apps Script writeback is not enabled yet. Add doPost before saving from the admin editor.'
+            : 'Provider update endpoint did not return a confirmed JSON success response.',
+        }),
+      };
+    }
+
+    let upstreamJson = null;
+    try {
+      upstreamJson = responseText ? JSON.parse(responseText) : null;
+    } catch {
+      upstreamJson = null;
+    }
+
+    if (upstreamJson?.error) {
+      return { status: 502, body: JSON.stringify({ error: upstreamJson.error }) };
+    }
+
+    if (!upstreamJson || (upstreamJson.ok !== true && upstreamJson.updated !== true)) {
+      return {
+        status: 502,
+        body: JSON.stringify({ error: 'Provider update endpoint did not confirm that the sheet was updated.' }),
+      };
+    }
+
+    return {
+      status: 200,
+      body: JSON.stringify({
+        ok: true,
+        provider: {
+          rowNumber,
+          providerId: normalizeText(payload.providerId),
+          name: normalizeText(payload.name),
+          category: normalizeText(payload.category),
+          phone: normalizeText(payload.phone),
+          email: normalizeText(payload.email),
+          description: normalizeText(payload.description),
+          businessCardUrl: normalizeText(payload.businessCardUrl),
+        },
+      }),
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      body: JSON.stringify({ error: error.message || 'Unable to save provider changes.' }),
     };
   }
 }
@@ -419,14 +611,8 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (req.method !== 'GET') {
-    res.writeHead(405);
-    res.end('Method Not Allowed');
-    return;
-  }
-
   // ── API routes ──────────────────────────────────────────────────────────────
-  if (pathname === '/api/providers') {
+  if (pathname === '/api/providers' && req.method === 'GET') {
     console.log('[API] GET /api/providers');
     const result = await handleProviders(env);
     res.writeHead(result.status, { 'Content-Type': 'application/json' });
@@ -434,11 +620,39 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (pathname === '/api/service-requests') {
+  if (pathname === '/api/admin/providers' && req.method === 'GET') {
+    console.log('[API] GET /api/admin/providers');
+    const result = await handleAdminProvidersGet(env);
+    res.writeHead(result.status, { 'Content-Type': 'application/json' });
+    res.end(result.body);
+    return;
+  }
+
+  if (pathname === '/api/admin/providers' && req.method === 'POST') {
+    console.log('[API] POST /api/admin/providers');
+    const result = await handleAdminProvidersPost(env, req);
+    res.writeHead(result.status, { 'Content-Type': 'application/json' });
+    res.end(result.body);
+    return;
+  }
+
+  if (pathname === '/api/service-requests' && req.method === 'GET') {
     console.log('[API] GET /api/service-requests');
     const result = await handleServiceRequests();
     res.writeHead(result.status, { 'Content-Type': 'application/json' });
     res.end(result.body);
+    return;
+  }
+
+  if (pathname.startsWith('/api/')) {
+    res.writeHead(405);
+    res.end('Method Not Allowed');
+    return;
+  }
+
+  if (req.method !== 'GET') {
+    res.writeHead(405);
+    res.end('Method Not Allowed');
     return;
   }
 
